@@ -1,5 +1,10 @@
 # Progetto Portfolio Next.js (Workspace "Diell Guido")
 
+## Stato Progetto (Aggiornato: 2025-12-07)
+- **Portfolio Principale:** React + Vite. Pubblicato su `disel07.github.io/Diell-Guido/`. Funzionante.
+- **Progetti Secondari:** SmartCompound e CareerPath pubblicati correttamente. Link attivi.
+- **Manutenzione:** Pulizia root completata. Protocollo documentazione attivo.
+
 ## Obiettivo
 Realizzare un sito portfolio SERIO, minimale e facile da mantenere.
 
@@ -7,10 +12,15 @@ Realizzare un sito portfolio SERIO, minimale e facile da mantenere.
 
 ## Documentazione e Storico
 Tutta la documentazione, lo storico delle sessioni e i piani futuri si trovano nella cartella `docs/`.
-- **Ultimo stato:** Vedi `docs/2025-12-06-session-summary.md` e `docs/memory_log.md`.
+- **Ultimo stato:** Vedi `docs/2025-12-07-session-summary.md` e `docs/memory_log.md`.
 - **Piani:** Vedi `docs/` per i file di piano (es. `YYYY-MM-DD-nome-feature.md`).
 
 ## Regole di lavoro
+
+- **Contesto & Pulizia (NUOVO):**
+  - Prima di ogni comando complesso, leggi i file di documentazione PIÙ RECENTI in `docs/` per avere il contesto aggiornato.
+  - Se trovi informazioni obsolete o inutili nei file vecchi (`docs/` o `legacy/`), procedi alla pulizia o archiviazione per mantenere il repository snello.
+  - Ogni errore incontrato o modifica effettuata DEVE essere registrata in `docs/memory_log.md`.
 
 - Prima di implementare QUALSIASI nuova feature o cambiamento importante:
   1. Leggi lo storico in `docs/` per capire il contesto.

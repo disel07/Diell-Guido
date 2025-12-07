@@ -1,22 +1,24 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Projects from './components/Projects';
 import Experience from './components/Experience';
-import Skills from './components/Skills';
 import Contact from './components/Contact';
-import MatrixBackground from './components/MatrixBackground';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <main className="min-h-screen text-white selection:bg-cyber-primary selection:text-black relative">
+    <div className="bg-black min-h-screen text-white selection:bg-cyber-primary selection:text-black">
       <MatrixBackground />
       <Navbar />
-      <Hero />
-      <Experience />
-      <Skills />
-      <Contact />
-    </main>
+      <main className="relative z-10">
+        <Hero />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
+    </div>
   );
-};
+}
 
 export default App;
