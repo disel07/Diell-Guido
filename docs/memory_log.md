@@ -13,16 +13,26 @@
     *   Effettuato commit delle modifiche di documentazione.
 
 ## 2025-12-07 - Modifiche Manuali Utente & Pulizia
-*   L'utente ha segnalato modifiche manuali al codice.
-*   `git status` iniziale non ha rilevato modifiche tracciate.
-*   Richiesta dell'utente di eliminare `update_temp` e fare "pulizia generale".
-*   Confermato che `update_temp` era già stato rimosso.
-*   Richiesta di chiarimento sulle operazioni di "pulizia generale" desiderate.
 *   **Modifiche manuali utente in `guido-diell-portfolio/constants.ts`:**
     *   Rimozione numero di telefono e semplificazione indirizzo.
     *   Aggiornamento link GitHub e LinkedIn.
     *   Aggiunta di 3 nuovi progetti: "SmartCompound", "CareerPath-Proiezioni", "Portfolio Diell-Guido".
     *   Aggiornamento livelli di skill linguistici.
+*   **Pulizia Radicale:**
+    *   Rimossi dalla root tutti i file residui del progetto Next.js (`src`, `app`, `node_modules`, config file).
+    *   Creato `README.md` nella root che punta alla cartella attiva `guido-diell-portfolio`.
+    *   Eseguito `npm prune` e `git remote prune` nella cartella attiva.
+
+## 2025-12-07 - Fix Critico Deploy & Pubblicazione
+*   **Problema:** Schermata nera/bianca su GitHub Pages dopo il deploy.
+*   **Diagnosi:**
+    *   Mancava `base: '/Diell-Guido/'` in `vite.config.ts`.
+    *   `index.html` usava percorsi assoluti (`/index.tsx`) e conteneva `importmap` non compatibili con il build.
+*   **Risoluzione:**
+    *   Aggiunto `base` path in `vite.config.ts`.
+    *   Corretti percorsi in `index.html` (relativi `./`) e rimossa `importmap`.
+    *   Ripristinato pacchetto `gh-pages` e script di deploy in `package.json`.
+*   **Risultato:** Deploy eseguito con successo (`Published`). Utente conferma funzionamento.
 
 ## Sessione del 06 Dicembre 2025
 

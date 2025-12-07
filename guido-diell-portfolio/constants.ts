@@ -18,12 +18,12 @@ export const SITE_CONFIG = {
   socials: {
     github: "https://github.com/disel07",
     linkedin: "https://www.linkedin.com/in/diell-guido/",
-    email: "mailto:diellguido007@gmail.com"
+    email: "diellguido007@gmail.com"
   }
 };
 
 export const PROJECTS = [
-  { name: 'SmartCompound', url: '#', description: 'Trasforma il tuo caffè in un Impero' },
+  { name: 'SmartCompound', url: 'https://disel07.github.io/SmartCompound/', description: 'Trasforma il tuo caffè in un Impero' },
   { name: 'CareerPath-Proiezioni', url: 'https://disel07.github.io/CareerPath-Proiezioni/', description: 'Life Simulator Progetta due vite parallele.' },
   { name: 'Portfolio Diell-Guido', url: '#', description: 'Il mio portfolio personale' },
   // Add more projects here
