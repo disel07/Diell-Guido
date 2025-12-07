@@ -22,13 +22,20 @@ export const SITE_CONFIG = {
   }
 };
 
+export const PROJECTS = [
+  { name: 'AI Image Generator', url: '#', description: 'React + AI API' },
+  { name: 'Crypto Tracker', url: '#', description: 'Real-time Data' },
+  { name: 'Portfolio v1', url: '#', description: 'Legacy Site' },
+  // Add more projects here
+];
+
 export const EXPERIENCE: ExperienceItem[] = [
   {
     id: '1',
     role: 'Assistant Pizza Chef',
     company: 'I Compari',
     location: 'Cellara, CS, Italy',
-    period: 'Mar 2023 - Jun 2023 & Summer 2025',
+    period: 'Summer 2025',
     description: [
       'Managed kitchen operations during high-pressure summer season.',
       'Assisted in preparation of ingredients and dough management.',
@@ -80,14 +87,13 @@ export const EXPERIENCE: ExperienceItem[] = [
   }
 ];
 
-// Percentages adjusted to be realistic for a student (Skilled but not expert)
 export const SKILLS: Skill[] = [
-  { name: 'C#', level: 55, category: 'Code' },
-  { name: 'HTML5 / CSS', level: 70, category: 'Code' },
-  { name: 'JavaScript', level: 50, category: 'Code' },
-  { name: 'PC Maintenance', level: 80, category: 'Tools' },
-  { name: 'Raspberry Pi', level: 55, category: 'Tools' },
-  { name: 'Social Media Mgmt', level: 65, category: 'Soft Skills' },
+  { name: 'C#', level: 65, category: 'Code' },
+  { name: 'HTML5 / CSS', level: 75, category: 'Code' },
+  { name: 'JavaScript', level: 60, category: 'Code' },
+  { name: 'PC Maintenance', level: 85, category: 'Tools' },
+  { name: 'Raspberry Pi', level: 60, category: 'Tools' },
+  { name: 'Social Media Mgmt', level: 70, category: 'Soft Skills' },
   { name: 'Italian (Native)', level: 100, category: 'Languages' },
   { name: 'English (B1)', level: 60, category: 'Languages' },
   { name: 'Spanish (A2)', level: 40, category: 'Languages' },

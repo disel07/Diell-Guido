@@ -8,7 +8,7 @@ import MatrixBackground from './components/MatrixBackground';
 
 const App: React.FC = () => {
   return (
-    <main className="min-h-screen bg-cyber-dark text-white selection:bg-cyber-primary selection:text-black">
+    <main className="min-h-screen text-white selection:bg-cyber-primary selection:text-black relative">
       <MatrixBackground />
       <Navbar />
       <Hero />

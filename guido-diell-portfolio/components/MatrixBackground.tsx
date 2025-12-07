@@ -21,7 +21,7 @@ const MatrixBackground: React.FC = () => {
     const alphabet = katakana + latin + nums;
 
     const fontSize = 14;
-    const columns = width / fontSize;
+    let columns = width / fontSize;
 
     const rainDrops: number[] = [];
 
@@ -29,12 +29,23 @@ const MatrixBackground: React.FC = () => {
       rainDrops[x] = 1;
     }
 
-    const draw = () => {
+    let animationFrameId: number;
+    let lastTime = 0;
+    const fps = 30;
+    const interval = 1000 / fps;
+
+    const draw = (currentTime: number) => {
+      animationFrameId = requestAnimationFrame(draw);
+
+      const deltaTime = currentTime - lastTime;
+      if (deltaTime < interval) return;
+
+      lastTime = currentTime - (deltaTime % interval);
+
       // Black with very slight opacity for trail effect
       ctx.fillStyle = 'rgba(5, 5, 5, 0.05)'; 
       ctx.fillRect(0, 0, width, height);
 
-      ctx.fillStyle = '#0F0'; // Default matrix green, overridden below for cyber look
       ctx.font = fontSize + 'px monospace';
 
       for (let i = 0; i < rainDrops.length; i++) {
@@ -54,19 +65,25 @@ const MatrixBackground: React.FC = () => {
       }
     };
 
-    const intervalId = setInterval(draw, 30);
+    animationFrameId = requestAnimationFrame(draw);
 
     const handleResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
+      columns = width / fontSize;
+      // Reset drops on resize to avoid rendering issues
+      rainDrops.length = 0;
+      for (let x = 0; x < columns; x++) {
+        rainDrops[x] = 1;
+      }
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearInterval(intervalId);
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
     };
   }, []);

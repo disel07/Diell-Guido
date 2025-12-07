@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth scroll-pt-24">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guido Diell | Computer Science Portfolio</title>
-    
-    <!-- Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CDN (Temporary for this setup, though Vite usually bundles CSS) -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
-              mono: ['Orbitron', 'monospace'],
+              mono: ['Orbitron', 'monospace'], // Futuristic headers
             },
             colors: {
               cyber: {
@@ -42,6 +38,7 @@
         color: #ffffff;
         overflow-x: hidden;
       }
+      /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -56,9 +53,21 @@
         background: #00f3ff;
       }
     </style>
-  </head>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
