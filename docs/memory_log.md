@@ -10,6 +10,19 @@
 *   **Gestione Progetto:**
     *   Aggiornato `GEMINI.md` (root e .gemini) per imporre protocollo di documentazione obbligatorio.
     *   Creato documento di piano retroattivo `docs/2025-12-07-integrazione-ai-studio.md`.
+    *   Effettuato commit delle modifiche di documentazione.
+
+## 2025-12-07 - Modifiche Manuali Utente & Pulizia
+*   L'utente ha segnalato modifiche manuali al codice.
+*   `git status` iniziale non ha rilevato modifiche tracciate.
+*   Richiesta dell'utente di eliminare `update_temp` e fare "pulizia generale".
+*   Confermato che `update_temp` era già stato rimosso.
+*   Richiesta di chiarimento sulle operazioni di "pulizia generale" desiderate.
+*   **Modifiche manuali utente in `guido-diell-portfolio/constants.ts`:**
+    *   Rimozione numero di telefono e semplificazione indirizzo.
+    *   Aggiornamento link GitHub e LinkedIn.
+    *   Aggiunta di 3 nuovi progetti: "SmartCompound", "CareerPath-Proiezioni", "Portfolio Diell-Guido".
+    *   Aggiornamento livelli di skill linguistici.
 
 ## Sessione del 06 Dicembre 2025
 
