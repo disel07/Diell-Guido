@@ -12,20 +12,20 @@ export const SITE_CONFIG = {
   aboutMe: "I am a curious and friendly person. I like to learn new things and try new experiences. I can work in new situations and I am not afraid of challenges. I want to grow, work hard and do my best in every job.",
   contact: {
     email: "diellguido007@gmail.com",
-    phone: "+39 351 521 8897",
-    address: "Via Ospizio 18, S. Sofia D'Epiro, CS, Italia"
+    phone: "",
+    address: "CS, Italia"
   },
   socials: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/disel07",
+    linkedin: "https://www.linkedin.com/in/diell-guido/",
     email: "mailto:diellguido007@gmail.com"
   }
 };
 
 export const PROJECTS = [
-  { name: 'AI Image Generator', url: '#', description: 'React + AI API' },
-  { name: 'Crypto Tracker', url: '#', description: 'Real-time Data' },
-  { name: 'Portfolio v1', url: '#', description: 'Legacy Site' },
+  { name: 'SmartCompound', url: '#', description: 'Trasforma il tuo caffè in un Impero' },
+  { name: 'CareerPath-Proiezioni', url: '#', description: 'Life Simulator Progetta due vite parallele.' },
+  { name: 'Portfolio Diell-Guido', url: '#', description: 'Il mio portfolio personale' },
   // Add more projects here
 ];
 
@@ -94,9 +94,9 @@ export const SKILLS: Skill[] = [
   { name: 'PC Maintenance', level: 85, category: 'Tools' },
   { name: 'Raspberry Pi', level: 60, category: 'Tools' },
   { name: 'Social Media Mgmt', level: 70, category: 'Soft Skills' },
-  { name: 'Italian (Native)', level: 100, category: 'Languages' },
-  { name: 'English (B1)', level: 60, category: 'Languages' },
-  { name: 'Spanish (A2)', level: 40, category: 'Languages' },
+  { name: 'Italian (Native)', level: 110, category: 'Languages' },
+  { name: 'English (B1)', level: 30, category: 'Languages' },
+  { name: 'Spanish (A2)', level: 20, category: 'Languages' },
 ];
 
 export const CERTIFICATIONS: Certification[] = [
