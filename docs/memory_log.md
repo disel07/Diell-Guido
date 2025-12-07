@@ -1,9 +1,22 @@
-# Memory Log - Sessione del 06 Dicembre 2025
+# Memory Log
+
+## 2025-12-07 - Integrazione AI Studio & Aggiornamento Protocollo
+
+*   **Importazione Massiva:**
+    *   Creato backup preventivo (commit Git).
+    *   Importati nuovi file generati da AI Studio tramite cartella temporanea `update_temp`.
+    *   Sovrascritti file chiave in `guido-diell-portfolio/`: `Hero.tsx` (layout responsive), `Navbar.tsx` (menu progetti, fix link), `Contact.tsx` (rimosso form, solo footer), `MatrixBackground.tsx` (ottimizzazione loop), `index.html` (fix scroll).
+    *   Eseguito `npm install` per allineare dipendenze.
+*   **Gestione Progetto:**
+    *   Aggiornato `GEMINI.md` (root e .gemini) per imporre protocollo di documentazione obbligatorio.
+    *   Creato documento di piano retroattivo `docs/2025-12-07-integrazione-ai-studio.md`.
+
+## Sessione del 06 Dicembre 2025
 
 Questo file traccia l'intera sessione di lavoro, le decisioni prese, gli errori incontrati e lo stato finale del progetto. Serve come memoria persistente per l'agente AI.
 
 ## 1. Log Interazioni (Cronologico)
-
+... (vecchio contenuto mantenuto se serve, o archiviato. Per ora lo mantengo sotto)
 *   **Inizio:** Richiesta utente di creare un "perfect portfolio" partendo dai file zip forniti.
 *   **Tentativo 1 (Next.js):** L'agente ha inizializzato un nuovo progetto Next.js 15 (App Router, Tailwind, Framer Motion), migrato i dati da `legacy` e creato una UI moderna/minimale.
 *   **Feedback 1:** L'utente ha richiesto uno stile "Futuristico/Dark/Neon". L'agente ha applicato un tema Cyberpunk.

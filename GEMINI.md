@@ -39,3 +39,17 @@ Tutta la documentazione, lo storico delle sessioni e i piani futuri si trovano n
   4. Solo dopo modificare/creare file, se necessario, proporre i comandi da eseguire.
 
 - Se qualcosa nel workspace non è chiaro (struttura, file mancanti, conflitti), chiedimi SEMPRE chiarimenti prima di inventare struttura nuova.
+
+## Protocollo di Documentazione (OBBLIGATORIO)
+
+Ogni sessione e ogni modifica significativa DEVE seguire questo flusso rigoroso:
+
+1.  **Memory Log (`docs/memory_log.md`):**
+    -   All'inizio di ogni giornata, aggiungi una intestazione con la data (es. `## YYYY-MM-DD`).
+    -   Registra sinteticamente ogni macro-azione, comando rilevante o decisione presa.
+
+2.  **Feature Plan (`docs/YYYY-MM-DD-nome-feature.md`):**
+    -   Per OGNI task o modifica, deve esistere un file di piano specifico.
+    -   Aggiorna questo file **mentre** lavori, non solo alla fine.
+    -   Ogni passo completato deve essere spuntato.
+
