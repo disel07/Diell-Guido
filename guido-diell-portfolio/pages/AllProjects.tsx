@@ -24,14 +24,9 @@ const AllProjects: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
 
             <div className="max-w-7xl mx-auto">
-                <Link to="/" className="inline-flex items-center text-gray-400 hover:text-cyber-primary transition-colors mb-8 group">
-                    <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    Back to Home
-                </Link>
-
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -65,7 +60,7 @@ const AllProjects: React.FC = () => {
 
                             <div className="p-8 flex flex-col h-full">
                                 <div className="mb-6 self-start p-3 bg-cyber-primary/10 rounded-lg text-cyber-primary group-hover:bg-cyber-primary group-hover:text-black transition-all duration-300">
-                                    <Zap className="w-8 h-8" />
+                                    <Zap className="w-6 h-6" />
                                 </div>
 
                                 <h3 className="text-2xl font-bold text-white mb-3 font-mono group-hover:text-cyber-primary transition-colors">

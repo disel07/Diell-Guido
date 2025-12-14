@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS } from '../constants';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/#home' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Experience', href: '/#experience' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 const Navbar: React.FC = () => {
@@ -25,18 +25,17 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex-shrink-0 flex items-center gap-2 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => window.location.href = '/'}
           >
             <Code className="w-8 h-8 text-cyber-primary" />
             <span className="font-mono font-bold text-xl tracking-widest text-white">
@@ -95,7 +94,7 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </a>
               ))}
-              
+
               <div className="mt-4 border-t border-white/10 pt-4 px-3">
                 <p className="text-xs font-mono text-gray-500 mb-2 uppercase text-center">Projects</p>
                 {PROJECTS.map((project) => (

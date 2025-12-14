@@ -23,8 +23,8 @@ export const SITE_CONFIG = {
 };
 
 export const PROJECTS = [
-  { name: 'SmartCompound', url: 'https://disel07.github.io/SmartCompound/', description: 'Trasforma il tuo caffè in un Impero' },
-  { name: 'CareerPath-Proiezioni', url: 'https://disel07.github.io/CareerPath-Proiezioni/', description: 'Life Simulator Progetta due vite parallele.' },
+  { name: 'SmartCompound', url: 'https://disel07.github.io/Diell-Guido/SmartCompound/', description: 'Trasforma il tuo caffè in un Impero' },
+  { name: 'CareerPath-Proiezioni', url: 'https://disel07.github.io/Diell-Guido/CareerPath-Proiezioni/', description: 'Life Simulator Progetta due vite parallele.' },
   { name: 'Portfolio Diell-Guido', url: '#', description: 'Il mio portfolio personale' },
 ];
 
