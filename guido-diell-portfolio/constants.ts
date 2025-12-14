@@ -26,7 +26,9 @@ export const PROJECTS = [
   { name: 'SmartCompound', url: 'https://disel07.github.io/SmartCompound/', description: 'Trasforma il tuo caffè in un Impero' },
   { name: 'CareerPath-Proiezioni', url: 'https://disel07.github.io/CareerPath-Proiezioni/', description: 'Life Simulator Progetta due vite parallele.' },
   { name: 'Portfolio Diell-Guido', url: '#', description: 'Il mio portfolio personale' },
-  // Add more projects here
+  { name: 'Gym Beast', url: '#', description: 'Advanced workout tracker & analytics platform.' },
+  { name: 'Photo Organizer', url: '#', description: 'Python tool for automated photo sorting.' },
+  { name: 'Network Monitor', url: '#', description: 'Real-time LAN traffic analyzer.' },
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [

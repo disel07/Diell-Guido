@@ -1,25 +1,24 @@
 import React from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
 import MatrixBackground from './components/MatrixBackground';
+import Home from './pages/Home';
+import AllProjects from './pages/AllProjects';
 
 function App() {
   return (
-    <div className="bg-black min-h-screen text-white selection:bg-cyber-primary selection:text-black">
-      <MatrixBackground />
-      <Navbar />
-      <main className="relative z-10">
-        <Hero />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-      </main>
-    </div>
+    <Router>
+      <div className="bg-black min-h-screen text-white selection:bg-cyber-primary selection:text-black">
+        <MatrixBackground />
+        <Navbar />
+        <main className="relative z-10">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<AllProjects />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
