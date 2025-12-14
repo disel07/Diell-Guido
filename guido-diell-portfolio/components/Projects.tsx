@@ -5,7 +5,7 @@ import { PROJECTS } from '../constants';
 
 const Projects: React.FC = () => {
   return (
-    <section id="projects" className="py-20 bg-black relative overflow-hidden">
+    <section id="projects" className="py-20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyber-primary/5 via-transparent to-transparent opacity-30" />
 

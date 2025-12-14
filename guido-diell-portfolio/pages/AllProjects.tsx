@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 
 const AllProjects: React.FC = () => {
-    // Filter out the portfolio itself if it's in the list, or keep all
-    // For now, allow everything to be shown here as a full catalog
-    const projectsList = PROJECTS;
+    // Filter out the portfolio itself if it's in the list
+    const projectsList = PROJECTS.filter(p => p.name !== 'Portfolio Diell-Guido');
 
     const container = {
         hidden: { opacity: 0 },
