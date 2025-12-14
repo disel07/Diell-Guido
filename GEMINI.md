@@ -1,5 +1,4 @@
-# Progetto Portfolio Next.js (Workspace "Diell Guido")
-
+pages già aggiornato :{shttps://github.com/disel07/Diell-Guido.git};
 ## Stato Progetto (Aggiornato: 2025-12-07)
 - **Portfolio Principale:** React + Vite. Pubblicato su `disel07.github.io/Diell-Guido/`. Funzionante.
 - **Progetti Secondari:** SmartCompound e CareerPath pubblicati correttamente. Link attivi.
@@ -25,11 +24,12 @@ Tutta la documentazione, lo storico delle sessioni e i piani futuri si trovano n
 - Prima di implementare QUALSIASI nuova feature o cambiamento importante:
   1. Leggi lo storico in `docs/` per capire il contesto.
   2. Crea o aggiorna un file di piano in `docs/YYYY-MM-DD-nome-feature.md`.
-  3. Nel piano descrivi:
-     - Obiettivo della feature.
-     - File da creare/modificare.
-     - Passi concreti.
-  4. Mostrami sempre il piano.
+  3. Nel piano DEVI includere queste sezioni obbligatorie:
+     - **Obiettivi & KPI:** Cosa vogliamo ottenere e come lo misuriamo (es. performance, assenza bug).
+     - **Dettagli Tecnici:** Librerie, pattern architetturali e modifiche strutturali.
+     - **Specifiche di Implementazione:** Lista dei file e passi logici sequenziali.
+     - **Criteri di Accettazione:** Checklist binaria (Sì/No) per considerare il task "Done".
+  4. Mostrami sempre il piano strutturato così prima di iniziare.
 
 - Quando modifichi il codice:
   - Lavora principalmente nella cartella `guido-diell-portfolio/` (salvo diversa indicazione).

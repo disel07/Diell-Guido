@@ -14,7 +14,9 @@ interface GeminiAdvisorProps {
 const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language }) => {
   const [loading, setLoading] = useState(false);
   const [advice, setAdvice] = useState<string | null>(null);
-  
+  const [userApiKey, setUserApiKey] = useState('');
+  const [showKeyInput, setShowKeyInput] = useState(false);
+
   useEffect(() => {
     setAdvice(null);
   }, [language]);
@@ -22,14 +24,26 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
   const t = translations[language].advisor;
 
   const generateAdvice = async () => {
-    if (!process.env.API_KEY) {
-      setAdvice(t.errorKey);
+    // Safe check for process.env.API_KEY to avoid reference errors if not defined
+    let envKey = '';
+    try {
+      envKey = process.env.API_KEY || '';
+    } catch (e) {
+      // process not defined
+    }
+    
+    const activeKey = userApiKey || envKey;
+
+    if (!activeKey || activeKey === 'undefined') {
+      setShowKeyInput(true);
       return;
     }
 
     setLoading(true);
+    setShowKeyInput(false);
+    
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: activeKey });
       
       const promptIt = `
         Sei un mentore finanziario di successo, esperto in finanza personale per i giovani.
@@ -74,14 +88,18 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
       `;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash-exp',
         contents: language === 'it' ? promptIt : promptEn,
       });
 
       setAdvice(response.text || "No response generated.");
     } catch (error) {
       console.error(error);
-      setAdvice(t.errorGen);
+      setAdvice(t.errorGen + " (Check API Key)");
+      // If error is auth related, show input again
+      if (JSON.stringify(error).includes('403') || JSON.stringify(error).includes('key')) {
+         setShowKeyInput(true);
+      }
     } finally {
       setLoading(false);
     }
@@ -105,7 +123,7 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
             </div>
           </div>
           
-          {!advice && (
+          {!advice && !showKeyInput && (
             <button
               onClick={generateAdvice}
               disabled={loading}
@@ -128,6 +146,30 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
           )}
         </div>
 
+        {showKeyInput && (
+           <div className="mb-4 bg-slate-900/50 p-4 rounded-xl border border-indigo-500/30">
+              <p className="text-sm text-indigo-300 mb-2 font-medium">🔑 Enter Gemini API Key:</p>
+              <div className="flex gap-2">
+                <input 
+                  type="password" 
+                  value={userApiKey}
+                  onChange={(e) => setUserApiKey(e.target.value)}
+                  placeholder="Paste your key here..."
+                  className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                />
+                <button 
+                  onClick={generateAdvice}
+                  className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+                >
+                  Go
+                </button>
+              </div>
+              <p className="text-[10px] text-slate-500 mt-2">
+                Key is used only locally for this session. Get one at <a href="https://aistudio.google.com/app/apikey" target="_blank" className="text-indigo-400 underline">Google AI Studio</a>.
+              </p>
+           </div>
+        )}
+
         {advice ? (
           <div className="animate-fadeIn">
              <div className="prose prose-invert prose-sm max-w-none text-slate-300 bg-indigo-950/30 p-5 rounded-xl border border-indigo-500/20">
@@ -140,7 +182,7 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
              </p>
           </div>
         ) : (
-          !loading && (
+          !loading && !showKeyInput && (
             <div className="bg-slate-900/50 rounded-xl p-6 text-center border border-dashed border-slate-700">
               <p className="text-slate-400 text-sm mb-2">
                 {t.placeholderTitle}
