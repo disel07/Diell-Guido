@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Cpu, Globe, Terminal } from 'lucide-react';
+import { HashLink } from 'react-router-hash-link';
 import { SITE_CONFIG } from '../constants';
 
 const Hero: React.FC = () => {
@@ -44,23 +45,27 @@ const Hero: React.FC = () => {
         {/* Functional Buttons / Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 w-full max-w-3xl">
           {[
-            { icon: Terminal, text: "System Admin", href: "#skills" },
-            { icon: Globe, text: "Web Development", href: "#skills" },
-            { icon: Cpu, text: "Hardware Ops", href: "#skills" }
+            { icon: Terminal, text: "System Admin", href: "/#skills" },
+            { icon: Globe, text: "Web Development", href: "/#skills" },
+            { icon: Cpu, text: "Hardware Ops", href: "/#skills" }
           ].map((item, i) => (
-            <motion.a
+            <motion.div
               key={i}
-              href={item.href}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + (i * 0.2) }}
-              whileHover={{ scale: 1.05, borderColor: 'rgba(0, 243, 255, 0.5)' }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all cursor-pointer group shadow-lg"
             >
-              <item.icon className="w-6 h-6 text-gray-400 group-hover:text-cyber-primary transition-colors" />
-              <span className="font-mono text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wider">{item.text}</span>
-            </motion.a>
+              <HashLink
+                to={item.href}
+                smooth
+                className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 hover:border-cyber-primary/50 transition-all cursor-pointer group shadow-lg w-full h-full"
+              >
+                <item.icon className="w-6 h-6 text-gray-400 group-hover:text-cyber-primary transition-colors" />
+                <span className="font-mono text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wider">{item.text}</span>
+              </HashLink>
+            </motion.div>
           ))}
         </div>
 
@@ -68,12 +73,12 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="mt-4" // Use margin-top instead of absolute positioning to prevent overlap
+          className="mt-4"
         >
-          <a href="#experience" className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group">
+          <HashLink to="/#experience" smooth className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group">
             <span className="text-xs font-mono tracking-[0.2em] group-hover:text-cyber-primary transition-colors">SCROLL TO EXPLORE</span>
             <ChevronDown className="w-6 h-6 animate-bounce text-cyber-primary" />
-          </a>
+          </HashLink>
         </motion.div>
       </div>
     </section>

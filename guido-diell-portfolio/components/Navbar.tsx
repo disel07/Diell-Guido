@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 import { PROJECTS } from '../constants';
 
 const navLinks = [
@@ -47,17 +48,22 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-8">
             <div className="flex items-baseline space-x-8">
               {navLinks.map((link, index) => (
-                <motion.a
+                <HashLink
                   key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="font-mono text-sm hover:text-cyber-primary transition-colors duration-300 relative group"
+                  to={link.href}
+                  smooth
+                  className="font-mono text-sm hover:text-cyber-primary transition-colors duration-300 relative group text-white"
                 >
-                  {link.name}
+                  <motion.span
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="block"
+                  >
+                    {link.name}
+                  </motion.span>
                   <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-cyber-primary transition-all duration-300 group-hover:w-full"></span>
-                </motion.a>
+                </HashLink>
               ))}
             </div>
           </div>
@@ -85,14 +91,15 @@ const Navbar: React.FC = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
-                <a
+                <HashLink
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
+                  smooth
                   onClick={() => setIsOpen(false)}
                   className="text-gray-300 hover:text-cyber-primary block px-3 py-4 rounded-md text-base font-mono font-bold text-center border-b border-white/5"
                 >
                   {link.name}
-                </a>
+                </HashLink>
               ))}
 
               <div className="mt-4 border-t border-white/10 pt-4 px-3">
