@@ -10,6 +10,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./guido-diell-portfolio
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,6 +22,7 @@ jobs:
         with:
           node-version: "20"
           cache: 'npm'
+          cache-dependency-path: './guido-diell-portfolio/package-lock.json'
 
       - name: Install dependencies
         run: npm ci
@@ -28,10 +32,10 @@ jobs:
         
       # Questo passo crea un file .nojekyll per dire a GitHub di non ignorare i file che iniziano con _
       - name: Create .nojekyll
-        run: touch out/.nojekyll
+        run: touch dist/.nojekyll
 
       - name: Deploy to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out
+          folder: ./guido-diell-portfolio/dist
           branch: gh-pages
