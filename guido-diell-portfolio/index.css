@@ -420,3 +420,95 @@ body {
 .skip-link:focus {
   transform: translateY(0);
 }
+
+/* ==========================================
+   TEXT GLITCH EFFECT (DecodeText)
+   ========================================== */
+.text-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.text-glitch .animate-glitch-1 {
+  animation: glitch-text-1 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-2px, -2px);
+}
+
+.text-glitch .animate-glitch-2 {
+  animation: glitch-text-2 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  transform: translate(2px, 2px);
+}
+
+@keyframes glitch-text-1 {
+  0% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(-3px, -2px);
+  }
+  20% {
+    clip-path: inset(60% 0 10% 0);
+    transform: translate(3px, 2px);
+  }
+  40% {
+    clip-path: inset(10% 0 80% 0);
+    transform: translate(-2px, 1px);
+  }
+  60% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translate(2px, -1px);
+  }
+  80% {
+    clip-path: inset(40% 0 30% 0);
+    transform: translate(-1px, 2px);
+  }
+  100% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(1px, -2px);
+  }
+}
+
+@keyframes glitch-text-2 {
+  0% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(2px, 2px);
+  }
+  20% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    clip-path: inset(80% 0 10% 0);
+    transform: translate(1px, -1px);
+  }
+  60% {
+    clip-path: inset(5% 0 80% 0);
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate(2px, -2px);
+  }
+  100% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(-2px, 2px);
+  }
+}
+
+/* ==========================================
+   CUSTOM CURSOR - NASCONDE CURSORE DEFAULT
+   ========================================== */
+@media (pointer: fine) {
+  body.cursor-none,
+  body.cursor-none *,
+  body.cursor-none a,
+  body.cursor-none button,
+  body.cursor-none [role="button"],
+  body.cursor-none input,
+  body.cursor-none textarea,
+  body.cursor-none select,
+  body.cursor-none label,
+  body.cursor-none .cursor-pointer {
+    cursor: none !important;
+  }
+}
