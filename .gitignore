@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# LOCAL DOCUMENTATION - NEVER COMMIT TO GITHUB
+docs-local/
+PROJECT_DOCS.md
+DEVELOPMENT_NOTES.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
