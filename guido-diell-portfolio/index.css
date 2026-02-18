@@ -500,24 +500,18 @@ body {
    ========================================== */
 @media (pointer: fine) {
   html body.cursor-none,
-  html body.cursor-none *,
-  html body.cursor-none a,
-  html body.cursor-none a:hover,
-  html body.cursor-none button,
-  html body.cursor-none button:hover,
-  html body.cursor-none [role="button"],
-  html body.cursor-none input,
-  html body.cursor-none textarea,
-  html body.cursor-none select,
-  html body.cursor-none label,
-  html body.cursor-none .cursor-pointer,
-  html body.cursor-none .cursor-pointer:hover,
-  html body.cursor-none [type="button"],
-  html body.cursor-none [type="submit"],
-  html body.cursor-none [type="reset"],
-  html body.cursor-none .group,
-  html body.cursor-none .group:hover,
-  html body.cursor-none .hover\:scale-105:hover {
+  html body.cursor-none *:not(a):not(button):not([role="button"]):not(input):not(textarea):not(select):not(label):not(.cursor-pointer):not([type="button"]):not([type="submit"]):not([type="reset"]),
+  html body.cursor-none p,
+  html body.cursor-none span,
+  html body.cursor-none div,
+  html body.cursor-none section,
+  html body.cursor-none article,
+  html body.cursor-none h1,
+  html body.cursor-none h2,
+  html body.cursor-none h3,
+  html body.cursor-none h4,
+  html body.cursor-none h5,
+  html body.cursor-none h6 {
     cursor: none !important;
   }
 }

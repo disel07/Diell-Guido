@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import { Menu, X, Code, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { PROJECTS } from '../constants';
 import { useActiveSection } from '../hooks/useActiveSection';
@@ -16,11 +17,17 @@ const navLinks = [
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
   
   const activeSection = useActiveSection({
     sectionIds: navLinks.map(link => link.sectionId),
     offset: 100
   });
+
+  const handleLogoClick = () => {
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +52,7 @@ const Navbar: React.FC = () => {
         aria-label="Main navigation"
         className={`fixed w-full z-50 transition-all duration-300 ${
           scrolled 
-            ? 'bg-black/90 backdrop-blur-md border-b border-white/5 py-4' 
+            ? 'bg-black/95 backdrop-blur-md py-4 shadow-lg shadow-black/50' 
             : 'bg-transparent py-6'
         }`}
       >
@@ -56,7 +63,7 @@ const Navbar: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="flex-shrink-0 flex items-center gap-2 cursor-pointer group"
-              onClick={() => window.location.href = '/'}
+              onClick={handleLogoClick}
             >
               <Code className="w-8 h-8 text-cyber-primary group-hover:animate-pulse" aria-hidden="true" />
               <span className="font-mono font-bold text-xl tracking-widest text-white">
