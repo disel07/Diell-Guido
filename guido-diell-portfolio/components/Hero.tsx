@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronDown, Cpu, Globe, Terminal } from 'lucide-react';
 import { HashLink } from 'react-router-hash-link';
 import { SITE_CONFIG } from '../constants';
+import DecodeText from './DecodeText';
 
 const Hero: React.FC = () => {
   const skillCards = [
@@ -29,13 +30,14 @@ const Hero: React.FC = () => {
           </span>
         </motion.div>
 
+        {/* Nome con effetto Decode Matrix */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-5xl md:text-8xl font-bold font-mono mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 uppercase leading-tight"
         >
-          {SITE_CONFIG.name}
+          <DecodeText text={SITE_CONFIG.name} delay={500} />
         </motion.h1>
 
         <motion.div
@@ -48,7 +50,7 @@ const Hero: React.FC = () => {
           <p className="text-cyber-primary font-light">{SITE_CONFIG.heroDescription}</p>
         </motion.div>
 
-        {/* Functional Buttons / Cards */}
+        {/* Functional Buttons / Cards con effetti glassmorphism */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 w-full max-w-3xl" role="list" aria-label="Quick navigation to skills">
           {skillCards.map((item, i) => (
             <motion.div
@@ -56,7 +58,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + (i * 0.2) }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
               role="listitem"
             >
@@ -64,7 +66,7 @@ const Hero: React.FC = () => {
                 to={item.href}
                 smooth
                 aria-label={item.label}
-                className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 hover:border-cyber-primary/50 transition-all cursor-pointer group shadow-lg w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
+                className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 glass glass-border-glow rounded-xl hover:bg-white/10 hover:border-cyber-primary/50 transition-all cursor-pointer group shadow-lg w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary circuit-button"
               >
                 <item.icon className="w-6 h-6 text-gray-400 group-hover:text-cyber-primary transition-colors" aria-hidden="true" />
                 <span className="font-mono text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wider">{item.text}</span>

@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
-        className="fixed top-0 left-0 z-[60] p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200"
+        className="fixed top-0 left-0 z-[60] p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200 skip-link"
       >
         Skip to main content
       </a>
@@ -44,7 +44,9 @@ const Navbar: React.FC = () => {
         role="navigation"
         aria-label="Main navigation"
         className={`fixed w-full z-50 transition-all duration-300 ${
-          scrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'
+          scrolled 
+            ? 'glass-strong border-b border-white/10 py-4' 
+            : 'bg-transparent py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,10 +55,10 @@ const Navbar: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex-shrink-0 flex items-center gap-2 cursor-pointer"
+              className="flex-shrink-0 flex items-center gap-2 cursor-pointer group"
               onClick={() => window.location.href = '/'}
             >
-              <Code className="w-8 h-8 text-cyber-primary" aria-hidden="true" />
+              <Code className="w-8 h-8 text-cyber-primary group-hover:animate-pulse" aria-hidden="true" />
               <span className="font-mono font-bold text-xl tracking-widest text-white">
                 GUIDO<span className="text-cyber-primary">DIELL</span>
               </span>
@@ -73,8 +75,8 @@ const Navbar: React.FC = () => {
                       to={link.href}
                       smooth
                       aria-current={isActive ? 'page' : undefined}
-                      className={`font-mono text-sm transition-colors duration-300 relative group ${
-                        isActive ? 'text-cyber-primary' : 'text-white hover:text-cyber-primary'
+                      className={`font-mono text-sm transition-colors duration-300 nav-link-underline ${
+                        isActive ? 'text-cyber-primary active' : 'text-white hover:text-cyber-primary'
                       }`}
                     >
                       <motion.span
@@ -85,11 +87,6 @@ const Navbar: React.FC = () => {
                       >
                         {link.name}
                       </motion.span>
-                      <span 
-                        className={`absolute -bottom-2 left-0 h-0.5 bg-cyber-primary transition-all duration-300 ${
-                          isActive ? 'w-full shadow-[0_0_10px_#00f3ff]' : 'w-0 group-hover:w-full'
-                        }`}
-                      />
                     </HashLink>
                   );
                 })}
@@ -119,7 +116,7 @@ const Navbar: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-black/95 backdrop-blur-lg border-b border-white/10 overflow-hidden"
+              className="md:hidden glass-strong border-b border-white/10 overflow-hidden"
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navLinks.map((link) => {

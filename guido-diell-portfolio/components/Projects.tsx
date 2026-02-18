@@ -17,7 +17,7 @@ const Projects: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 id="projects-heading" className="text-4xl md:text-5xl font-mono font-bold text-white mb-4">
-            FEATURED <span className="text-cyber-primary">PROJECTS</span>
+            FEATURED <span className="text-cyber-primary text-glow">PROJECTS</span>
           </h2>
           <div className="h-1 w-24 bg-cyber-primary mx-auto rounded-full shadow-[0_0_10px_#00f3ff]" aria-hidden="true" />
           <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
@@ -41,7 +41,7 @@ const Projects: React.FC = () => {
                 >
                   <a
                     href="#/projects"
-                    className="group relative bg-cyber-primary/10 backdrop-blur-sm border border-cyber-primary/30 rounded-xl overflow-hidden hover:bg-cyber-primary/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.2)] flex flex-col h-full justify-center items-center text-center p-8 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
+                    className="group relative glass glass-border-glow rounded-xl overflow-hidden hover:bg-cyber-primary/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.2)] flex flex-col h-full justify-center items-center text-center p-8 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary card-glitch hover-lift"
                     aria-label="View all projects"
                   >
                     <div className="p-4 bg-cyber-primary/20 rounded-full text-cyber-primary mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
@@ -66,7 +66,7 @@ const Projects: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="group relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-cyber-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] flex flex-col h-full"
+                className="group relative glass glass-border-glow rounded-xl overflow-hidden hover:border-cyber-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.15)] flex flex-col h-full hover-lift card-glitch"
                 role="listitem"
               >
                 <div className="p-6 h-full flex flex-col">
@@ -98,7 +98,7 @@ const Projects: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`View ${project.name} project (opens in new tab)`}
-                    className="inline-flex items-center justify-center w-full py-3 bg-white/5 hover:bg-cyber-primary hover:text-black text-white rounded-lg transition-all duration-300 font-mono text-sm font-bold gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
+                    className="inline-flex items-center justify-center w-full py-3 bg-white/5 hover:bg-cyber-primary hover:text-black text-white rounded-lg transition-all duration-300 font-mono text-sm font-bold gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary circuit-button"
                   >
                     VIEW PROJECT <ExternalLink className="w-4 h-4" aria-hidden="true" />
                   </a>
