@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, Check, Copy } from 'lucide-react';
 import { SITE_CONFIG } from '../constants';
@@ -14,8 +14,6 @@ const Contact: React.FC = () => {
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
-      // Opzionale: chiudere la tendina dopo un po'
-      // setShowEmail(false); 
     }, 2000);
   };
 
@@ -44,12 +42,13 @@ const Contact: React.FC = () => {
               href={SITE_CONFIG.socials.github}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit my GitHub profile (opens in new tab)"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
-              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300"
+              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded-full"
             >
-              <Github className="w-6 h-6" />
+              <Github className="w-6 h-6" aria-hidden="true" />
             </motion.a>
 
             {/* LinkedIn */}
@@ -57,29 +56,33 @@ const Contact: React.FC = () => {
               href={SITE_CONFIG.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit my LinkedIn profile (opens in new tab)"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
               whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
-              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300"
+              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded-full"
             >
-              <Linkedin className="w-6 h-6" />
+              <Linkedin className="w-6 h-6" aria-hidden="true" />
             </motion.a>
 
             {/* Email Button (Interactive) */}
             <motion.button
               onClick={() => setShowEmail(!showEmail)}
+              aria-expanded={showEmail}
+              aria-controls="email-panel"
+              aria-label={showEmail ? 'Hide email address' : 'Show email address'}
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
               whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
-              className={`p-3 rounded-full border transition-all duration-300 ${
+              className={`p-3 rounded-full border transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary ${
                 showEmail 
                   ? 'bg-cyber-primary/20 border-cyber-primary text-cyber-primary shadow-[0_0_15px_rgba(0,243,255,0.3)]' 
                   : 'bg-white/5 border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10'
               }`}
             >
-              <Mail className="w-6 h-6" />
+              <Mail className="w-6 h-6" aria-hidden="true" />
             </motion.button>
           </div>
 
@@ -87,6 +90,7 @@ const Contact: React.FC = () => {
           <AnimatePresence>
             {showEmail && (
               <motion.div
+                id="email-panel"
                 initial={{ opacity: 0, height: 0, y: -10 }}
                 animate={{ opacity: 1, height: 'auto', y: 0 }}
                 exit={{ opacity: 0, height: 0, y: -10 }}
@@ -94,7 +98,10 @@ const Contact: React.FC = () => {
               >
                 <motion.div
                   onClick={handleCopy}
-                  className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-full cursor-pointer hover:bg-white/10 hover:border-cyber-primary/50 group transition-all"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCopy()}
+                  className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-full cursor-pointer hover:bg-white/10 hover:border-cyber-primary/50 group transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -103,12 +110,12 @@ const Contact: React.FC = () => {
                   </code>
                   <div className="w-px h-4 bg-white/10" />
                   {copied ? (
-                    <span className="flex items-center gap-1 text-xs font-bold text-green-400">
-                      <Check className="w-3 h-3" /> COPIED
+                    <span className="flex items-center gap-1 text-xs font-bold text-green-400" aria-live="polite">
+                      <Check className="w-3 h-3" aria-hidden="true" /> COPIED
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 text-xs font-bold text-cyber-primary group-hover:text-cyber-primary/80">
-                      <Copy className="w-3 h-3" /> COPY
+                      <Copy className="w-3 h-3" aria-hidden="true" /> COPY
                     </span>
                   )}
                 </motion.div>
@@ -127,4 +134,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact;
+export default memo(Contact);

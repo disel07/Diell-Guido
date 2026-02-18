@@ -23,8 +23,84 @@ body {
   background: #00f3ff;
 }
 
-/* Utilità di selezione testo (recuperata da App.tsx classes) */
+/* Text selection */
 ::selection {
   background-color: #00f3ff;
   color: #000;
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid #00f3ff;
+  outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .motion-reduce\:hidden {
+    display: none !important;
+  }
+  
+  .motion-reduce\:animate-none {
+    animation: none !important;
+  }
+}
+
+/* Smooth scroll only when not reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom animation utilities */
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip link styles */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 1rem;
+  background-color: #00f3ff;
+  color: #000;
+  font-weight: bold;
+  transform: translateY(-100%);
+  transition: transform 0.2s;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }

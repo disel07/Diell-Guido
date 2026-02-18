@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /legacy/
+Disallow: /node_modules/
+Disallow: /.git/
+
+Sitemap: https://disel07.github.io/Diell-Guido/sitemap.xml

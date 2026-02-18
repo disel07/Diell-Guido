@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Cpu, Globe, Terminal } from 'lucide-react';
 import { HashLink } from 'react-router-hash-link';
 import { SITE_CONFIG } from '../constants';
 
 const Hero: React.FC = () => {
+  const skillCards = [
+    { icon: Terminal, text: "System Admin", href: "/#skills", label: "View system administration skills" },
+    { icon: Globe, text: "Web Development", href: "/#skills", label: "View web development skills" },
+    { icon: Cpu, text: "Hardware Ops", href: "/#skills", label: "View hardware operations skills" }
+  ];
+
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-32 md:py-20">
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-32 md:py-20" aria-label="Hero section">
       {/* Ambient Glow */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-primary/20 rounded-full blur-[128px] animate-pulse-slow pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-[128px] animate-pulse-slow delay-1000 pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-primary/20 rounded-full blur-[128px] animate-pulse-slow pointer-events-none motion-reduce:animate-none" aria-hidden="true" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-[128px] animate-pulse-slow delay-1000 pointer-events-none motion-reduce:animate-none" aria-hidden="true" />
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
         <motion.div
@@ -18,7 +24,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8 inline-block"
         >
-          <span className="px-4 py-2 rounded-full border border-cyber-primary/30 bg-cyber-primary/10 text-cyber-primary font-mono text-sm shadow-[0_0_15px_rgba(0,243,255,0.3)]">
+          <span className="px-4 py-2 rounded-full border border-cyber-primary/30 bg-cyber-primary/10 text-cyber-primary font-mono text-sm shadow-[0_0_15px_rgba(0,243,255,0.3)]" role="status" aria-label={`Current status: ${SITE_CONFIG.status}`}>
             STATUS: {SITE_CONFIG.status}
           </span>
         </motion.div>
@@ -43,26 +49,24 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* Functional Buttons / Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 w-full max-w-3xl">
-          {[
-            { icon: Terminal, text: "System Admin", href: "/#skills" },
-            { icon: Globe, text: "Web Development", href: "/#skills" },
-            { icon: Cpu, text: "Hardware Ops", href: "/#skills" }
-          ].map((item, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 w-full max-w-3xl" role="list" aria-label="Quick navigation to skills">
+          {skillCards.map((item, i) => (
             <motion.div
-              key={i}
+              key={item.text}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + (i * 0.2) }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              role="listitem"
             >
               <HashLink
                 to={item.href}
                 smooth
-                className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 hover:border-cyber-primary/50 transition-all cursor-pointer group shadow-lg w-full h-full"
+                aria-label={item.label}
+                className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 hover:border-cyber-primary/50 transition-all cursor-pointer group shadow-lg w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
               >
-                <item.icon className="w-6 h-6 text-gray-400 group-hover:text-cyber-primary transition-colors" />
+                <item.icon className="w-6 h-6 text-gray-400 group-hover:text-cyber-primary transition-colors" aria-hidden="true" />
                 <span className="font-mono text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wider">{item.text}</span>
               </HashLink>
             </motion.div>
@@ -75,9 +79,9 @@ const Hero: React.FC = () => {
           transition={{ delay: 1.2, duration: 1 }}
           className="mt-4"
         >
-          <HashLink to="/#experience" smooth className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group">
+          <HashLink to="/#experience" smooth className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group" aria-label="Scroll to experience section">
             <span className="text-xs font-mono tracking-[0.2em] group-hover:text-cyber-primary transition-colors">SCROLL TO EXPLORE</span>
-            <ChevronDown className="w-6 h-6 animate-bounce text-cyber-primary" />
+            <ChevronDown className="w-6 h-6 animate-bounce text-cyber-primary motion-reduce:animate-none" aria-hidden="true" />
           </HashLink>
         </motion.div>
       </div>
@@ -85,4 +89,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default memo(Hero);
