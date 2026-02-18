@@ -499,16 +499,25 @@ body {
    CUSTOM CURSOR - NASCONDE CURSORE DEFAULT
    ========================================== */
 @media (pointer: fine) {
-  body.cursor-none,
-  body.cursor-none *,
-  body.cursor-none a,
-  body.cursor-none button,
-  body.cursor-none [role="button"],
-  body.cursor-none input,
-  body.cursor-none textarea,
-  body.cursor-none select,
-  body.cursor-none label,
-  body.cursor-none .cursor-pointer {
+  html body.cursor-none,
+  html body.cursor-none *,
+  html body.cursor-none a,
+  html body.cursor-none a:hover,
+  html body.cursor-none button,
+  html body.cursor-none button:hover,
+  html body.cursor-none [role="button"],
+  html body.cursor-none input,
+  html body.cursor-none textarea,
+  html body.cursor-none select,
+  html body.cursor-none label,
+  html body.cursor-none .cursor-pointer,
+  html body.cursor-none .cursor-pointer:hover,
+  html body.cursor-none [type="button"],
+  html body.cursor-none [type="submit"],
+  html body.cursor-none [type="reset"],
+  html body.cursor-none .group,
+  html body.cursor-none .group:hover,
+  html body.cursor-none .hover\:scale-105:hover {
     cursor: none !important;
   }
 }
