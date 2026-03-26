@@ -204,7 +204,7 @@ const App: React.FC = () => {
               <a
                 href="https://github.com"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hidden lg:flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-all border border-slate-700 bg-slate-800/50 rounded-xl hover:bg-slate-800 hover:border-indigo-500/50"
               >
                 <Star size={16} className="text-amber-400 fill-amber-400" />

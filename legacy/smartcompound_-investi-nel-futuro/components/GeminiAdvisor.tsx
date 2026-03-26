@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleGenAI } from "@google/genai";
 import { SimulationResult, SimulationParams, Language } from '../types';
-import { formatCurrency } from '../utils/calculations';
 import { Sparkles, Bot } from 'lucide-react';
 import { translations } from '../utils/translations';
 
@@ -14,8 +12,6 @@ interface GeminiAdvisorProps {
 const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language }) => {
   const [loading, setLoading] = useState(false);
   const [advice, setAdvice] = useState<string | null>(null);
-  const [userApiKey, setUserApiKey] = useState('');
-  const [showKeyInput, setShowKeyInput] = useState(false);
 
   useEffect(() => {
     setAdvice(null);
@@ -24,82 +20,29 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
   const t = translations[language].advisor;
 
   const generateAdvice = async () => {
-    // Safe check for process.env.API_KEY to avoid reference errors if not defined
-    let envKey = '';
-    try {
-      envKey = process.env.API_KEY || '';
-    } catch (e) {
-      // process not defined
-    }
-    
-    const activeKey = userApiKey || envKey;
-
-    if (!activeKey || activeKey === 'undefined') {
-      setShowKeyInput(true);
-      return;
-    }
-
     setLoading(true);
-    setShowKeyInput(false);
-    
+
     try {
-      const ai = new GoogleGenAI({ apiKey: activeKey });
-      
-      const promptIt = `
-        Sei un mentore finanziario di successo, esperto in finanza personale per i giovani.
-        Il tuo obiettivo è motivare un giovane adulto italiano a iniziare a investire ORA.
-        
-        DATI DELLA SIMULAZIONE:
-        - Inizio investimento: ${params.startAge} anni.
-        - Investimento: ${formatCurrency(params.dailyAmount)}/giorno.
-        - Durata del sacrificio: Solo ${params.investmentDurationYears} anni (dai ${params.startAge} ai ${params.startAge + params.investmentDurationYears} anni). Poi STOP versamenti.
-        - Totale versato di tasca propria: ${formatCurrency(result.totalInvested)}.
-        - Rendimento ipotizzato: ${params.interestRate}% annuo.
-        - Età finale: ${params.targetAge} anni.
-        - CAPITALE FINALE: ${formatCurrency(result.finalAmount)}.
-        - GUADAGNO PURO: ${formatCurrency(result.totalInterestEarned)}.
-
-        CREA UNA RISPOSTA IN ITALIANO CON QUESTA STRUTTURA (Usa Markdown):
-        1. **La Rivelazione**: Una frase a effetto shock su come ${formatCurrency(result.totalInvested)} sono diventati ${formatCurrency(result.finalAmount)} senza fare nulla dopo aver smesso di versare.
-        2. **La Visione**: Descrivi vividamente cosa può fare un adulto di ${params.targetAge} anni con questa cifra.
-        3. **Il Verdetto**: Una conclusione potente sull'iniziare presto (a ${params.startAge} anni).
-        Tono: Energico, diretto, ispirazionale. Usa emoji. Max 150 parole.
-      `;
-
-      const promptEn = `
-        You are a successful financial mentor, expert in personal finance for young adults.
-        Your goal is to motivate a young investor to start investing NOW.
-        
-        SIMULATION DATA:
-        - Start Age: ${params.startAge}.
-        - Investment: ${formatCurrency(params.dailyAmount)}/day.
-        - Sacrifice Duration: Only ${params.investmentDurationYears} years (from ${params.startAge} to ${params.startAge + params.investmentDurationYears}). Then STOP contributing.
-        - Total out of pocket: ${formatCurrency(result.totalInvested)}.
-        - Interest Rate: ${params.interestRate}% annual.
-        - Target Age: ${params.targetAge}.
-        - FINAL CAPITAL: ${formatCurrency(result.finalAmount)}.
-        - PURE PROFIT: ${formatCurrency(result.totalInterestEarned)}.
-
-        CREATE A RESPONSE IN ENGLISH WITH THIS STRUCTURE (Use Markdown):
-        1. **The Revelation**: A shocking statement on how ${formatCurrency(result.totalInvested)} turned into ${formatCurrency(result.finalAmount)} doing nothing after contributions stopped.
-        2. **The Vision**: Vividly describe what a ${params.targetAge}-year-old can do with this amount.
-        3. **The Verdict**: A powerful conclusion on starting early (at ${params.startAge}).
-        Tone: Energetic, direct, inspirational. Use emojis. Max 150 words.
-      `;
-
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
-        contents: language === 'it' ? promptIt : promptEn,
+      const response = await fetch('/api/gemini-advice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          result,
+          params,
+          language
+        })
       });
+      if (!response.ok) {
+        throw new Error(`Backend error: ${response.status}`);
+      }
+      const data = await response.json();
 
-      setAdvice(response.text || "No response generated.");
+      setAdvice(data?.advice || "No response generated.");
     } catch (error) {
       console.error(error);
-      setAdvice(t.errorGen + " (Check API Key)");
-      // If error is auth related, show input again
-      if (JSON.stringify(error).includes('403') || JSON.stringify(error).includes('key')) {
-         setShowKeyInput(true);
-      }
+      setAdvice(t.errorGen + " (Backend endpoint /api/gemini-advice not available)");
     } finally {
       setLoading(false);
     }
@@ -123,7 +66,7 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
             </div>
           </div>
           
-          {!advice && !showKeyInput && (
+          {!advice && (
             <button
               onClick={generateAdvice}
               disabled={loading}
@@ -146,30 +89,6 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
           )}
         </div>
 
-        {showKeyInput && (
-           <div className="mb-4 bg-slate-900/50 p-4 rounded-xl border border-indigo-500/30">
-              <p className="text-sm text-indigo-300 mb-2 font-medium">🔑 Enter Gemini API Key:</p>
-              <div className="flex gap-2">
-                <input 
-                  type="password" 
-                  value={userApiKey}
-                  onChange={(e) => setUserApiKey(e.target.value)}
-                  placeholder="Paste your key here..."
-                  className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
-                />
-                <button 
-                  onClick={generateAdvice}
-                  className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-semibold"
-                >
-                  Go
-                </button>
-              </div>
-              <p className="text-[10px] text-slate-500 mt-2">
-                Key is used only locally for this session. Get one at <a href="https://aistudio.google.com/app/apikey" target="_blank" className="text-indigo-400 underline">Google AI Studio</a>.
-              </p>
-           </div>
-        )}
-
         {advice ? (
           <div className="animate-fadeIn">
              <div className="prose prose-invert prose-sm max-w-none text-slate-300 bg-indigo-950/30 p-5 rounded-xl border border-indigo-500/20">
@@ -182,13 +101,16 @@ const GeminiAdvisor: React.FC<GeminiAdvisorProps> = ({ result, params, language 
              </p>
           </div>
         ) : (
-          !loading && !showKeyInput && (
+          !loading && (
             <div className="bg-slate-900/50 rounded-xl p-6 text-center border border-dashed border-slate-700">
               <p className="text-slate-400 text-sm mb-2">
                 {t.placeholderTitle}
               </p>
               <p className="text-indigo-400 text-sm font-medium">
                 {t.placeholderText}
+              </p>
+              <p className="text-[10px] text-slate-500 mt-3">
+                AI requests are handled only via secure backend endpoint <code>/api/gemini-advice</code>.
               </p>
             </div>
           )

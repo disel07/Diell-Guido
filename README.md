@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://disel07.github.io/Diell-Guido/" target="_blank">
+  <a href="https://disel07.github.io/Diell-Guido/" target="_blank" rel="noopener noreferrer">
     <strong>🌐 Live Demo</strong>
   </a>
 </p>
