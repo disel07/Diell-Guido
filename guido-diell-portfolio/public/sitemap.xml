@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://disel07.github.io/Diell-Guido/</loc>
-    <lastmod>2025-02-18</lastmod>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://disel07.github.io/Diell-Guido/#/projects</loc>
-    <lastmod>2025-02-18</lastmod>
+    <loc>https://disel07.github.io/Diell-Guido/about</loc>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://disel07.github.io/Diell-Guido/SmartCompound/</loc>
-    <lastmod>2025-02-18</lastmod>
+    <loc>https://disel07.github.io/Diell-Guido/projects/all</loc>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://disel07.github.io/Diell-Guido/CareerPath-Proiezioni/</loc>
-    <lastmod>2025-02-18</lastmod>
+    <loc>https://disel07.github.io/Diell-Guido/contacts</loc>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>

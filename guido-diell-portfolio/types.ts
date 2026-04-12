@@ -18,3 +18,12 @@ export interface Certification {
   name: string;
   issuer: string;
 }
+
+export interface Project {
+  name: string;
+  url: string;
+  description: string;
+  technologies: string[];
+  bgGradient?: string;
+}
+

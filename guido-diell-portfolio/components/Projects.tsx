@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 
 const Projects: React.FC = () => {
@@ -39,8 +40,8 @@ const Projects: React.FC = () => {
                   transition={{ delay: index * 0.1 }}
                   role="listitem"
                 >
-                  <a
-                    href="#/projects"
+                  <Link
+                    to="/projects/all"
                     className="group relative glass glass-border-glow rounded-xl overflow-hidden hover:bg-cyber-primary/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.2)] flex flex-col h-full justify-center items-center text-center p-8 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary card-glitch hover-lift"
                     aria-label="View all projects"
                   >
@@ -53,7 +54,7 @@ const Projects: React.FC = () => {
                     <p className="text-gray-400 text-sm">
                       Esplora l'intero catalogo dei miei lavori e esperimenti.
                     </p>
-                  </a>
+                  </Link>
                 </motion.div>
               );
             }

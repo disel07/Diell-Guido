@@ -12,6 +12,12 @@
     <meta name="author" content="Guido Diell">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://disel07.github.io/Diell-Guido/">
+
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#00f3ff">
@@ -32,7 +38,10 @@
     <meta property="twitter:image" content="https://disel07.github.io/Diell-Guido/preview-image.png">
 
     <!-- PWA -->
-    <link rel="manifest" href="/Diell-Guido/manifest.json">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,6 +97,7 @@
       ]
     }
     </script>
+
 </head>
   <body>
     <div id="root"></div>
