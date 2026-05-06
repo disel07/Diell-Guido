@@ -68,80 +68,6 @@ body {
 }
 
 /* ==========================================
-   GLITCH EFFECT
-   ========================================== */
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes glitch-1 {
-  0%, 100% {
-    clip-path: inset(0 0 0 0);
-    transform: translate(0);
-  }
-  20% {
-    clip-path: inset(20% 0 30% 0);
-    transform: translate(-3px, 0);
-  }
-  40% {
-    clip-path: inset(50% 0 20% 0);
-    transform: translate(3px, 0);
-  }
-  60% {
-    clip-path: inset(10% 0 60% 0);
-    transform: translate(-3px, 0);
-  }
-  80% {
-    clip-path: inset(80% 0 5% 0);
-    transform: translate(3px, 0);
-  }
-}
-
-.glitch-active {
-  animation: glitch 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  position: relative;
-}
-
-.glitch-active::before,
-.glitch-active::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.glitch-active::before {
-  animation: glitch-1 0.2s linear both;
-  color: #00f3ff;
-  z-index: -1;
-}
-
-.glitch-active::after {
-  animation: glitch-1 0.2s linear reverse both;
-  color: #bc13fe;
-  z-index: -2;
-}
-
-/* ==========================================
    CARD GLITCH ON HOVER
    ========================================== */
 .card-glitch {
@@ -188,30 +114,6 @@ body {
   }
   80% {
     transform: translateX(1px);
-  }
-}
-
-/* ==========================================
-   RIPPLE EFFECT
-   ========================================== */
-.ripple-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(0, 243, 255, 0.3);
-  transform: scale(0);
-  animation: ripple-animation 0.6s ease-out;
-  pointer-events: none;
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 0;
   }
 }
 
@@ -326,28 +228,8 @@ body {
 }
 
 /* ==========================================
-   SCANLINE EFFECT
-   ========================================== */
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
-
-/* ==========================================
    GLOW EFFECTS
    ========================================== */
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), 0 0 40px rgba(0, 243, 255, 0.1);
-}
-
-.glow-purple {
-  box-shadow: 0 0 20px rgba(188, 19, 254, 0.3), 0 0 40px rgba(188, 19, 254, 0.1);
-}
-
 .text-glow {
   text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
 }
@@ -364,29 +246,12 @@ body {
   box-shadow: 0 10px 40px rgba(0, 243, 255, 0.1);
 }
 
-.hover-glow:hover {
-  box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
-}
-
 /* ==========================================
    UTILITY ANIMATIONS
    ========================================== */
 @layer utilities {
   .animate-pulse-slow {
     animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
   }
 }
 
@@ -419,99 +284,4 @@ body {
 
 .skip-link:focus {
   transform: translateY(0);
-}
-
-/* ==========================================
-   TEXT GLITCH EFFECT (DecodeText)
-   ========================================== */
-.text-glitch {
-  position: relative;
-  display: inline-block;
-}
-
-.text-glitch .animate-glitch-1 {
-  animation: glitch-text-1 0.3s infinite linear alternate-reverse;
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  transform: translate(-2px, -2px);
-}
-
-.text-glitch .animate-glitch-2 {
-  animation: glitch-text-2 0.3s infinite linear alternate-reverse;
-  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  transform: translate(2px, 2px);
-}
-
-@keyframes glitch-text-1 {
-  0% {
-    clip-path: inset(20% 0 60% 0);
-    transform: translate(-3px, -2px);
-  }
-  20% {
-    clip-path: inset(60% 0 10% 0);
-    transform: translate(3px, 2px);
-  }
-  40% {
-    clip-path: inset(10% 0 80% 0);
-    transform: translate(-2px, 1px);
-  }
-  60% {
-    clip-path: inset(80% 0 5% 0);
-    transform: translate(2px, -1px);
-  }
-  80% {
-    clip-path: inset(40% 0 30% 0);
-    transform: translate(-1px, 2px);
-  }
-  100% {
-    clip-path: inset(20% 0 60% 0);
-    transform: translate(1px, -2px);
-  }
-}
-
-@keyframes glitch-text-2 {
-  0% {
-    clip-path: inset(60% 0 20% 0);
-    transform: translate(2px, 2px);
-  }
-  20% {
-    clip-path: inset(10% 0 60% 0);
-    transform: translate(-2px, -2px);
-  }
-  40% {
-    clip-path: inset(80% 0 10% 0);
-    transform: translate(1px, -1px);
-  }
-  60% {
-    clip-path: inset(5% 0 80% 0);
-    transform: translate(-1px, 1px);
-  }
-  80% {
-    clip-path: inset(30% 0 40% 0);
-    transform: translate(2px, -2px);
-  }
-  100% {
-    clip-path: inset(60% 0 20% 0);
-    transform: translate(-2px, 2px);
-  }
-}
-
-/* ==========================================
-   CUSTOM CURSOR - NASCONDE CURSORE DEFAULT
-   ========================================== */
-@media (pointer: fine) {
-  html body.cursor-none,
-  html body.cursor-none *:not(a):not(button):not([role="button"]):not(input):not(textarea):not(select):not(label):not(.cursor-pointer):not([type="button"]):not([type="submit"]):not([type="reset"]),
-  html body.cursor-none p,
-  html body.cursor-none span,
-  html body.cursor-none div,
-  html body.cursor-none section,
-  html body.cursor-none article,
-  html body.cursor-none h1,
-  html body.cursor-none h2,
-  html body.cursor-none h3,
-  html body.cursor-none h4,
-  html body.cursor-none h5,
-  html body.cursor-none h6 {
-    cursor: none !important;
-  }
 }

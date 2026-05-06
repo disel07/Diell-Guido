@@ -1,23 +1,30 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useMemo } from 'react';
 import { Menu, X, Code, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { PROJECTS } from '../constants';
 import { useActiveSection } from '../hooks/useActiveSection';
-
-const navLinks = [
-  { name: 'Home', href: '/#home', sectionId: 'home' },
-  { name: 'Skills', href: '/#skills', sectionId: 'skills' },
-  { name: 'Projects', href: '/#projects', sectionId: 'projects' },
-  { name: 'Experience', href: '/#experience', sectionId: 'experience' },
-  { name: 'Contact', href: '/#contact', sectionId: 'contact' },
-];
+import { useLanguage } from '../contexts/LanguageContext';
+import LanguageToggle from './LanguageToggle';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
+
+  const navLinks = useMemo(
+    () => [
+      { name: t.nav.home, href: '/#home', sectionId: 'home' },
+      { name: t.nav.skills, href: '/#skills', sectionId: 'skills' },
+      { name: t.nav.learning, href: '/#learning', sectionId: 'learning' },
+      { name: t.nav.projects, href: '/#projects', sectionId: 'projects' },
+      { name: t.nav.experience, href: '/#experience', sectionId: 'experience' },
+      { name: t.nav.contact, href: '/#contact', sectionId: 'contact' },
+    ],
+    [t]
+  );
   
   const activeSection = useActiveSection({
     sectionIds: navLinks.map(link => link.sectionId),
@@ -44,7 +51,7 @@ const Navbar: React.FC = () => {
         href="#main-content"
         className="fixed top-0 left-0 z-[60] p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200 skip-link"
       >
-        Skip to main content
+        {t.skipToContent}
       </a>
 
       <nav
@@ -72,7 +79,7 @@ const Navbar: React.FC = () => {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-6">
               <div className="flex items-baseline space-x-8">
                 {navLinks.map((link, index) => {
                   const isActive = activeSection === link.sectionId;
@@ -98,10 +105,12 @@ const Navbar: React.FC = () => {
                   );
                 })}
               </div>
+              <LanguageToggle />
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-2">
+              <LanguageToggle className="px-2" />
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gray-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded-lg p-2"
@@ -147,7 +156,7 @@ const Navbar: React.FC = () => {
                 })}
 
                 <div className="mt-4 border-t border-white/10 pt-4 px-3">
-                  <p className="text-xs font-mono text-gray-500 mb-2 uppercase text-center">Projects</p>
+                  <p className="text-xs font-mono text-gray-500 mb-2 uppercase text-center">{t.nav.projectsLabel}</p>
                   {PROJECTS.map((project) => (
                     <a
                       key={project.name}
@@ -158,9 +167,10 @@ const Navbar: React.FC = () => {
                       className="block py-3 text-center text-sm font-bold text-white hover:text-cyber-primary flex items-center justify-center gap-2"
                       aria-label={`${project.name} (opens in new tab)`}
                     >
-                      {project.name} <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                      {project.name} <span className="text-xs text-gray-500">{project.category}</span> <ExternalLink className="w-3 h-3" aria-hidden="true" />
                     </a>
                   ))}
+                  <p className="sr-only">{language}</p>
                 </div>
               </div>
             </motion.div>

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { usePerformanceMode } from '../contexts/PerformanceContext';
 
 const THROTTLE_DELAY = 200; // ms
 
@@ -7,24 +8,24 @@ const MatrixBackground: React.FC = () => {
   const animationFrameIdRef = useRef<number>(0);
   const isVisibleRef = useRef(true);
   const resizeTimeoutRef = useRef<number>(0);
-
-  const throttledResize = useCallback((handler: () => void) => {
-    if (resizeTimeoutRef.current) {
-      clearTimeout(resizeTimeoutRef.current);
-    }
-    resizeTimeoutRef.current = window.setTimeout(handler, THROTTLE_DELAY);
-  }, []);
+  const { autoPerformanceMode } = usePerformanceMode();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    if (autoPerformanceMode) {
+      canvas.style.display = 'none';
+      return;
+    }
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const coarsePointerQuery = window.matchMedia('(pointer: coarse)');
+    if (reducedMotionQuery.matches || coarsePointerQuery.matches) {
       canvas.style.display = 'none';
       return;
     }
@@ -39,7 +40,7 @@ const MatrixBackground: React.FC = () => {
     const nums = '0123456789';
     const alphabet = katakana + latin + nums;
 
-    const fontSize = 14;
+    const fontSize = 18;
     let columns = width / fontSize;
 
     const rainDrops: number[] = [];
@@ -49,7 +50,7 @@ const MatrixBackground: React.FC = () => {
     }
 
     let lastTime = 0;
-    const fps = 30;
+    const fps = 18;
     const interval = 1000 / fps;
 
     const draw = (currentTime: number) => {
@@ -94,7 +95,11 @@ const MatrixBackground: React.FC = () => {
 
     // Handle resize with throttle
     const handleResize = () => {
-      throttledResize(() => {
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+
+      resizeTimeoutRef.current = window.setTimeout(() => {
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = width;
@@ -104,7 +109,7 @@ const MatrixBackground: React.FC = () => {
         for (let x = 0; x < columns; x++) {
           rainDrops[x] = 1;
         }
-      });
+      }, THROTTLE_DELAY);
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -116,7 +121,7 @@ const MatrixBackground: React.FC = () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
     };
-  }, [throttledResize]);
+  }, [autoPerformanceMode]);
 
   return (
     <canvas

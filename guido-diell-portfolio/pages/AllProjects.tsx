@@ -1,29 +1,20 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, GitBranch, FolderOpen, Trophy } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
+import ProjectFilters from '../components/ProjectFilters';
+import { useLanguage } from '../contexts/LanguageContext';
+import { ProjectCategory } from '../types';
+import { usePerformanceMode } from '../contexts/PerformanceContext';
 
 const AllProjects: React.FC = () => {
-    const projectsList = [
-        ...PROJECTS.filter(p => p.name !== 'Portfolio Diell-Guido').map(p => {
-            if (p.name === 'SmartCompound') return { ...p, description: "Turn your daily savings into an empire with compound interest simulation." };
-            if (p.name === 'CareerPath-Proiezioni') return { ...p, description: "Life simulator. Plan two parallel career paths and compare your future." };
-            return p;
-        }),
-        {
-            name: "Organizer-Foto-Pro",
-            description: "The safest and fastest way to organize thousands of photos and videos in seconds.",
-            technologies: ["Python", "CLI"],
-            url: "https://github.com/disel07/Organizer-Foto-Pro"
-        },
-        {
-            name: "Torneo FIFA 2025",
-            description: "Leaderboard and schedule management system for a FIFA 2025 tournament.",
-            technologies: ["HTML", "CSS", "JavaScript", "Python"],
-            url: "https://disel07.github.io/torneo-fifa-2025/"
-        }
-    ];
+    const { language, t } = useLanguage();
+    const { autoPerformanceMode } = usePerformanceMode();
+    const [activeCategory, setActiveCategory] = useState<ProjectCategory | 'All'>('All');
+    const projectsList = useMemo(
+        () => PROJECTS.filter((project) => activeCategory === 'All' || project.category === activeCategory),
+        [activeCategory]
+    );
 
     const container = {
         hidden: { opacity: 0 },
@@ -50,7 +41,7 @@ const AllProjects: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center m-0 text-3xl md:text-5xl font-mono font-bold text-white leading-tight"
             >
-                FULL PROJECT <span className="text-cyber-primary text-glow">CATALOG</span>
+                {t.projects.allTitleA} <span className="text-cyber-primary text-glow">{t.projects.allTitleB}</span>
             </motion.h1>
 
             {/* Row 3: Cyan horizontal line */}
@@ -62,23 +53,25 @@ const AllProjects: React.FC = () => {
                 animate={{ opacity: 0.7 }}
                 className="text-center italic text-gray-400 mb-12"
             >
-                "The best way to predict the future is to invent it."
+                "{t.projects.quote}"
             </motion.p>
+
+            <ProjectFilters activeCategory={activeCategory} onChange={setActiveCategory} />
 
             {/* Row 5: Project grid */}
             <motion.div
                 variants={container}
                 initial="hidden"
                 animate="show"
-                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', maxWidth: '896px', margin: '0 auto', padding: '0 32px' }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto px-4 sm:px-8"
                 role="list"
-                aria-label="All projects"
+                aria-label={t.projects.allLabel}
             >
                 {projectsList.map((project) => (
                     <motion.div
                         key={project.name}
                         variants={item}
-                        whileHover={{
+                        whileHover={autoPerformanceMode ? undefined : {
                             y: -6,
                             transition: { duration: 0.3 }
                         }}
@@ -91,6 +84,7 @@ const AllProjects: React.FC = () => {
                             {project.name === 'CareerPath-Proiezioni' && <GitBranch className="w-10 h-10 text-white drop-shadow-lg" />}
                             {project.name === 'Organizer-Foto-Pro' && <FolderOpen className="w-10 h-10 text-white drop-shadow-lg" />}
                             {project.name === 'Torneo FIFA 2025' && <Trophy className="w-10 h-10 text-white drop-shadow-lg" />}
+                            {project.name === 'Portfolio Diell-Guido' && <FolderOpen className="w-10 h-10 text-white drop-shadow-lg" />}
                         </div>
 
                         {/* Body */}
@@ -102,7 +96,7 @@ const AllProjects: React.FC = () => {
 
                             {/* Description */}
                             <p className="text-gray-400 text-sm mb-4">
-                                {project.description}
+                                {project.description[language]}
                             </p>
 
                             {/* Tech badges */}
@@ -124,12 +118,16 @@ const AllProjects: React.FC = () => {
                                 rel="noopener noreferrer"
                                 className="block w-full text-center border border-cyan-400 text-cyan-400 bg-transparent hover:bg-cyan-400 hover:text-black transition-all duration-300 mt-4 py-2 rounded font-mono font-bold text-sm tracking-wide focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
                             >
-                                VIEW PROJECT
+                                {t.projects.viewProject}
                             </a>
                         </div>
                     </motion.div>
                 ))}
             </motion.div>
+
+            {projectsList.length === 0 && (
+                <p className="text-center text-gray-400 mt-8">{t.projects.empty}</p>
+            )}
         </div>
     );
 };

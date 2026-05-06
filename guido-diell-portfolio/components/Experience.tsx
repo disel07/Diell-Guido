@@ -2,8 +2,13 @@ import React, { memo } from 'react';
 import { EXPERIENCE } from '../constants';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Briefcase } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { usePerformanceMode } from '../contexts/PerformanceContext';
 
 const Experience: React.FC = () => {
+  const { language, t } = useLanguage();
+  const { autoPerformanceMode } = usePerformanceMode();
+
   return (
     <section id="experience" className="py-20 relative" aria-labelledby="experience-heading">
       <div className="max-w-6xl mx-auto px-4">
@@ -14,7 +19,7 @@ const Experience: React.FC = () => {
           className="mb-16"
         >
           <h2 id="experience-heading" className="text-4xl md:text-5xl font-mono font-bold mb-4">
-            EXPERIENCE <span className="text-cyber-primary">LOG</span>
+            {t.experience.titleA} <span className="text-cyber-primary">{t.experience.titleB}</span>
           </h2>
           <div className="h-1 w-20 bg-cyber-secondary rounded-full" aria-hidden="true" />
         </motion.div>
@@ -23,14 +28,14 @@ const Experience: React.FC = () => {
           {/* Center Line */}
           <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-gradient-to-b from-cyber-primary via-purple-500 to-transparent opacity-30" aria-hidden="true" />
 
-          <div className="space-y-12" role="list" aria-label="Work experience timeline">
+          <div className="space-y-12" role="list" aria-label={t.experience.label}>
             {EXPERIENCE.map((exp, index) => (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: autoPerformanceMode ? 0 : 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: autoPerformanceMode ? 0.1 : 0.5, delay: autoPerformanceMode ? 0 : index * 0.1 }}
                 className={`relative flex flex-col md:flex-row ${
                   index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 } gap-8`}
@@ -48,7 +53,7 @@ const Experience: React.FC = () => {
                     <div className="relative z-10">
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="text-xl font-bold text-white group-hover:text-cyber-primary transition-colors">
-                          {exp.role}
+                          {exp.role[language]}
                         </h3>
                         {exp.type === 'tech' && (
                           <Briefcase className="w-4 h-4 text-cyber-secondary flex-shrink-0" aria-hidden="true" />
@@ -59,15 +64,15 @@ const Experience: React.FC = () => {
 
                       <div className="flex flex-wrap gap-4 text-sm text-gray-400 font-mono mb-6">
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" aria-hidden="true" /> {exp.period}
+                          <Calendar className="w-3 h-3" aria-hidden="true" /> {exp.period[language]}
                         </span>
                         <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" aria-hidden="true" /> {exp.location}
+                          <MapPin className="w-3 h-3" aria-hidden="true" /> {exp.location[language]}
                         </span>
                       </div>
 
                       <ul className="space-y-2">
-                        {exp.description.map((desc, i) => (
+                        {exp.description[language].map((desc, i) => (
                           <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
                             <span className="mt-1.5 w-1.5 h-1.5 bg-cyber-primary rounded-full flex-shrink-0" aria-hidden="true" />
                             {desc}

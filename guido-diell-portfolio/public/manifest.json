@@ -2,8 +2,16 @@
   "name": "Guido Diell Portfolio",
   "short_name": "Portfolio",
   "start_url": "/Diell-Guido/",
+  "scope": "/Diell-Guido/",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#00ffff",
-  "icons": []
+  "icons": [
+    {
+      "src": "/Diell-Guido/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }

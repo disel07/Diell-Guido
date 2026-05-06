@@ -1,9 +1,12 @@
 import React, { memo } from 'react';
-import { SKILLS, CERTIFICATIONS, SITE_CONFIG } from '../constants';
+import { SKILLS, CERTIFICATIONS } from '../constants';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Skills: React.FC = () => {
+  const { language, t } = useLanguage();
+
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-transparent to-black/80" aria-labelledby="skills-heading">
       <div className="max-w-6xl mx-auto px-4">
@@ -18,15 +21,15 @@ const Skills: React.FC = () => {
               className="mb-12"
             >
               <h2 id="skills-heading" className="text-4xl font-mono font-bold mb-2">
-                TECHNICAL <span className="text-cyber-secondary">ARSENAL</span>
+                {t.skills.titleA} <span className="text-cyber-secondary">{t.skills.titleB}</span>
               </h2>
-              <p className="text-gray-400">Proficiency level loaded from system metrics.</p>
+              <p className="text-gray-400">{t.skills.subtitle}</p>
             </motion.div>
 
-            <div className="space-y-8" role="list" aria-label="Technical skills">
+            <div className="space-y-8" role="list" aria-label={t.skills.listLabel}>
               {SKILLS.map((skill, index) => (
                 <motion.div
-                  key={skill.name}
+                  key={skill.name.en}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -35,9 +38,9 @@ const Skills: React.FC = () => {
                 >
                   <div className="flex justify-between mb-2">
                     <span className="font-mono text-sm font-bold tracking-wider" id={`skill-${index}`}>
-                      {skill.name.toUpperCase()}
+                      {skill.name[language].toUpperCase()}
                     </span>
-                    <span className="font-mono text-xs text-cyber-primary" aria-label={`${skill.level} percent proficiency`}>
+                    <span className="font-mono text-xs text-cyber-primary" aria-label={`${skill.level} ${t.skills.proficiencyLabel}`}>
                       {skill.level}%
                     </span>
                   </div>
@@ -76,12 +79,12 @@ const Skills: React.FC = () => {
               className="mb-12"
             >
               <h2 className="text-4xl font-mono font-bold mb-2">
-                CERTIFIED <span className="text-white">DATA</span>
+                {t.skills.certifiedA} <span className="text-white">{t.skills.certifiedB}</span>
               </h2>
-              <p className="text-gray-400">Verified achievements and personal objectives.</p>
+              <p className="text-gray-400">{t.skills.certifiedSubtitle}</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-4 mb-12" role="list" aria-label="Certifications">
+            <div className="grid grid-cols-1 gap-4 mb-12" role="list" aria-label={t.skills.certsLabel}>
               {CERTIFICATIONS.map((cert, index) => (
                 <motion.div
                   key={cert.name}
@@ -107,9 +110,9 @@ const Skills: React.FC = () => {
               viewport={{ once: true }}
               className="p-6 border-l-2 border-cyber-primary bg-gradient-to-r from-cyber-primary/10 to-transparent"
             >
-              <h3 className="font-mono font-bold text-xl mb-4">SYSTEM OBJECTIVE</h3>
+              <h3 className="font-mono font-bold text-xl mb-4">{t.skills.objectiveTitle}</h3>
               <p className="text-gray-300 italic leading-relaxed">
-                "{SITE_CONFIG.aboutMe}"
+                "{t.skills.about}"
               </p>
             </motion.div>
           </div>
