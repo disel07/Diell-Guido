@@ -17,6 +17,10 @@ export default defineConfig(({ mode }) => {
         }
       },
       build: {
+        modulePreload: {
+          resolveDependencies: (_filename, deps) =>
+            deps.filter((dep) => !dep.includes('/motion-') && !dep.startsWith('assets/motion-')),
+        },
         rollupOptions: {
           output: {
             manualChunks: isProduction
