@@ -23,6 +23,19 @@ export interface Skill {
 export interface Certification {
   name: string;
   issuer: string;
+  issued: LocalizedText;
+  expires?: LocalizedText;
+  credentialId?: string;
+  skills: LocalizedText;
+}
+
+export interface EducationItem {
+  school: string;
+  degree: LocalizedText;
+  location: LocalizedText;
+  period: LocalizedText;
+  focus: string[];
+  description: LocalizedText;
 }
 
 export interface Project {

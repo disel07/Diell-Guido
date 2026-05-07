@@ -13,7 +13,7 @@ const LanguageToggle: React.FC<{ className?: string }> = ({ className = '' }) =>
       aria-label={t.languageToggle}
     >
       <Languages className="h-4 w-4" aria-hidden="true" />
-      {language.toUpperCase()}
+      <span className="hidden min-[421px]:inline">{language.toUpperCase()}</span>
     </button>
   );
 };
