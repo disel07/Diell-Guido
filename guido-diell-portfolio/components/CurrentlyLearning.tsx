@@ -18,15 +18,14 @@ const CurrentlyLearning: React.FC = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <div className="section-kicker mb-4">
+          <div className="inline-flex items-center gap-2 text-cyber-primary font-mono text-xs font-bold tracking-[0.2em] mb-4">
             <Radio className="w-4 h-4" aria-hidden="true" />
             {t.learning.badge}
           </div>
           <h2 id="learning-heading" className="text-4xl md:text-5xl font-mono font-bold mb-4">
             {t.learning.titleA} <span className="text-cyber-secondary">{t.learning.titleB}</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl leading-relaxed">{t.learning.subtitle}</p>
-          <div className="section-rule mt-8 max-w-xl" aria-hidden="true" />
+          <p className="text-gray-400 max-w-2xl">{t.learning.subtitle}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5" role="list" aria-label={t.learning.label}>
@@ -37,7 +36,7 @@ const CurrentlyLearning: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: autoPerformanceMode ? 0 : index * 0.06 }}
-              className="surface-panel glass-border-glow rounded-lg p-5"
+              className="glass glass-border-glow rounded-xl p-5 border border-white/10"
               role="listitem"
             >
               <div className="flex items-start justify-between gap-4 mb-4">

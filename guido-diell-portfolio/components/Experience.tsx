@@ -21,7 +21,7 @@ const Experience: React.FC = () => {
           <h2 id="experience-heading" className="text-4xl md:text-5xl font-mono font-bold mb-4">
             {t.experience.titleA} <span className="text-cyber-primary">{t.experience.titleB}</span>
           </h2>
-          <div className="section-rule max-w-xl" aria-hidden="true" />
+          <div className="h-1 w-20 bg-cyber-secondary rounded-full" aria-hidden="true" />
         </motion.div>
 
         <div className="relative">
@@ -42,11 +42,11 @@ const Experience: React.FC = () => {
                 role="listitem"
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-black border-2 border-cyber-primary rounded-full z-10 mt-6 shadow-[0_0_12px_rgba(0,243,255,0.7)]" aria-hidden="true" />
+                <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-black border-2 border-cyber-primary rounded-full z-10 mt-6 shadow-[0_0_10px_#00f3ff]" aria-hidden="true" />
 
                 {/* Content Card */}
                 <div className="w-full md:w-1/2 pl-8 md:pl-0 md:px-8">
-                  <article className="group relative p-6 surface-panel rounded-lg overflow-hidden hover:border-cyber-primary/35 transition-all duration-300">
+                  <article className="group relative p-6 bg-cyber-card backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-cyber-primary/30 transition-all duration-300">
                     {/* Hover Gradient Effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-cyber-primary/5 to-cyber-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
 
