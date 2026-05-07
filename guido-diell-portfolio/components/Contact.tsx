@@ -2,14 +2,10 @@ import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, Check, Copy } from 'lucide-react';
 import { SITE_CONFIG } from '../constants';
-import { useLanguage } from '../contexts/LanguageContext';
-import { usePerformanceMode } from '../contexts/PerformanceContext';
 
 const Contact: React.FC = () => {
   const [showEmail, setShowEmail] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { t } = useLanguage();
-  const { autoPerformanceMode } = usePerformanceMode();
 
   const email = SITE_CONFIG.contact.email || "diellguido007@gmail.com";
 
@@ -22,7 +18,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <footer id="contact" className="py-14 relative overflow-hidden border-t border-white/5 bg-black/55">
+    <footer id="contact" className="py-12 relative overflow-hidden border-t border-white/5 bg-black/40">
       <div className="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center">
         
         <motion.div
@@ -32,25 +28,25 @@ const Contact: React.FC = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl md:text-3xl font-mono font-bold mb-4">
-            {t.contact.titleA} <span className="text-cyber-primary">{t.contact.titleB}</span>
+            CONNECT <span className="text-cyber-primary">PROTOCOL</span>
           </h2>
           <p className="text-gray-400 text-sm md:text-base max-w-md mx-auto">
-            {t.contact.subtitle}
+            Ready to collaborate on future technologies.
           </p>
         </motion.div>
 
-        <div className="surface-panel rounded-lg px-6 py-7 flex flex-col items-center gap-6 mb-8">
+        <div className="flex flex-col items-center gap-6 mb-8">
           <div className="flex justify-center gap-8">
             {/* GitHub */}
             <motion.a
               href={SITE_CONFIG.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={t.contact.githubLabel}
+              aria-label="Visit my GitHub profile (opens in new tab)"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={autoPerformanceMode ? undefined : { y: -5, color: '#00f3ff', scale: 1.1 }}
-              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
+              whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
+              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded-full"
             >
               <Github className="w-6 h-6" aria-hidden="true" />
             </motion.a>
@@ -60,12 +56,12 @@ const Contact: React.FC = () => {
               href={SITE_CONFIG.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={t.contact.linkedinLabel}
+              aria-label="Visit my LinkedIn profile (opens in new tab)"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
-              whileHover={autoPerformanceMode ? undefined : { y: -5, color: '#00f3ff', scale: 1.1 }}
-              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
+              whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
+              className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:border-cyber-primary hover:bg-cyber-primary/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded-full"
             >
               <Linkedin className="w-6 h-6" aria-hidden="true" />
             </motion.a>
@@ -75,11 +71,11 @@ const Contact: React.FC = () => {
               onClick={() => setShowEmail(!showEmail)}
               aria-expanded={showEmail}
               aria-controls="email-panel"
-              aria-label={showEmail ? t.contact.hideEmail : t.contact.showEmail}
+              aria-label={showEmail ? 'Hide email address' : 'Show email address'}
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              whileHover={autoPerformanceMode ? undefined : { y: -5, color: '#00f3ff', scale: 1.1 }}
+              whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
               className={`p-3 rounded-full border transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary ${
                 showEmail 
                   ? 'bg-cyber-primary/20 border-cyber-primary text-cyber-primary shadow-[0_0_15px_rgba(0,243,255,0.3)]' 
@@ -105,9 +101,9 @@ const Contact: React.FC = () => {
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => e.key === 'Enter' && handleCopy()}
-                  className="flex flex-wrap items-center justify-center gap-3 px-5 py-3 bg-white/5 border border-white/10 rounded-lg cursor-pointer hover:bg-white/10 hover:border-cyber-primary/50 group transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
-                  whileHover={autoPerformanceMode ? undefined : { scale: 1.02 }}
-                  whileTap={autoPerformanceMode ? undefined : { scale: 0.98 }}
+                  className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-full cursor-pointer hover:bg-white/10 hover:border-cyber-primary/50 group transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <code className="font-mono text-sm text-gray-300 group-hover:text-white transition-colors">
                     {email}
@@ -115,11 +111,11 @@ const Contact: React.FC = () => {
                   <div className="w-px h-4 bg-white/10" />
                   {copied ? (
                     <span className="flex items-center gap-1 text-xs font-bold text-green-400" aria-live="polite">
-                      <Check className="w-3 h-3" aria-hidden="true" /> {t.contact.copied}
+                      <Check className="w-3 h-3" aria-hidden="true" /> COPIED
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 text-xs font-bold text-cyber-primary group-hover:text-cyber-primary/80">
-                      <Copy className="w-3 h-3" aria-hidden="true" /> {t.contact.copy}
+                      <Copy className="w-3 h-3" aria-hidden="true" /> COPY
                     </span>
                   )}
                 </motion.div>
@@ -130,7 +126,7 @@ const Contact: React.FC = () => {
         
         <div className="text-center">
           <p className="text-xs text-gray-600 font-mono">
-            © {new Date().getFullYear()} {SITE_CONFIG.name.toUpperCase()}. {t.contact.footer}
+            © {new Date().getFullYear()} {SITE_CONFIG.name.toUpperCase()}. SYSTEM ONLINE.
           </p>
         </div>
       </div>

@@ -1,25 +1,18 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import Hero from '../components/Hero';
-
-const Skills = lazy(() => import('../components/Skills'));
-const CurrentlyLearning = lazy(() => import('../components/CurrentlyLearning'));
-const Projects = lazy(() => import('../components/Projects'));
-const Experience = lazy(() => import('../components/Experience'));
-const Education = lazy(() => import('../components/Education'));
-const Contact = lazy(() => import('../components/Contact'));
+import Skills from '../components/Skills';
+import Projects from '../components/Projects';
+import Experience from '../components/Experience';
+import Contact from '../components/Contact';
 
 const Home: React.FC = () => {
     return (
         <>
             <Hero />
-            <Suspense fallback={null}>
-                <Skills />
-                <CurrentlyLearning />
-                <Projects />
-                <Experience />
-                <Education />
-                <Contact />
-            </Suspense>
+            <Skills />
+            <Projects />
+            <Experience />
+            <Contact />
         </>
     );
 };
