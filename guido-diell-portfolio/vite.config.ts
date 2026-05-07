@@ -1,9 +1,9 @@
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
-    const isProduction = mode === 'production';
+    const env = loadEnv(mode, '.', '');
     return {
       base: '/Diell-Guido/',
       server: {
@@ -15,23 +15,6 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
-      },
-      build: {
-        modulePreload: {
-          resolveDependencies: (_filename, deps) =>
-            deps.filter((dep) => !dep.includes('/motion-') && !dep.startsWith('assets/motion-')),
-        },
-        rollupOptions: {
-          output: {
-            manualChunks: isProduction
-              ? {
-                  react: ['react', 'react-dom', 'react-router-dom'],
-                  motion: ['framer-motion'],
-                  icons: ['lucide-react'],
-                }
-              : undefined,
-          },
-        },
       }
     };
 });

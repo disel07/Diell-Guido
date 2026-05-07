@@ -7,9 +7,21 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://disel07.github.io/Diell-Guido/about</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://disel07.github.io/Diell-Guido/projects/all</loc>
     <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disel07.github.io/Diell-Guido/contacts</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

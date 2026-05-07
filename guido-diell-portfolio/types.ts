@@ -1,21 +1,15 @@
-export type Language = 'en' | 'it';
-
-export type LocalizedText = Record<Language, string>;
-
-export type ProjectCategory = 'Web' | 'Python' | 'Hardware' | 'School' | 'Experiments';
-
 export interface ExperienceItem {
   id: string;
-  role: LocalizedText;
+  role: string;
   company: string;
-  location: LocalizedText;
-  period: LocalizedText;
-  description: Record<Language, string[]>;
+  location: string;
+  period: string;
+  description: string[];
   type: 'tech' | 'other';
 }
 
 export interface Skill {
-  name: LocalizedText;
+  name: string;
   level: number; // 0-100
   category: 'Code' | 'Tools' | 'Languages' | 'Soft Skills';
 }
@@ -23,34 +17,13 @@ export interface Skill {
 export interface Certification {
   name: string;
   issuer: string;
-  issued: LocalizedText;
-  expires?: LocalizedText;
-  credentialId?: string;
-  skills: LocalizedText;
-}
-
-export interface EducationItem {
-  school: string;
-  degree: LocalizedText;
-  location: LocalizedText;
-  period: LocalizedText;
-  focus: string[];
-  description: LocalizedText;
 }
 
 export interface Project {
   name: string;
   url: string;
-  description: LocalizedText;
+  description: string;
   technologies: string[];
-  category: ProjectCategory;
-  featured?: boolean;
   bgGradient?: string;
 }
 
-export interface LearningItem {
-  title: LocalizedText;
-  status: LocalizedText;
-  description: LocalizedText;
-  tags: string[];
-}

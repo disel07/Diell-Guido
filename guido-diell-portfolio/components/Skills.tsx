@@ -1,21 +1,16 @@
 import React, { memo } from 'react';
-import { SKILLS, CERTIFICATIONS } from '../constants';
+import { SKILLS, CERTIFICATIONS, SITE_CONFIG } from '../constants';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
-import { usePerformanceMode } from '../contexts/PerformanceContext';
 
 const Skills: React.FC = () => {
-  const { language, t } = useLanguage();
-  const { autoPerformanceMode } = usePerformanceMode();
-
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-transparent to-black/80" aria-labelledby="skills-heading">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
           {/* Skills Column */}
-          <div className="surface-panel rounded-lg p-6">
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -23,27 +18,26 @@ const Skills: React.FC = () => {
               className="mb-12"
             >
               <h2 id="skills-heading" className="text-4xl font-mono font-bold mb-2">
-                {t.skills.titleA} <span className="text-cyber-secondary">{t.skills.titleB}</span>
+                TECHNICAL <span className="text-cyber-secondary">ARSENAL</span>
               </h2>
-              <p className="text-gray-400">{t.skills.subtitle}</p>
-              <div className="section-rule mt-6" aria-hidden="true" />
+              <p className="text-gray-400">Proficiency level loaded from system metrics.</p>
             </motion.div>
 
-            <div className="space-y-6" role="list" aria-label={t.skills.listLabel}>
+            <div className="space-y-8" role="list" aria-label="Technical skills">
               {SKILLS.map((skill, index) => (
                 <motion.div
-                  key={skill.name.en}
+                  key={skill.name}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={autoPerformanceMode ? { duration: 0.1 } : { delay: index * 0.04 }}
+                  transition={{ delay: index * 0.05 }}
                   role="listitem"
                 >
                   <div className="flex justify-between mb-2">
                     <span className="font-mono text-sm font-bold tracking-wider" id={`skill-${index}`}>
-                      {skill.name[language].toUpperCase()}
+                      {skill.name.toUpperCase()}
                     </span>
-                    <span className="font-mono text-xs text-cyber-primary" aria-label={`${skill.level} ${t.skills.proficiencyLabel}`}>
+                    <span className="font-mono text-xs text-cyber-primary" aria-label={`${skill.level} percent proficiency`}>
                       {skill.level}%
                     </span>
                   </div>
@@ -59,15 +53,13 @@ const Skills: React.FC = () => {
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
-                      transition={autoPerformanceMode ? { duration: 0.2 } : { duration: 1, ease: "easeOut" }}
+                      transition={{ duration: 1.5, ease: "easeOut" }}
                       className={`h-full rounded-full ${
                         skill.category === 'Code' ? 'bg-cyber-primary' : 
                         skill.category === 'Tools' ? 'bg-cyber-secondary' : 'bg-white'
                       } relative motion-reduce:animate-none`}
                     >
-                      {!autoPerformanceMode && (
-                        <div className="absolute top-0 right-0 bottom-0 w-full animate-pulse bg-white/20 motion-reduce:animate-none" aria-hidden="true" />
-                      )}
+                      <div className="absolute top-0 right-0 bottom-0 w-full animate-pulse bg-white/20 motion-reduce:animate-none" aria-hidden="true" />
                     </motion.div>
                   </div>
                 </motion.div>
@@ -76,7 +68,7 @@ const Skills: React.FC = () => {
           </div>
 
           {/* Certifications & About Column */}
-          <div className="surface-panel rounded-lg p-6">
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -84,13 +76,12 @@ const Skills: React.FC = () => {
               className="mb-12"
             >
               <h2 className="text-4xl font-mono font-bold mb-2">
-                {t.skills.certifiedA} <span className="text-white">{t.skills.certifiedB}</span>
+                CERTIFIED <span className="text-white">DATA</span>
               </h2>
-              <p className="text-gray-400">{t.skills.certifiedSubtitle}</p>
-              <div className="section-rule mt-6" aria-hidden="true" />
+              <p className="text-gray-400">Verified achievements and personal objectives.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-4 mb-12" role="list" aria-label={t.skills.certsLabel}>
+            <div className="grid grid-cols-1 gap-4 mb-12" role="list" aria-label="Certifications">
               {CERTIFICATIONS.map((cert, index) => (
                 <motion.div
                   key={cert.name}
@@ -105,16 +96,6 @@ const Skills: React.FC = () => {
                   <div>
                     <h3 className="font-bold text-white">{cert.name}</h3>
                     <p className="text-xs text-gray-400 uppercase tracking-wider">{cert.issuer}</p>
-                    <p className="mt-2 text-xs text-gray-400">
-                      {t.skills.issued}: {cert.issued[language]}
-                      {cert.expires ? ` · ${t.skills.expires}: ${cert.expires[language]}` : ''}
-                    </p>
-                    {cert.credentialId && (
-                      <p className="text-xs text-gray-500 font-mono">
-                        {t.skills.credentialId}: {cert.credentialId}
-                      </p>
-                    )}
-                    <p className="mt-1 text-xs text-cyber-secondary">{cert.skills[language]}</p>
                   </div>
                 </motion.div>
               ))}
@@ -126,9 +107,9 @@ const Skills: React.FC = () => {
               viewport={{ once: true }}
               className="p-6 border-l-2 border-cyber-primary bg-gradient-to-r from-cyber-primary/10 to-transparent"
             >
-              <h3 className="font-mono font-bold text-xl mb-4">{t.skills.objectiveTitle}</h3>
+              <h3 className="font-mono font-bold text-xl mb-4">SYSTEM OBJECTIVE</h3>
               <p className="text-gray-300 italic leading-relaxed">
-                "{t.skills.about}"
+                "{SITE_CONFIG.aboutMe}"
               </p>
             </motion.div>
           </div>
