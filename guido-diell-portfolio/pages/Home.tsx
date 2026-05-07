@@ -5,6 +5,7 @@ const Skills = lazy(() => import('../components/Skills'));
 const CurrentlyLearning = lazy(() => import('../components/CurrentlyLearning'));
 const Projects = lazy(() => import('../components/Projects'));
 const Experience = lazy(() => import('../components/Experience'));
+const Education = lazy(() => import('../components/Education'));
 const Contact = lazy(() => import('../components/Contact'));
 
 const Home: React.FC = () => {
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
                 <CurrentlyLearning />
                 <Projects />
                 <Experience />
+                <Education />
                 <Contact />
             </Suspense>
         </>

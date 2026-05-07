@@ -1,4 +1,4 @@
-import { Certification, ExperienceItem, LearningItem, Project, ProjectCategory, Skill } from './types';
+import { Certification, EducationItem, ExperienceItem, LearningItem, Project, ProjectCategory, Skill } from './types';
 
 export const SITE_CONFIG = {
   name: 'Guido Diell',
@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   contact: {
     email: 'diellguido007@gmail.com',
     phone: '',
-    address: 'CS, Italia',
+    address: "Santa Sofia d'Epiro, Calabria, Italia",
   },
   socials: {
     github: 'https://github.com/disel07',
@@ -108,10 +108,10 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     id: '2',
     role: {
-      en: 'Erasmus Internship',
-      it: 'Tirocinio Erasmus',
+      en: 'IT Intern',
+      it: 'Stagista informatica',
     },
-    company: 'CodeMonster',
+    company: 'Code Monsters',
     location: {
       en: 'A Coruna, Spain',
       it: 'La Coruna, Spagna',
@@ -122,16 +122,16 @@ export const EXPERIENCE: ExperienceItem[] = [
     },
     description: {
       en: [
-        'Configured Raspberry Pi devices and supported small lab infrastructure tasks.',
-        'Installed and maintained private-cloud systems in a supervised internship setting.',
-        'Created scripts to automate repeated setup and update workflows.',
-        'Practiced troubleshooting across operating systems, hardware and legacy machines.',
+        'Completed an Erasmus+ IT internship focused on computer maintenance, Linux and technical support.',
+        'Configured devices and supported small lab infrastructure tasks in an on-site environment.',
+        'Practiced troubleshooting across operating systems, hardware and network-related issues.',
+        'Strengthened practical communication, documentation and problem-solving skills.',
       ],
       it: [
-        'Ho configurato dispositivi Raspberry Pi e supportato attivita di infrastruttura in laboratorio.',
-        'Ho installato e mantenuto sistemi cloud privati in un contesto di tirocinio supervisionato.',
-        'Ho creato script per automatizzare procedure ripetitive di setup e aggiornamento.',
-        'Ho fatto troubleshooting su sistemi operativi, hardware e macchine datate.',
+        'Ho svolto uno stage Erasmus+ IT orientato a manutenzione computer, Linux e supporto tecnico.',
+        'Ho configurato dispositivi e supportato attivita di infrastruttura in laboratorio in presenza.',
+        'Ho fatto troubleshooting su sistemi operativi, hardware e problemi legati alla rete.',
+        'Ho rafforzato comunicazione pratica, documentazione e capacita di problem solving.',
       ],
     },
     type: 'tech',
@@ -139,10 +139,10 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     id: '3',
     role: {
-      en: 'School Internship',
-      it: 'Tirocinio scolastico',
+      en: 'Student Volunteer',
+      it: 'Volontario studente',
     },
-    company: 'RATO-ADCC',
+    company: 'ADCC (Associacao para a Divulgacao Cultural e Cientifica)',
     location: {
       en: 'Lisbon, Portugal',
       it: 'Lisbona, Portogallo',
@@ -153,15 +153,15 @@ export const EXPERIENCE: ExperienceItem[] = [
     },
     description: {
       en: [
+        'Completed a one-month school-work alternation experience in science and technology.',
         'Explored IT support, basic web development and multimedia production workflows.',
         'Practiced HTML, JavaScript and content editing in collaborative activities.',
-        'Gained introductory exposure to 3D printing and digital fabrication tools.',
-        'Improved communication and adaptability in an international work environment.',
+        'Improved communication and adaptability in an international environment.',
       ],
       it: [
+        'Ho svolto un mese di alternanza scuola-lavoro in ambito scienza e tecnologia.',
         'Ho esplorato supporto IT, sviluppo web di base e flussi di produzione multimediale.',
         'Ho usato HTML, JavaScript e strumenti di editing in attivita collaborative.',
-        'Ho avuto un primo contatto con stampa 3D e strumenti di fabbricazione digitale.',
         'Ho migliorato comunicazione e adattabilita in un ambiente internazionale.',
       ],
     },
@@ -199,12 +199,17 @@ export const EXPERIENCE: ExperienceItem[] = [
 ];
 
 export const SKILLS: Skill[] = [
-  { name: { en: 'C#', it: 'C#' }, level: 65, category: 'Code' },
-  { name: { en: 'HTML5 / CSS', it: 'HTML5 / CSS' }, level: 75, category: 'Code' },
+  { name: { en: 'Python', it: 'Python' }, level: 70, category: 'Code' },
   { name: { en: 'JavaScript', it: 'JavaScript' }, level: 60, category: 'Code' },
+  { name: { en: 'SQL', it: 'SQL' }, level: 45, category: 'Code' },
+  { name: { en: 'Bash', it: 'Bash' }, level: 55, category: 'Code' },
+  { name: { en: 'C#', it: 'C#' }, level: 65, category: 'Code' },
+  { name: { en: 'Linux', it: 'Linux' }, level: 70, category: 'Tools' },
+  { name: { en: 'Docker', it: 'Docker' }, level: 40, category: 'Tools' },
+  { name: { en: 'Network Architecture', it: 'Architettura di rete' }, level: 55, category: 'Tools' },
+  { name: { en: 'Cybersecurity', it: 'Cybersecurity' }, level: 55, category: 'Tools' },
+  { name: { en: 'Blockchain Basics', it: 'Basi blockchain' }, level: 45, category: 'Tools' },
   { name: { en: 'PC Maintenance', it: 'Manutenzione PC' }, level: 85, category: 'Tools' },
-  { name: { en: 'Raspberry Pi', it: 'Raspberry Pi' }, level: 60, category: 'Tools' },
-  { name: { en: 'Social Media Mgmt', it: 'Gestione social media' }, level: 70, category: 'Soft Skills' },
   { name: { en: 'Italian (Native)', it: 'Italiano (madrelingua)' }, level: 100, category: 'Languages' },
   { name: { en: 'English (B1)', it: 'Inglese (B1)' }, level: 30, category: 'Languages' },
   { name: { en: 'Spanish (A2)', it: 'Spagnolo (A2)' }, level: 20, category: 'Languages' },
@@ -212,64 +217,115 @@ export const SKILLS: Skill[] = [
 
 export const CURRENTLY_LEARNING: LearningItem[] = [
   {
-    title: { en: 'TypeScript + React', it: 'TypeScript + React' },
+    title: { en: 'Cybersecurity foundations', it: 'Fondamenti di cybersecurity' },
     status: { en: 'Active focus', it: 'Focus attivo' },
     description: {
-      en: 'Writing safer components, improving state structure and learning practical testing patterns.',
-      it: 'Scrivo componenti piu sicuri, miglioro la struttura dello stato e studio pattern di test pratici.',
+      en: 'Strengthening network security, basic threat awareness and defensive troubleshooting.',
+      it: 'Rafforzo sicurezza delle reti, consapevolezza delle minacce e troubleshooting difensivo.',
     },
-    tags: ['TypeScript', 'React', 'Testing'],
+    tags: ['Cisco', 'Security', 'Networks'],
   },
   {
-    title: { en: 'Backend basics', it: 'Fondamenti backend' },
+    title: { en: 'Blockchain and Web3', it: 'Blockchain e Web3' },
     status: { en: 'Building foundations', it: 'Basi in costruzione' },
     description: {
-      en: 'Studying APIs, authentication concepts and how frontend apps communicate with services.',
-      it: 'Studio API, concetti di autenticazione e comunicazione tra frontend e servizi.',
+      en: 'Studying blockchain basics, Web3 concepts and the security mindset behind smart contracts.',
+      it: 'Studio basi blockchain, concetti Web3 e mentalita di sicurezza dietro gli smart contract.',
     },
-    tags: ['API', 'Node', 'Auth'],
+    tags: ['Cyfrin', 'Web3', 'Smart Contracts'],
   },
   {
-    title: { en: 'Linux and sysadmin', it: 'Linux e sysadmin' },
+    title: { en: 'Linux, Bash and Docker', it: 'Linux, Bash e Docker' },
     status: { en: 'Hands-on practice', it: 'Pratica diretta' },
     description: {
-      en: 'Practicing shell workflows, service setup and basic troubleshooting on Linux systems.',
-      it: 'Mi esercito con shell, configurazione servizi e troubleshooting di base su sistemi Linux.',
+      en: 'Practicing terminal workflows, scripts, containers and repeatable local environments.',
+      it: 'Mi esercito con terminale, script, container e ambienti locali ripetibili.',
     },
-    tags: ['Linux', 'Shell', 'Services'],
+    tags: ['Linux', 'Bash', 'Docker'],
   },
   {
-    title: { en: 'Networking fundamentals', it: 'Fondamenti di networking' },
+    title: { en: 'SQL and data basics', it: 'SQL e basi dati' },
     status: { en: 'In progress', it: 'In corso' },
     description: {
-      en: 'Improving understanding of IP addressing, DNS, routing basics and local network debugging.',
-      it: 'Approfondisco indirizzamento IP, DNS, basi di routing e debug di reti locali.',
+      en: 'Improving query fundamentals, data modeling basics and practical database usage.',
+      it: 'Miglioro query, basi di modellazione dati e uso pratico dei database.',
     },
-    tags: ['DNS', 'IP', 'Troubleshooting'],
+    tags: ['SQL', 'Data', 'Backend'],
   },
   {
-    title: { en: 'Hardware and Raspberry Pi', it: 'Hardware e Raspberry Pi' },
+    title: { en: 'Python automation', it: 'Automazione Python' },
     status: { en: 'Project-based', it: 'Basato su progetti' },
     description: {
-      en: 'Experimenting with small devices, automation scripts and practical hardware maintenance.',
-      it: 'Sperimento con piccoli dispositivi, script di automazione e manutenzione hardware pratica.',
+      en: 'Building small utilities that solve real file, system and workflow problems.',
+      it: 'Creo piccole utility per risolvere problemi reali su file, sistema e workflow.',
     },
-    tags: ['Raspberry Pi', 'Hardware', 'Automation'],
+    tags: ['Python', 'CLI', 'Automation'],
   },
   {
-    title: { en: 'Automated testing', it: 'Test automatici' },
+    title: { en: 'Technical English', it: 'Inglese tecnico' },
     status: { en: 'Portfolio rollout', it: 'Applicato al portfolio' },
     description: {
-      en: 'Adding tests that protect routing, language switching and core portfolio content.',
-      it: 'Aggiungo test per proteggere routing, cambio lingua e contenuti principali del portfolio.',
+      en: 'Improving how I explain projects, internships and technical decisions in English.',
+      it: 'Miglioro il modo in cui spiego progetti, stage e decisioni tecniche in inglese.',
     },
-    tags: ['Vitest', 'QA', 'CI'],
+    tags: ['B1', 'Communication', 'Remote'],
+  },
+];
+
+export const EDUCATION: EducationItem[] = [
+  {
+    school: 'ITI A. Monaco - Informatica',
+    degree: {
+      en: 'Technical and Professional Institute Diploma, Informatics',
+      it: 'Diploma Istituto Tecnico e Professionale, Informatica',
+    },
+    location: {
+      en: 'Cosenza, Italy',
+      it: 'Cosenza, Italia',
+    },
+    period: {
+      en: 'Jan 2021 - Jun 2026',
+      it: 'gen 2021 - giu 2026',
+    },
+    focus: ['C#', 'Computer Networks', 'Python', 'Linux', 'SQL', 'Cybersecurity'],
+    description: {
+      en: 'School path focused on informatics, computer networks and practical technical skills, with a growing focus on cybersecurity, Linux and software tools.',
+      it: 'Percorso scolastico orientato a informatica, reti e competenze tecniche pratiche, con focus crescente su cybersecurity, Linux e strumenti software.',
+    },
   },
 ];
 
 export const CERTIFICATIONS: Certification[] = [
-  { name: 'ICDL/ECDL Full Standard', issuer: 'AICA' },
-  { name: 'Computer Essentials', issuer: 'ECDL' },
-  { name: 'IT Security', issuer: 'ECDL' },
-  { name: 'Spreadsheets', issuer: 'ECDL' },
+  {
+    name: 'Introduction to Modern AI',
+    issuer: 'Cisco',
+    issued: { en: 'May 2026', it: 'mag 2026' },
+    skills: { en: 'Artificial Intelligence', it: 'Intelligenza artificiale' },
+  },
+  {
+    name: 'Certification: Blockchain Basics',
+    issuer: 'Cyfrin Updraft',
+    issued: { en: 'Apr 2026', it: 'apr 2026' },
+    expires: { en: 'Apr 2027', it: 'apr 2027' },
+    credentialId: 'BBCC-EFGJTLGD9GTG2',
+    skills: { en: 'Blockchain, Web3, smart contracts', it: 'Blockchain, Web3, smart contract' },
+  },
+  {
+    name: 'Introduction to Cybersecurity',
+    issuer: 'Cisco',
+    issued: { en: 'Apr 2026', it: 'apr 2026' },
+    skills: { en: 'Cybersecurity, network security', it: 'Cybersecurity, sicurezza delle reti' },
+  },
+  {
+    name: 'Computer Essentials and Spreadsheets',
+    issuer: 'AICA',
+    issued: { en: 'Apr 2025', it: 'apr 2025' },
+    skills: { en: 'ECDL, Microsoft Excel, computer essentials', it: 'ECDL, Microsoft Excel, competenze informatiche di base' },
+  },
+  {
+    name: 'IT Security',
+    issuer: 'AICA',
+    issued: { en: 'Jun 2025', it: 'giu 2025' },
+    skills: { en: 'Cybersecurity, network architecture, IT security', it: 'Sicurezza informatica, architettura di rete, IT security' },
+  },
 ];

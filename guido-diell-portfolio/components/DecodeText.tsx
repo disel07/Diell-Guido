@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 
 interface DecodeTextProps {
   text: string;
@@ -42,14 +41,11 @@ const DecodeText: React.FC<DecodeTextProps> = ({ text, className = '', delay = 0
   }, [text, delay]);
 
   return (
-    <motion.span
+    <span
       className={`inline-block ${className}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3, delay: delay / 1000 }}
     >
       {displayText}
-    </motion.span>
+    </span>
   );
 };
 

@@ -19,10 +19,11 @@ describe('portfolio app', () => {
   it('renders the English portfolio by default', async () => {
     renderApp();
 
-    expect(await screen.findByText('Computer Science Student')).toBeInTheDocument();
+    expect(await screen.findByText('IT Student | Python · Linux · Docker · Bash · SQL')).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: /main navigation/i })).toBeInTheDocument();
     expect(await screen.findByText('CURRENTLY', {}, { timeout: 5000 })).toBeInTheDocument();
     expect(await screen.findByText('FEATURED', {}, { timeout: 5000 })).toBeInTheDocument();
+    expect(await screen.findByText('ITI A. Monaco - Informatica', {}, { timeout: 5000 })).toBeInTheDocument();
   });
 
   it('switches the visible language to Italian and persists the choice', async () => {
@@ -32,7 +33,7 @@ describe('portfolio app', () => {
     const languageButtons = await screen.findAllByRole('button', { name: /switch language to italian/i });
     await user.click(languageButtons[0]);
 
-    expect(screen.getByText('Studente di informatica')).toBeInTheDocument();
+    expect(screen.getByText('Studente IT | Python · Linux · Docker · Bash · SQL')).toBeInTheDocument();
     expect(window.localStorage.getItem('portfolio-language')).toBe('it');
   });
 
@@ -56,6 +57,8 @@ describe('portfolio app', () => {
     const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8');
     expect(html).toContain('https://disel07.github.io/Diell-Guido/preview-image.png');
     expect(html).toContain('<link rel="canonical" href="https://disel07.github.io/Diell-Guido/">');
+    expect(html).toContain('Cybersecurity');
+    expect(html).toContain('Blockchain');
   });
 
   it('handles GitHub Pages 404 redirect storage', async () => {

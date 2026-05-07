@@ -21,7 +21,7 @@ const AllProjects: React.FC = () => {
         show: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
+                staggerChildren: autoPerformanceMode ? 0 : 0.06
             }
         }
     };
@@ -36,25 +36,25 @@ const AllProjects: React.FC = () => {
             <div style={{ height: '120px' }} />
 
             {/* Row 2: Title */}
-            <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-center m-0 text-3xl md:text-5xl font-mono font-bold text-white leading-tight"
-            >
-                {t.projects.allTitleA} <span className="text-cyber-primary text-glow">{t.projects.allTitleB}</span>
-            </motion.h1>
+            <header className="mx-auto max-w-5xl px-4 text-center">
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="m-0 text-3xl md:text-5xl font-mono font-bold text-white leading-tight"
+                >
+                    {t.projects.allTitleA} <span className="text-cyber-primary text-glow">{t.projects.allTitleB}</span>
+                </motion.h1>
 
-            {/* Row 3: Cyan horizontal line */}
-            <div className="w-full h-px bg-cyan-500 mb-8" />
+                <div className="section-rule mx-auto my-8 max-w-2xl" />
 
-            {/* Row 4: Quote */}
-            <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.7 }}
-                className="text-center italic text-gray-400 mb-12"
-            >
-                "{t.projects.quote}"
-            </motion.p>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.7 }}
+                    className="italic text-gray-400 mb-12"
+                >
+                    "{t.projects.quote}"
+                </motion.p>
+            </header>
 
             <ProjectFilters activeCategory={activeCategory} onChange={setActiveCategory} />
 
@@ -63,7 +63,7 @@ const AllProjects: React.FC = () => {
                 variants={container}
                 initial="hidden"
                 animate="show"
-                className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto px-4 sm:px-8"
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 sm:px-8"
                 role="list"
                 aria-label={t.projects.allLabel}
             >
@@ -75,11 +75,14 @@ const AllProjects: React.FC = () => {
                             y: -6,
                             transition: { duration: 0.3 }
                         }}
-                        className="bg-black/40 backdrop-blur-md rounded-xl border border-cyan-500/30 overflow-hidden flex flex-col motion-reduce:hover:transform-none"
+                        className="surface-panel rounded-lg overflow-hidden flex flex-col transition-colors hover:border-cyan-400/60 motion-reduce:hover:transform-none"
                         role="listitem"
                     >
                         {/* Header area: gradient from cyan to purple */}
-                        <div className="w-full h-24 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-t-xl flex items-center justify-center" style={{ height: '96px', minHeight: '96px', flexShrink: 0 }}>
+                        <div className="relative w-full h-24 bg-gradient-to-r from-cyan-500/90 to-purple-600/90 rounded-t-lg flex items-center justify-center" style={{ height: '96px', minHeight: '96px', flexShrink: 0 }}>
+                            <span className="absolute right-3 top-3 rounded border border-white/30 bg-black/20 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-white">
+                                {project.category}
+                            </span>
                             {project.name === 'SmartCompound' && <TrendingUp className="w-10 h-10 text-white drop-shadow-lg" />}
                             {project.name === 'CareerPath-Proiezioni' && <GitBranch className="w-10 h-10 text-white drop-shadow-lg" />}
                             {project.name === 'Organizer-Foto-Pro' && <FolderOpen className="w-10 h-10 text-white drop-shadow-lg" />}
@@ -95,7 +98,7 @@ const AllProjects: React.FC = () => {
                             </h3>
 
                             {/* Description */}
-                            <p className="text-gray-400 text-sm mb-4">
+                            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
                                 {project.description[language]}
                             </p>
 
