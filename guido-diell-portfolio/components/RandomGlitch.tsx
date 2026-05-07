@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 const RandomGlitch: React.FC = () => {
-  const [glitchElement, setGlitchElement] = useState<string | null>(null);
-
   useEffect(() => {
     const triggerGlitch = () => {
       // Seleziona un elemento random tra h1, h2, h3
@@ -10,7 +8,6 @@ const RandomGlitch: React.FC = () => {
       if (elements.length === 0) return;
 
       const randomElement = elements[Math.floor(Math.random() * elements.length)];
-      const originalText = randomElement.textContent || '';
       
       // Applica glitch
       randomElement.classList.add('glitch-active');

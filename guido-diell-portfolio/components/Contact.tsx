@@ -2,10 +2,12 @@ import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, Check, Copy } from 'lucide-react';
 import { SITE_CONFIG } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Contact: React.FC = () => {
   const [showEmail, setShowEmail] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
 
   const email = SITE_CONFIG.contact.email || "diellguido007@gmail.com";
 
@@ -28,10 +30,10 @@ const Contact: React.FC = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl md:text-3xl font-mono font-bold mb-4">
-            CONNECT <span className="text-cyber-primary">PROTOCOL</span>
+            {t.contact.titleA} <span className="text-cyber-primary">{t.contact.titleB}</span>
           </h2>
           <p className="text-gray-400 text-sm md:text-base max-w-md mx-auto">
-            Ready to collaborate on future technologies.
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
@@ -42,7 +44,7 @@ const Contact: React.FC = () => {
               href={SITE_CONFIG.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit my GitHub profile (opens in new tab)"
+              aria-label={t.contact.githubLabel}
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -5, color: '#00f3ff', scale: 1.1 }}
@@ -56,7 +58,7 @@ const Contact: React.FC = () => {
               href={SITE_CONFIG.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit my LinkedIn profile (opens in new tab)"
+              aria-label={t.contact.linkedinLabel}
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
@@ -71,7 +73,7 @@ const Contact: React.FC = () => {
               onClick={() => setShowEmail(!showEmail)}
               aria-expanded={showEmail}
               aria-controls="email-panel"
-              aria-label={showEmail ? 'Hide email address' : 'Show email address'}
+              aria-label={showEmail ? t.contact.hideEmail : t.contact.showEmail}
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
@@ -111,11 +113,11 @@ const Contact: React.FC = () => {
                   <div className="w-px h-4 bg-white/10" />
                   {copied ? (
                     <span className="flex items-center gap-1 text-xs font-bold text-green-400" aria-live="polite">
-                      <Check className="w-3 h-3" aria-hidden="true" /> COPIED
+                      <Check className="w-3 h-3" aria-hidden="true" /> {t.contact.copied}
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 text-xs font-bold text-cyber-primary group-hover:text-cyber-primary/80">
-                      <Copy className="w-3 h-3" aria-hidden="true" /> COPY
+                      <Copy className="w-3 h-3" aria-hidden="true" /> {t.contact.copy}
                     </span>
                   )}
                 </motion.div>
@@ -126,7 +128,7 @@ const Contact: React.FC = () => {
         
         <div className="text-center">
           <p className="text-xs text-gray-600 font-mono">
-            © {new Date().getFullYear()} {SITE_CONFIG.name.toUpperCase()}. SYSTEM ONLINE.
+            © {new Date().getFullYear()} {SITE_CONFIG.name.toUpperCase()}. {t.contact.footer}
           </p>
         </div>
       </div>

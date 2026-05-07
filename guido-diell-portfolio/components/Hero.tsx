@@ -4,16 +4,18 @@ import { ChevronDown, Cpu, Globe, Terminal } from 'lucide-react';
 import { HashLink } from 'react-router-hash-link';
 import { SITE_CONFIG } from '../constants';
 import DecodeText from './DecodeText';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero: React.FC = () => {
+  const { language, t } = useLanguage();
   const skillCards = [
-    { icon: Terminal, text: "System Admin", href: "/#skills", label: "View system administration skills" },
-    { icon: Globe, text: "Web Development", href: "/#skills", label: "View web development skills" },
-    { icon: Cpu, text: "Hardware Ops", href: "/#skills", label: "View hardware operations skills" }
+    { icon: Terminal, text: t.hero.cards[0].text, href: "/#skills", label: t.hero.cards[0].label },
+    { icon: Globe, text: t.hero.cards[1].text, href: "/#skills", label: t.hero.cards[1].label },
+    { icon: Cpu, text: t.hero.cards[2].text, href: "/#skills", label: t.hero.cards[2].label }
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-32 md:py-20" aria-label="Hero section">
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-32 md:py-20" aria-label={t.hero.sectionLabel}>
       {/* Ambient Glow */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-primary/20 rounded-full blur-[128px] animate-pulse-slow pointer-events-none motion-reduce:animate-none" aria-hidden="true" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-[128px] animate-pulse-slow delay-1000 pointer-events-none motion-reduce:animate-none" aria-hidden="true" />
@@ -25,8 +27,8 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8 inline-block"
         >
-          <span className="px-4 py-2 rounded-full border border-cyber-primary/30 bg-cyber-primary/10 text-cyber-primary font-mono text-sm shadow-[0_0_15px_rgba(0,243,255,0.3)]" role="status" aria-label={`Current status: ${SITE_CONFIG.status}`}>
-            STATUS: {SITE_CONFIG.status}
+          <span className="px-4 py-2 rounded-full border border-cyber-primary/30 bg-cyber-primary/10 text-cyber-primary font-mono text-sm shadow-[0_0_15px_rgba(0,243,255,0.3)]" role="status" aria-label={`${t.hero.statusLabel}: ${SITE_CONFIG.status}`}>
+            {t.hero.statusPrefix}: {SITE_CONFIG.status}
           </span>
         </motion.div>
 
@@ -46,8 +48,8 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto"
         >
-          <p className="mb-2 font-medium text-white">{SITE_CONFIG.role}</p>
-          <p className="text-cyber-primary font-light">{SITE_CONFIG.heroDescription}</p>
+          <p className="mb-2 font-medium text-white">{SITE_CONFIG.role[language]}</p>
+          <p className="text-cyber-primary font-light">{SITE_CONFIG.heroDescription[language]}</p>
         </motion.div>
 
         {/* Functional Buttons / Cards con effetti glassmorphism */}
@@ -81,8 +83,8 @@ const Hero: React.FC = () => {
           transition={{ delay: 1.2, duration: 1 }}
           className="mt-4"
         >
-          <HashLink to="/#experience" smooth className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group" aria-label="Scroll to experience section">
-            <span className="text-xs font-mono tracking-[0.2em] group-hover:text-cyber-primary transition-colors">SCROLL TO EXPLORE</span>
+          <HashLink to="/#experience" smooth className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group" aria-label={t.hero.scrollLabel}>
+            <span className="text-xs font-mono tracking-[0.2em] group-hover:text-cyber-primary transition-colors">{t.hero.scroll}</span>
             <ChevronDown className="w-6 h-6 animate-bounce text-cyber-primary motion-reduce:animate-none" aria-hidden="true" />
           </HashLink>
         </motion.div>
