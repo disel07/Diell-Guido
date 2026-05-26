@@ -1,27 +1,29 @@
 {
   "name": "Guido Diell Portfolio",
-  "short_name": "Guido Portfolio",
-  "description": "Portfolio of Guido Diell, a Computer Science student and developer. Explore projects in AI, Web Development, and futuristic UI design.",
+  "short_name": "Guido Diell",
   "start_url": "/Diell-Guido/",
+  "scope": "/Diell-Guido/",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#00f3ff",
-  "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "/Diell-Guido/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "/Diell-Guido/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/Diell-Guido/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
-  ],
-  "categories": ["portfolio", "developer", "technology"],
-  "lang": "en",
-  "dir": "ltr"
+  ]
 }
