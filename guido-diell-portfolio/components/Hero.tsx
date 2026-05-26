@@ -5,6 +5,7 @@ import { HashLink } from 'react-router-hash-link';
 import { SITE_CONFIG } from '../constants';
 import DecodeText from './DecodeText';
 import { useLanguage } from '../contexts/LanguageContext';
+import { scrollWithOffset } from '../utils/scroll';
 
 const Hero: React.FC = () => {
   const { language, t } = useLanguage();
@@ -66,7 +67,7 @@ const Hero: React.FC = () => {
             >
               <HashLink
                 to={item.href}
-                smooth
+                scroll={scrollWithOffset}
                 aria-label={item.label}
                 className="flex flex-col md:flex-row items-center justify-center gap-3 p-6 glass glass-border-glow rounded-xl hover:bg-white/10 hover:border-cyber-primary/50 transition-all cursor-pointer group shadow-lg w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary circuit-button"
               >
@@ -83,7 +84,7 @@ const Hero: React.FC = () => {
           transition={{ delay: 1.2, duration: 1 }}
           className="mt-4"
         >
-          <HashLink to="/#experience" smooth className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group" aria-label={t.hero.scrollLabel}>
+          <HashLink to="/#experience" scroll={scrollWithOffset} className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group" aria-label={t.hero.scrollLabel}>
             <span className="text-xs font-mono tracking-[0.2em] group-hover:text-cyber-primary transition-colors">{t.hero.scroll}</span>
             <ChevronDown className="w-6 h-6 animate-bounce text-cyber-primary motion-reduce:animate-none" aria-hidden="true" />
           </HashLink>

@@ -7,6 +7,7 @@ import { PROJECTS } from '../constants';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { useLanguage } from '../contexts/LanguageContext';
 import LanguageToggle from './LanguageToggle';
+import { scrollWithOffset } from '../utils/scroll';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,9 +52,9 @@ const Navbar: React.FC = () => {
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
-        className="fixed top-0 left-0 z-[60] p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200 skip-link"
+        className="fixed top-0 left-0 p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200 skip-link"
       >
-        Skip to main content
+        {t.skipToContent}
       </a>
 
       <nav
@@ -89,7 +90,7 @@ const Navbar: React.FC = () => {
                     <HashLink
                       key={link.name}
                       to={link.href}
-                      smooth
+                      scroll={scrollWithOffset}
                       aria-current={isActive ? 'page' : undefined}
                       className={`font-mono text-xs lg:text-sm transition-colors duration-300 nav-link-underline ${
                         isActive ? 'text-cyber-primary active' : 'text-white hover:text-cyber-primary'
@@ -145,7 +146,7 @@ const Navbar: React.FC = () => {
                     <HashLink
                       key={link.name}
                       to={link.href}
-                      smooth
+                      scroll={scrollWithOffset}
                       onClick={() => setIsOpen(false)}
                       aria-current={isActive ? 'page' : undefined}
                       className={`block px-3 py-4 rounded-md text-base font-mono font-bold text-center border-b border-white/5 transition-colors ${

@@ -463,17 +463,17 @@ export const CURRENTLY_LEARNING: LearningItem[] = [
 export const AWARDS: AwardItem[] = [
   {
     title: {
-      en: 'Recognition Pending Public Announcement',
-      it: 'Riconoscimento in attesa di annuncio pubblico',
+      en: 'National Digital Innovation Award 2026',
+      it: "Premio Nazionale sull'Innovazione Digitale 2026",
     },
     status: {
-      en: 'Received',
-      it: 'Ricevuto',
+      en: 'Winner',
+      it: 'Vincitore',
     },
     description: {
-      en: 'Recognition received. Details will be shared after the official public announcement.',
-      it: 'Riconoscimento ricevuto. I dettagli saranno condivisi dopo l annuncio pubblico ufficiale.',
+      en: 'Issued by Anitec-Assinform · May 2026. Winner in the category "ICT for Inclusion and Accessibility – No One Excluded in the Digital Era" with the UrbanAI project, developed in partnership with Somos Srl and ENS (National Deaf Association). VI edition.',
+      it: 'Rilasciato da Anitec-Assinform · mag 2026. Vincitore nella categoria "ICT per l\'inclusione e l\'accessibilità – Nessuno escluso nell\'era digitale" con il progetto UrbanAI, sviluppato in partnership con Somos Srl ed ENS (Ente Nazionale Sordi). VI edizione.',
     },
-    tags: ['Confidential', 'Achievement', 'Coming soon'],
+    tags: ['Anitec-Assinform', 'UrbanAI', 'Accessibility', 'AI'],
   },
 ];
