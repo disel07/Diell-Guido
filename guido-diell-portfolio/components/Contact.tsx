@@ -98,11 +98,10 @@ const Contact: React.FC = () => {
                 exit={{ opacity: 0, height: 0, y: -10 }}
                 className="overflow-hidden"
               >
-                <motion.div
+                <motion.button
+                  type="button"
                   onClick={handleCopy}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === 'Enter' && handleCopy()}
+                  aria-label={`${t.contact.copy}: ${email}`}
                   className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-full cursor-pointer hover:bg-white/10 hover:border-cyber-primary/50 group transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -110,7 +109,7 @@ const Contact: React.FC = () => {
                   <code className="font-mono text-sm text-gray-300 group-hover:text-white transition-colors">
                     {email}
                   </code>
-                  <div className="w-px h-4 bg-white/10" />
+                  <div className="w-px h-4 bg-white/10" aria-hidden="true" />
                   {copied ? (
                     <span className="flex items-center gap-1 text-xs font-bold text-green-400" aria-live="polite">
                       <Check className="w-3 h-3" aria-hidden="true" /> {t.contact.copied}
@@ -120,7 +119,7 @@ const Contact: React.FC = () => {
                       <Copy className="w-3 h-3" aria-hidden="true" /> {t.contact.copy}
                     </span>
                   )}
-                </motion.div>
+                </motion.button>
               </motion.div>
             )}
           </AnimatePresence>

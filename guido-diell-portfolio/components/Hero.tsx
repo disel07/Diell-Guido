@@ -9,6 +9,7 @@ import { scrollWithOffset } from '../utils/scroll';
 
 const Hero: React.FC = () => {
   const { language, t } = useLanguage();
+  const [avatarError, setAvatarError] = React.useState(false);
   const skillCards = [
     { icon: Terminal, text: t.hero.cards[0].text, href: "/#skills", label: t.hero.cards[0].label },
     { icon: Globe, text: t.hero.cards[1].text, href: "/#skills", label: t.hero.cards[1].label },
@@ -31,14 +32,25 @@ const Hero: React.FC = () => {
         >
           <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-cyber-primary via-cyber-secondary to-cyber-primary opacity-70 blur-md group-hover:opacity-100 transition-opacity duration-500 motion-reduce:opacity-40 motion-reduce:blur-none" aria-hidden="true" />
           <div className="relative rounded-full p-1 bg-black/80 ring-2 ring-cyber-primary/50">
-            <img
-              src={`${import.meta.env.BASE_URL}images/avatar-opentowork.png`}
-              alt="Guido Diell - Open to Work profile"
-              className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover shadow-2xl"
-              width="144"
-              height="144"
-              loading="eager"
-            />
+            {!avatarError ? (
+              <img
+                src={`${import.meta.env.BASE_URL}images/avatar-opentowork.png`}
+                alt="Guido Diell - Open to Work profile"
+                className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover shadow-2xl"
+                width="144"
+                height="144"
+                loading="eager"
+                onError={() => setAvatarError(true)}
+              />
+            ) : (
+              <div
+                className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-cyber-primary/10 border border-cyber-primary/30 flex items-center justify-center text-cyber-primary font-mono font-bold text-2xl md:text-3xl shadow-2xl"
+                aria-label="Guido Diell - Open to Work profile"
+                role="img"
+              >
+                GD
+              </div>
+            )}
           </div>
         </motion.div>
 
@@ -59,7 +71,9 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-5xl md:text-8xl font-bold font-mono mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 uppercase leading-tight"
+          aria-label={SITE_CONFIG.name}
         >
+          <span className="sr-only">{SITE_CONFIG.name}</span>
           <DecodeText text={SITE_CONFIG.name} delay={500} />
         </motion.h1>
 

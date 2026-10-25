@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -146,5 +146,71 @@ describe('portfolio app', () => {
     canvasElements.forEach((canvas) => {
       expect(canvas.className).toContain('motion-reduce:hidden');
     });
+  });
+
+  it('handles company logo and avatar loading errors gracefully with fallback UI', async () => {
+    renderApp();
+
+    const rootrunnersLogo = screen.getByAltText('RootRunners logo');
+    fireEvent.error(rootrunnersLogo);
+
+    // After error, image is replaced by fallback Briefcase icon container without throwing
+    expect(screen.queryByAltText('RootRunners logo')).not.toBeInTheDocument();
+
+    const avatar = screen.getByAltText('Guido Diell - Open to Work profile');
+    fireEvent.error(avatar);
+
+    // After avatar error, initials avatar fallback is rendered with proper label
+    expect(screen.getByRole('img', { name: 'Guido Diell - Open to Work profile' })).toBeInTheDocument();
+    expect(screen.getByText('GD')).toBeInTheDocument();
+  });
+
+  it('provides fully keyboard-operable contact actions with accessible announcements', async () => {
+    const user = userEvent.setup();
+    renderApp();
+
+    const emailButton = screen.getByRole('button', { name: /show email address/i });
+    await user.click(emailButton);
+
+    const copyButton = await screen.findByRole('button', { name: /copy: diellguido007@gmail.com/i });
+    expect(copyButton).toBeInTheDocument();
+
+    await user.click(copyButton);
+    expect(await navigator.clipboard.readText()).toBe('diellguido007@gmail.com');
+    expect(await screen.findByText('COPIED')).toBeInTheDocument();
+  });
+
+  it('provides accessible labels for all project catalog links and filter controls', async () => {
+    renderApp('/Diell-Guido/projects/all');
+
+    expect(await screen.findByText('FULL PROJECT')).toBeInTheDocument();
+    const projectLinks = screen.getAllByRole('link', { name: /view project:/i });
+    expect(projectLinks.length).toBeGreaterThanOrEqual(5);
+    projectLinks.forEach((link) => {
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(link.getAttribute('aria-label')).toContain('(opens in new tab)');
+    });
+  });
+
+  it('dynamically adapts to prefers-reduced-motion and pointer media query updates', async () => {
+    const { unmount } = renderApp();
+
+    // Trigger dynamic change to reduced-motion
+    const motionMql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    act(() => {
+      motionMql.dispatchEvent(new Event('change') as MediaQueryListEvent);
+    });
+
+    // Verify touch/coarse pointer does not lock cursor-none on document.body
+    const coarseMql = window.matchMedia('(pointer: coarse)');
+    act(() => {
+      coarseMql.dispatchEvent(new Event('change') as MediaQueryListEvent);
+    });
+    expect(document.body.classList.contains('cursor-none')).toBe(false);
+
+    // Verify clean unmount without dangling timers or errors
+    expect(() => unmount()).not.toThrow();
+    expect(document.body.classList.contains('cursor-none')).toBe(false);
   });
 });

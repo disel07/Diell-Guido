@@ -23,30 +23,35 @@ const DecodeText: React.FC<DecodeTextProps> = ({ text, className = '', delay = 0
       return;
     }
 
-    const timeout = setTimeout(() => {
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    const timeoutId = setTimeout(() => {
       let currentIndex = 0;
       const totalLength = text.length;
-      
-      const interval = setInterval(() => {
+
+      intervalId = setInterval(() => {
         if (currentIndex < totalLength) {
           setDisplayText(() => {
-            return text.split('').map((char, index) => {
-              if (char === ' ') return ' ';
-              if (index < currentIndex) return text[index];
-              return CHARS[Math.floor(Math.random() * CHARS.length)];
-            }).join('');
+            return text
+              .split('')
+              .map((char, index) => {
+                if (char === ' ') return ' ';
+                if (index < currentIndex) return text[index];
+                return CHARS[Math.floor(Math.random() * CHARS.length)];
+              })
+              .join('');
           });
           currentIndex++;
         } else {
-          clearInterval(interval);
+          if (intervalId) clearInterval(intervalId);
           setDisplayText(text);
         }
       }, 80);
-
-      return () => clearInterval(interval);
     }, delay);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeoutId);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, [text, delay]);
 
   return (
@@ -55,6 +60,7 @@ const DecodeText: React.FC<DecodeTextProps> = ({ text, className = '', delay = 0
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: delay / 1000 }}
+      aria-hidden="true"
     >
       {displayText}
     </motion.span>

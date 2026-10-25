@@ -16,14 +16,13 @@ const Particles: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionQuery.matches) return;
-
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -87,7 +86,26 @@ const Particles: React.FC = () => {
       ctx.globalAlpha = 1;
     };
 
-    animationId = requestAnimationFrame(animate);
+    const startAnimation = () => {
+      if (animationId === 0) {
+        lastTime = 0;
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    const stopAnimation = () => {
+      if (animationId !== 0) {
+        cancelAnimationFrame(animationId);
+        animationId = 0;
+      }
+      ctx.clearRect(0, 0, width, height);
+    };
+
+    if (!motionQuery.matches) {
+      startAnimation();
+    } else {
+      stopAnimation();
+    }
 
     let resizeTimeout: number | undefined;
     const handleResize = () => {
@@ -102,10 +120,9 @@ const Particles: React.FC = () => {
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        cancelAnimationFrame(animationId);
-        ctx.clearRect(0, 0, width, height);
+        stopAnimation();
       } else {
-        animationId = requestAnimationFrame(animate);
+        startAnimation();
       }
     };
 
@@ -113,7 +130,7 @@ const Particles: React.FC = () => {
     motionQuery.addEventListener('change', handleMotionChange);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      stopAnimation();
       if (resizeTimeout) clearTimeout(resizeTimeout);
       window.removeEventListener('resize', handleResize);
       motionQuery.removeEventListener('change', handleMotionChange);

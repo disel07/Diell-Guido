@@ -189,6 +189,7 @@ export const EXPERIENCE: ExperienceItem[] = [
       it: 'Stagista informatica',
     },
     company: 'Code Monsters',
+    logo: 'images/code-monsters-logo.png',
     location: {
       en: 'La Coruna, Galicia, Spain',
       it: 'La Coruna, Galizia, Spagna',
@@ -225,6 +226,7 @@ export const EXPERIENCE: ExperienceItem[] = [
       it: 'Studente in alternanza scuola-lavoro',
     },
     company: 'ADCC',
+    logo: 'images/adcc-logo.png',
     location: {
       en: 'Lisbon, Portugal',
       it: 'Lisbona, Portogallo',
@@ -281,6 +283,7 @@ export const EXPERIENCE: ExperienceItem[] = [
 export const EDUCATION: EducationItem[] = [
   {
     school: 'Università della Calabria (UniCal)',
+    logo: 'images/unical-logo.png',
     degree: {
       en: "Bachelor's Degree in Computer Science (Informatica)",
       it: 'Laurea Triennale in Informatica',
@@ -302,8 +305,8 @@ export const EDUCATION: EducationItem[] = [
   {
     school: 'ITI A. Monaco - Informatica',
     degree: {
-      en: 'Technical IT Diploma, Computer Science (Grade: 92/100)',
-      it: 'Diploma tecnico, Informatica (Votazione: 92/100)',
+      en: 'Technical IT Diploma, Computer Science',
+      it: 'Diploma tecnico, Informatica',
     },
     location: {
       en: 'Cosenza, Italy',
@@ -325,6 +328,7 @@ export const EDUCATION: EducationItem[] = [
 export const VOLUNTEERING: VolunteerItem[] = [
   {
     organization: 'ADCC (Associacao para a Divulgacao Cultural e Cientifica)',
+    logo: 'images/adcc-logo.png',
     role: {
       en: 'Student Volunteer',
       it: 'Volontario studente',
@@ -465,6 +469,7 @@ export const CERTIFICATIONS: Certification[] = [
     credentialUrl: 'https://www.credly.com/badges/ebec2e5c-0c23-4a16-83d1-990b9eb645ba',
     skills: { en: 'IT security, Cloud Security, Threat Defense', it: 'Sicurezza informatica, Cloud Security, Difesa dalle minacce' },
     featured: true,
+    badge: 'images/llpa-champion-badge.png',
   },
   {
     name: 'Introduction to Modern AI',
@@ -474,6 +479,7 @@ export const CERTIFICATIONS: Certification[] = [
     credentialId: '1b5f1647-a661-429a-9a37-cd1ec89f7b83',
     credentialUrl: 'https://www.credly.com/badges/1b5f1647-a661-429a-9a37-cd1ec89f7b83',
     skills: { en: 'Artificial intelligence, Machine Learning', it: 'Intelligenza artificiale, Machine Learning' },
+    badge: 'images/cisco-logo.png',
   },
   {
     name: 'Introduction to Cybersecurity',
@@ -483,6 +489,7 @@ export const CERTIFICATIONS: Certification[] = [
     credentialId: '5fe6a8c8-9c8f-4449-bf3f-accc2f0c7dd6',
     credentialUrl: 'https://www.credly.com/badges/5fe6a8c8-9c8f-4449-bf3f-accc2f0c7dd6',
     skills: { en: 'Cybersecurity, network security', it: 'Cybersecurity, sicurezza delle reti' },
+    badge: 'images/cisco-logo.png',
   },
   {
     name: 'Certification: Blockchain Basics',
@@ -596,6 +603,7 @@ export const AWARDS: AwardItem[] = [
       it: 'Assegnato da Leading Learning Partners Association (LLPA) in collaborazione con Microsoft, AWS e Pipeline Srl. 1° classificato in Italia in IT Security e qualificato per rappresentare l\'Italia alle Finali Mondiali del 28 maggio 2026.',
     },
     tags: ['LLPA', 'IT Security', 'Microsoft', 'AWS', 'Pipeline Srl', 'World Finals'],
+    badge: 'images/llpa-champion-badge.png',
     link: 'https://www.credly.com/badges/ebec2e5c-0c23-4a16-83d1-990b9eb645ba',
   },
 ];

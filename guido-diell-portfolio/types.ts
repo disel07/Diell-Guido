@@ -28,6 +28,7 @@ export interface ExperienceItem {
 
 export interface EducationItem {
   school: string;
+  logo?: string;
   degree: LocalizedText;
   location: LocalizedText;
   period: LocalizedText;
@@ -38,6 +39,7 @@ export interface EducationItem {
 
 export interface VolunteerItem {
   organization: string;
+  logo?: string;
   role: LocalizedText;
   location: LocalizedText;
   period: LocalizedText;
@@ -90,4 +92,5 @@ export interface AwardItem {
   description: LocalizedText;
   tags: string[];
   link?: string;
+  badge?: string;
 }

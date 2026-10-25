@@ -1,18 +1,34 @@
 import '@testing-library/jest-dom/vitest';
 import { vi } from 'vitest';
 
+const mqlListenersMap = new Map<string, Set<(e: MediaQueryListEvent) => void>>();
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation((query: string) => ({
-    matches: query.includes('pointer: coarse') ? false : query.includes('prefers-reduced-motion: reduce'),
-    media: query,
-    onchange: null,
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
+  value: vi.fn().mockImplementation((query: string) => {
+    if (!mqlListenersMap.has(query)) {
+      mqlListenersMap.set(query, new Set());
+    }
+    const listeners = mqlListenersMap.get(query)!;
+
+    return {
+      matches: query.includes('pointer: coarse') ? false : query.includes('prefers-reduced-motion: reduce'),
+      media: query,
+      onchange: null,
+      addListener: vi.fn((fn) => listeners.add(fn)),
+      removeListener: vi.fn((fn) => listeners.delete(fn)),
+      addEventListener: vi.fn((event: string, fn: (e: MediaQueryListEvent) => void) => {
+        if (event === 'change') listeners.add(fn);
+      }),
+      removeEventListener: vi.fn((event: string, fn: (e: MediaQueryListEvent) => void) => {
+        if (event === 'change') listeners.delete(fn);
+      }),
+      dispatchEvent: vi.fn((event: Event) => {
+        listeners.forEach((fn) => fn(event as MediaQueryListEvent));
+        return true;
+      }),
+    };
+  }),
 });
 
 Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {

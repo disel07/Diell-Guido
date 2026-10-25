@@ -81,11 +81,11 @@ const AllProjects: React.FC = () => {
                         {/* Header area: dark repository header */}
                         <div className="w-full h-24 bg-gradient-to-br from-black via-cyan-950/30 to-purple-950/20 rounded-t-xl flex items-center justify-center border-b border-white/10" style={{ height: '96px', minHeight: '96px', flexShrink: 0 }}>
                             <div className="rounded-xl border border-cyan-400/25 bg-cyan-400/10 p-4 text-cyan-300">
-                                {project.name === 'SmartCompound' && <TrendingUp className="w-9 h-9 drop-shadow-lg" />}
-                                {project.name === 'CareerPath-Proiezioni' && <GitBranch className="w-9 h-9 drop-shadow-lg" />}
-                                {project.name === 'Organizer-Foto-Pro' && <FolderOpen className="w-9 h-9 drop-shadow-lg" />}
-                                {project.name === 'Torneo FIFA 2025' && <Trophy className="w-9 h-9 drop-shadow-lg" />}
-                                {project.name === 'Portfolio Diell-Guido' && <FolderOpen className="w-9 h-9 drop-shadow-lg" />}
+                                {project.name === 'SmartCompound' && <TrendingUp className="w-9 h-9 drop-shadow-lg" aria-hidden="true" />}
+                                {project.name === 'CareerPath-Proiezioni' && <GitBranch className="w-9 h-9 drop-shadow-lg" aria-hidden="true" />}
+                                {project.name === 'Organizer-Foto-Pro' && <FolderOpen className="w-9 h-9 drop-shadow-lg" aria-hidden="true" />}
+                                {project.name === 'Torneo FIFA 2025' && <Trophy className="w-9 h-9 drop-shadow-lg" aria-hidden="true" />}
+                                {project.name === 'Portfolio Diell-Guido' && <FolderOpen className="w-9 h-9 drop-shadow-lg" aria-hidden="true" />}
                             </div>
                         </div>
 
@@ -123,6 +123,7 @@ const AllProjects: React.FC = () => {
                                 href={project.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label={`${t.projects.viewProject}: ${project.name} (opens in new tab)`}
                                 className="inline-flex w-full items-center justify-center gap-2 text-center border border-cyan-400/40 text-cyan-300 bg-cyan-400/5 hover:bg-cyan-400 hover:text-black transition-all duration-300 mt-5 py-2 rounded font-mono font-bold text-sm tracking-wide focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
                             >
                                 <Terminal className="h-4 w-4" aria-hidden="true" />

@@ -236,9 +236,17 @@ const Skills: React.FC = () => {
                   </span>
 
                   <div className="flex items-start gap-4">
-                    <div className={`mt-1 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border ${tone.icon}`} aria-hidden="true">
-                      <CertIcon className="w-6 h-6" />
-                    </div>
+                    {cert.badge ? (
+                      <img
+                        src={cert.badge.startsWith('http') || cert.badge.startsWith('data:') ? cert.badge : `${import.meta.env.BASE_URL}${cert.badge.replace(/^\//, '')}`}
+                        alt={`${cert.issuer} badge`}
+                        className="mt-1 h-12 w-12 object-contain rounded-lg border border-white/10 bg-black/60 p-1 flex-shrink-0 shadow-sm"
+                      />
+                    ) : (
+                      <div className={`mt-1 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border ${tone.icon}`} aria-hidden="true">
+                        <CertIcon className="w-6 h-6" />
+                      </div>
+                    )}
 
                     <div className="min-w-0 flex-1">
                       <div className="mb-3">

@@ -4,6 +4,31 @@ import { Award, ExternalLink, Radio, Trophy } from 'lucide-react';
 import { AWARDS } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const AwardBadgeIcon: React.FC<{ badge?: string; title: string }> = ({ badge, title }) => {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (badge && !hasError) {
+    const src = badge.startsWith('http') || badge.startsWith('data:')
+      ? badge
+      : `${import.meta.env.BASE_URL}${badge.replace(/^\//, '')}`;
+
+    return (
+      <img
+        src={src}
+        alt={`${title} medal`}
+        className="h-14 w-14 object-contain flex-shrink-0 drop-shadow-[0_0_15px_rgba(168,85,247,0.35)]"
+        onError={() => setHasError(true)}
+      />
+    );
+  }
+
+  return (
+    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-cyber-secondary/30 bg-cyber-secondary/10 text-cyber-secondary" aria-hidden="true">
+      <Trophy className="h-6 w-6" />
+    </div>
+  );
+};
+
 const Awards: React.FC = () => {
   const { language, t } = useLanguage();
 
@@ -42,9 +67,7 @@ const Awards: React.FC = () => {
 
               <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-cyber-secondary/30 bg-cyber-secondary/10 text-cyber-secondary" aria-hidden="true">
-                    <Trophy className="h-6 w-6" />
-                  </div>
+                  <AwardBadgeIcon badge={award.badge} title={award.title[language]} />
                   <div>
                     <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-green-400/25 bg-green-400/10 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-green-300">
                       <Award className="h-3.5 w-3.5" aria-hidden="true" />

@@ -3,10 +3,13 @@ import React, { useEffect } from 'react';
 const RandomGlitch: React.FC = () => {
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionQuery.matches) return;
 
     let scheduleTimeout: number | undefined;
     let glitchTimeout: number | undefined;
+
+    const clearGlitchStyles = () => {
+      document.querySelectorAll('.glitch-active').forEach((el) => el.classList.remove('glitch-active'));
+    };
 
     const triggerGlitch = () => {
       const elements = document.querySelectorAll('h1, h2, h3');
@@ -26,29 +29,47 @@ const RandomGlitch: React.FC = () => {
         if (document.visibilityState === 'visible' && !motionQuery.matches) {
           triggerGlitch();
         }
-        scheduleGlitch();
+        if (!motionQuery.matches) {
+          scheduleGlitch();
+        }
       }, delay);
     };
 
-    scheduleTimeout = window.setTimeout(scheduleGlitch, 5000);
+    const startGlitching = () => {
+      if (!scheduleTimeout) {
+        scheduleTimeout = window.setTimeout(scheduleGlitch, 5000);
+      }
+    };
+
+    const stopGlitching = () => {
+      if (scheduleTimeout) {
+        clearTimeout(scheduleTimeout);
+        scheduleTimeout = undefined;
+      }
+      if (glitchTimeout) {
+        clearTimeout(glitchTimeout);
+        glitchTimeout = undefined;
+      }
+      clearGlitchStyles();
+    };
+
+    if (!motionQuery.matches) {
+      startGlitching();
+    }
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        if (scheduleTimeout) clearTimeout(scheduleTimeout);
-        if (glitchTimeout) clearTimeout(glitchTimeout);
-        document.querySelectorAll('.glitch-active').forEach((el) => el.classList.remove('glitch-active'));
+        stopGlitching();
       } else {
-        scheduleTimeout = window.setTimeout(scheduleGlitch, 5000);
+        startGlitching();
       }
     };
 
     motionQuery.addEventListener('change', handleMotionChange);
 
     return () => {
-      if (scheduleTimeout) clearTimeout(scheduleTimeout);
-      if (glitchTimeout) clearTimeout(glitchTimeout);
+      stopGlitching();
       motionQuery.removeEventListener('change', handleMotionChange);
-      document.querySelectorAll('.glitch-active').forEach((el) => el.classList.remove('glitch-active'));
     };
   }, []);
 

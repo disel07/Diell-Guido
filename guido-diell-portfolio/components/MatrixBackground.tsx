@@ -22,12 +22,7 @@ const MatrixBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      canvas.style.display = 'none';
-      return;
-    }
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -85,7 +80,28 @@ const MatrixBackground: React.FC = () => {
       }
     };
 
-    animationFrameIdRef.current = requestAnimationFrame(draw);
+    const startAnimation = () => {
+      if (animationFrameIdRef.current === 0) {
+        canvas.style.display = 'block';
+        lastTime = 0;
+        animationFrameIdRef.current = requestAnimationFrame(draw);
+      }
+    };
+
+    const stopAnimation = () => {
+      if (animationFrameIdRef.current !== 0) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        animationFrameIdRef.current = 0;
+      }
+      canvas.style.display = 'none';
+      ctx.clearRect(0, 0, width, height);
+    };
+
+    if (!motionQuery.matches) {
+      startAnimation();
+    } else {
+      stopAnimation();
+    }
 
     // Handle visibility changes
     const handleVisibilityChange = () => {
@@ -107,28 +123,20 @@ const MatrixBackground: React.FC = () => {
       });
     };
 
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionQuery.matches) {
-      canvas.style.display = 'none';
-      return;
-    }
-
     const handleMotionChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        cancelAnimationFrame(animationFrameIdRef.current);
-        canvas.style.display = 'none';
+        stopAnimation();
       } else {
-        canvas.style.display = 'block';
-        animationFrameIdRef.current = requestAnimationFrame(draw);
+        startAnimation();
       }
     };
-    motionQuery.addEventListener('change', handleMotionChange);
 
+    motionQuery.addEventListener('change', handleMotionChange);
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('resize', handleResize);
 
     return () => {
-      cancelAnimationFrame(animationFrameIdRef.current);
+      stopAnimation();
       clearTimeout(resizeTimeoutRef.current);
       motionQuery.removeEventListener('change', handleMotionChange);
       document.removeEventListener('visibilitychange', handleVisibilityChange);

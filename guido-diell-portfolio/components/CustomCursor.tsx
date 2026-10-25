@@ -7,20 +7,14 @@ const CustomCursor: React.FC = () => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
-    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const fineQuery = window.matchMedia('(pointer: fine)');
+    const coarseQuery = window.matchMedia('(pointer: coarse)');
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    const checkEnabled = () => isFinePointer && !isCoarsePointer && !motionQuery.matches;
-    const enabled = checkEnabled();
-    setIsEnabled(enabled);
+    const evaluateEnabled = () =>
+      fineQuery.matches && !coarseQuery.matches && !motionQuery.matches;
 
-    if (enabled) {
-      document.body.classList.add('cursor-none');
-    } else {
-      document.body.classList.remove('cursor-none');
-      return;
-    }
+    let mouseMoveAttached = false;
 
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -30,28 +24,51 @@ const CustomCursor: React.FC = () => {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener('mousemove', updateMousePosition, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
-
-    const handleMotionChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        setIsEnabled(false);
-        document.body.classList.remove('cursor-none');
-      } else if (isFinePointer && !isCoarsePointer) {
-        setIsEnabled(true);
-        document.body.classList.add('cursor-none');
-      }
+    const attachMouseListeners = () => {
+      if (mouseMoveAttached) return;
+      window.addEventListener('mousemove', updateMousePosition, { passive: true });
+      document.addEventListener('mouseleave', handleMouseLeave);
+      document.addEventListener('mouseenter', handleMouseEnter);
+      mouseMoveAttached = true;
     };
 
-    motionQuery.addEventListener('change', handleMotionChange);
-
-    return () => {
-      document.body.classList.remove('cursor-none');
+    const detachMouseListeners = () => {
+      if (!mouseMoveAttached) return;
       window.removeEventListener('mousemove', updateMousePosition);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
-      motionQuery.removeEventListener('change', handleMotionChange);
+      mouseMoveAttached = false;
+    };
+
+    const applyState = () => {
+      const active = evaluateEnabled();
+      setIsEnabled(active);
+      if (active) {
+        document.body.classList.add('cursor-none');
+        attachMouseListeners();
+      } else {
+        document.body.classList.remove('cursor-none');
+        detachMouseListeners();
+        setIsVisible(false);
+      }
+    };
+
+    applyState();
+
+    const handleQueryChange = () => {
+      applyState();
+    };
+
+    fineQuery.addEventListener('change', handleQueryChange);
+    coarseQuery.addEventListener('change', handleQueryChange);
+    motionQuery.addEventListener('change', handleQueryChange);
+
+    return () => {
+      document.body.classList.remove('cursor-none');
+      detachMouseListeners();
+      fineQuery.removeEventListener('change', handleQueryChange);
+      coarseQuery.removeEventListener('change', handleQueryChange);
+      motionQuery.removeEventListener('change', handleQueryChange);
     };
   }, []);
 

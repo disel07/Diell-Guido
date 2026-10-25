@@ -4,6 +4,31 @@ import { CalendarDays, GraduationCap, HeartHandshake, MapPin } from 'lucide-reac
 import { EDUCATION, VOLUNTEERING } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const EducationLogo: React.FC<{ logo?: string; school: string }> = ({ logo, school }) => {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (logo && !hasError) {
+    const src = logo.startsWith('http') || logo.startsWith('data:')
+      ? logo
+      : `${import.meta.env.BASE_URL}${logo.replace(/^\//, '')}`;
+
+    return (
+      <img
+        src={src}
+        alt={`${school} logo`}
+        className="h-12 w-12 rounded-lg object-contain border border-white/10 bg-white/5 p-1.5 flex-shrink-0 shadow-sm"
+        onError={() => setHasError(true)}
+      />
+    );
+  }
+
+  return (
+    <div className="h-12 w-12 rounded-lg bg-cyber-primary/10 text-cyber-primary flex items-center justify-center flex-shrink-0" aria-hidden="true">
+      <GraduationCap className="w-6 h-6" />
+    </div>
+  );
+};
+
 const Education: React.FC = () => {
   const { language, t } = useLanguage();
 
@@ -34,9 +59,7 @@ const Education: React.FC = () => {
             >
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                 <div className="flex gap-4">
-                  <div className="h-12 w-12 rounded-lg bg-cyber-primary/10 text-cyber-primary flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                    <GraduationCap className="w-6 h-6" />
-                  </div>
+                  <EducationLogo logo={item.logo} school={item.school} />
                   <div>
                     <h3 className="text-xl font-bold text-white">{item.school}</h3>
                     <p className="text-cyber-primary font-medium mt-1">{item.degree[language]}</p>
@@ -84,9 +107,17 @@ const Education: React.FC = () => {
               role="listitem"
             >
               <div className="flex gap-4">
-                <div className="h-12 w-12 rounded-lg bg-cyber-secondary/10 text-cyber-secondary flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                  <HeartHandshake className="w-6 h-6" />
-                </div>
+                {item.logo ? (
+                  <img
+                    src={item.logo.startsWith('http') || item.logo.startsWith('data:') ? item.logo : `${import.meta.env.BASE_URL}${item.logo.replace(/^\//, '')}`}
+                    alt={`${item.organization} logo`}
+                    className="h-12 w-12 rounded-lg object-contain border border-white/10 bg-white/5 p-1 flex-shrink-0 shadow-sm"
+                  />
+                ) : (
+                  <div className="h-12 w-12 rounded-lg bg-cyber-secondary/10 text-cyber-secondary flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                    <HeartHandshake className="w-6 h-6" />
+                  </div>
+                )}
                 <div>
                   <p className="text-xs font-mono uppercase tracking-wider text-gray-500 mb-2">{t.education.volunteer}</p>
                   <h3 className="text-xl font-bold text-white">{item.role[language]}</h3>
