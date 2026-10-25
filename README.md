@@ -121,6 +121,32 @@ npm run build
 ### Deploy
 Il deploy è automatico via GitHub Actions su ogni push su `main`.
 
+### Branch e GitHub Pages
+
+Il repository usa questa convenzione:
+
+- `main` è il branch stabile e quello che pubblica il portfolio.
+- I branch `feature/*`, `fix/*` o personali servono per lavorare senza
+  pubblicare modifiche incomplete.
+- `gh-pages` non viene più usato: GitHub Pages è configurato con **GitHub
+  Actions** come sorgente e il workflow `.github/workflows/deploy.yml`
+  pubblica l'artifact generato da `main`.
+
+Flusso consigliato:
+
+```bash
+git switch main
+git pull --ff-only
+git switch -c feature/nome-modifica
+# lavora e verifica localmente in guido-diell-portfolio/
+git push -u origin feature/nome-modifica
+# apri una Pull Request verso main
+```
+
+Dopo il merge su `main`, il workflow esegue `npm ci`, `npm run build` e
+pubblica automaticamente su
+`https://disel07.github.io/Diell-Guido/`.
+
 ---
 
 ## 📦 Progetti Legacy
