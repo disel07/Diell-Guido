@@ -107,12 +107,30 @@ const MatrixBackground: React.FC = () => {
       });
     };
 
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionQuery.matches) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        canvas.style.display = 'none';
+      } else {
+        canvas.style.display = 'block';
+        animationFrameIdRef.current = requestAnimationFrame(draw);
+      }
+    };
+    motionQuery.addEventListener('change', handleMotionChange);
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(animationFrameIdRef.current);
       clearTimeout(resizeTimeoutRef.current);
+      motionQuery.removeEventListener('change', handleMotionChange);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
     };

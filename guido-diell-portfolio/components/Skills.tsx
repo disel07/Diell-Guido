@@ -9,6 +9,7 @@ import {
   Code2,
   Cpu,
   Database,
+  ExternalLink,
   Languages as LanguagesIcon,
   LockKeyhole,
   Server,
@@ -266,6 +267,21 @@ const Skills: React.FC = () => {
                         <div className="mb-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
                           <p className="text-[11px] font-mono uppercase tracking-wider text-gray-500">{t.skills.credentialId}</p>
                           <p className="break-all font-mono text-xs text-gray-300">{cert.credentialId}</p>
+                        </div>
+                      )}
+
+                      {cert.credentialUrl && (
+                        <div className="mb-3">
+                          <a
+                            href={cert.credentialUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${t.skills.verifyBadge}: ${cert.name} (opens in new tab)`}
+                            className="inline-flex items-center gap-1.5 text-xs font-mono text-cyber-primary hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-cyber-primary rounded"
+                          >
+                            <span>{t.skills.verifyBadge}</span>
+                            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                          </a>
                         </div>
                       )}
 

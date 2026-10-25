@@ -8,6 +8,7 @@ import { useActiveSection } from '../hooks/useActiveSection';
 import { useLanguage } from '../contexts/LanguageContext';
 import LanguageToggle from './LanguageToggle';
 import { scrollWithOffset } from '../utils/scroll';
+import { throttle } from '../utils/performance';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,9 +41,9 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       setScrolled(window.scrollY > 50);
-    };
+    }, 100);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -52,7 +53,7 @@ const Navbar: React.FC = () => {
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
-        className="fixed top-0 left-0 p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200 skip-link"
+        className="fixed top-0 left-0 p-4 bg-cyber-primary text-black font-bold transform -translate-y-full focus:translate-y-0 transition-transform duration-200 skip-link focus:outline-none focus:ring-2 focus:ring-black"
       >
         {t.skipToContent}
       </a>
@@ -69,17 +70,19 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-12">
             {/* Logo */}
-            <motion.div
+            <motion.button
+              type="button"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex-shrink-0 flex items-center gap-2 cursor-pointer group"
+              className="flex-shrink-0 flex items-center gap-2 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded-lg p-1 bg-transparent border-0"
               onClick={handleLogoClick}
+              aria-label="Guido Diell - Return to top"
             >
               <Code className="w-8 h-8 text-cyber-primary group-hover:animate-pulse" aria-hidden="true" />
               <span className="font-mono font-bold text-xl tracking-widest text-white">
                 GUIDO<span className="text-cyber-primary">DIELL</span>
               </span>
-            </motion.div>
+            </motion.button>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-4 lg:gap-8">
@@ -92,7 +95,7 @@ const Navbar: React.FC = () => {
                       to={link.href}
                       scroll={scrollWithOffset}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`font-mono text-xs lg:text-sm transition-colors duration-300 nav-link-underline ${
+                      className={`font-mono text-xs lg:text-sm transition-colors duration-300 nav-link-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded px-2 py-1 ${
                         isActive ? 'text-cyber-primary active' : 'text-white hover:text-cyber-primary'
                       }`}
                     >
@@ -149,7 +152,7 @@ const Navbar: React.FC = () => {
                       scroll={scrollWithOffset}
                       onClick={() => setIsOpen(false)}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`block px-3 py-4 rounded-md text-base font-mono font-bold text-center border-b border-white/5 transition-colors ${
+                      className={`block px-3 py-4 rounded-md text-base font-mono font-bold text-center border-b border-white/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary ${
                         isActive 
                           ? 'text-cyber-primary bg-cyber-primary/10' 
                           : 'text-gray-300 hover:text-cyber-primary'
@@ -169,7 +172,7 @@ const Navbar: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setIsOpen(false)}
-                      className="block py-3 text-center text-sm font-bold text-white hover:text-cyber-primary flex items-center justify-center gap-2"
+                      className="block py-3 text-center text-sm font-bold text-white hover:text-cyber-primary flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded"
                       aria-label={`${project.name} (opens in new tab)`}
                     >
                       {project.name} <span className="text-xs text-gray-500">{project.category}</span> <ExternalLink className="w-3 h-3" aria-hidden="true" />

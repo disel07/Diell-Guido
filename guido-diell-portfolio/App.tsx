@@ -35,7 +35,7 @@ function App() {
     <ErrorBoundary>
       <LanguageProvider>
         <Router basename="/Diell-Guido/">
-          <div className="bg-black min-h-screen text-white selection:bg-cyber-primary selection:text-black cursor-none">
+          <div className="bg-black min-h-screen text-white selection:bg-cyber-primary selection:text-black">
             <GitHubPagesRedirect />
             {/* Background Effects */}
             <MatrixBackground />

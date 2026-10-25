@@ -1,6 +1,6 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import App from '../App';
@@ -14,20 +14,43 @@ describe('portfolio app', () => {
   beforeEach(() => {
     window.localStorage.clear();
     window.sessionStorage.clear();
+    vi.clearAllMocks();
   });
 
-  it('renders the English portfolio by default with updated sections', async () => {
+  it('renders the English portfolio by default with 2026 LinkedIn career milestones', async () => {
     renderApp();
 
-    expect(await screen.findByText('IT Student | Python · Linux · Docker · Bash · SQL')).toBeInTheDocument();
+    // Profile & Hero
+    expect(
+      await screen.findByText('Computer Science Student @ UniCal | HR Recruiter @ RootRunners')
+    ).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: /main navigation/i })).toBeInTheDocument();
     expect(await screen.findByText('CURRENTLY')).toBeInTheDocument();
+
+    // Avatar
+    expect(screen.getByAltText('Guido Diell - Open to Work profile')).toBeInTheDocument();
+
+    // Certifications & Credly
     const itSecurity = await screen.findByRole('heading', { name: 'IT Security' });
     const modernAi = await screen.findByRole('heading', { name: 'Introduction to Modern AI' });
     expect(Boolean(itSecurity.compareDocumentPosition(modernAi) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true);
+    expect(screen.getByRole('heading', { name: 'LLPA Digital Skills Cup - National Champion IT Security' })).toBeInTheDocument();
     expect(screen.queryByText(/75%|70%|60%|100%/)).not.toBeInTheDocument();
-    expect(await screen.findByText('Recognition Pending Public Announcement')).toBeInTheDocument();
+
+    // Awards (both Anitec-Assinform & LLPA National Champion)
+    expect(await screen.findByText('National Digital Innovation Award 2026')).toBeInTheDocument();
+    expect(await screen.findByText('LLPA Digital Skills Cup - National Champion 2026 IT Security')).toBeInTheDocument();
+
+    // Education (UniCal and ITI A. Monaco with graduation grade 92/100)
+    expect(await screen.findByText('Università della Calabria (UniCal)')).toBeInTheDocument();
     expect(await screen.findByText('ITI A. Monaco - Informatica')).toBeInTheDocument();
+    expect(await screen.findByText('Graduation Grade: 92/100')).toBeInTheDocument();
+
+    // Experience (RootRunners and Urban Italian Group)
+    expect(await screen.findByText('RootRunners')).toBeInTheDocument();
+    expect(await screen.findByText('Urban Italian Group')).toBeInTheDocument();
+    expect(screen.getByAltText('RootRunners logo')).toBeInTheDocument();
+    expect(screen.getByAltText('Urban Italian Group logo')).toBeInTheDocument();
   });
 
   it('switches the visible language to Italian and persists the choice', async () => {
@@ -36,8 +59,16 @@ describe('portfolio app', () => {
 
     await user.click(screen.getByRole('button', { name: /switch language to italian/i }));
 
-    expect(screen.getByText('Studente IT | Python · Linux · Docker · Bash · SQL')).toBeInTheDocument();
+    expect(screen.getByText('Studente di Informatica @ UniCal | HR Recruiter @ RootRunners')).toBeInTheDocument();
     expect(window.localStorage.getItem('portfolio-language')).toBe('it');
+
+    // Italian milestones
+    expect(screen.getByText("Premio Nazionale sull'Innovazione Digitale 2026")).toBeInTheDocument();
+    expect(screen.getByText('LLPA Digital Skills Cup - Campione Nazionale 2026 IT Security')).toBeInTheDocument();
+    expect(screen.getByText('Votazione: 92/100')).toBeInTheDocument();
+    expect(screen.getByText('Laurea Triennale in Informatica')).toBeInTheDocument();
+    expect(screen.getByText('Addetto alla selezione del personale / HR Recruiter')).toBeInTheDocument();
+    expect(screen.getByText('Pizzaiolo')).toBeInTheDocument();
   });
 
   it('renders the project catalog and filters by category', async () => {
@@ -76,5 +107,44 @@ describe('portfolio app', () => {
 
     await waitFor(() => expect(window.location.pathname).toBe('/Diell-Guido/projects/all'));
     expect(screen.getByText('FULL PROJECT')).toBeInTheDocument();
+  });
+
+  it('meets WCAG 2.1 AA keyboard accessibility and label requirements', async () => {
+    renderApp();
+
+    // Skip to content link
+    const skipLink = screen.getByRole('link', { name: /skip to main content/i });
+    expect(skipLink).toBeInTheDocument();
+    expect(skipLink).toHaveAttribute('href', '#main-content');
+
+    // Logo is a keyboard-operable button with accessible label
+    const logoButton = screen.getByRole('button', { name: /guido diell - return to top/i });
+    expect(logoButton).toBeInTheDocument();
+
+    // Main navigation and landmark roles
+    expect(screen.getByRole('navigation', { name: /main navigation/i })).toBeInTheDocument();
+    expect(screen.getByRole('main')).toHaveAttribute('id', 'main-content');
+
+    // Quick navigation buttons are keyboard accessible
+    const quickList = screen.getByRole('list', { name: /quick navigation to skills/i });
+    expect(within(quickList).getAllByRole('link').length).toBe(3);
+
+    // Language toggle has accessible label
+    expect(screen.getByRole('button', { name: /switch language to italian/i })).toBeInTheDocument();
+  });
+
+  it('honors reduced motion preference and avoids mobile cursor hiding', async () => {
+    const { container } = renderApp();
+
+    // Root element should never have unconditional cursor-none
+    const rootContainer = container.querySelector('.bg-black.min-h-screen');
+    expect(rootContainer).not.toHaveClass('cursor-none');
+
+    // Canvas elements have motion-reduce:hidden class
+    const canvasElements = container.querySelectorAll('canvas');
+    expect(canvasElements.length).toBeGreaterThanOrEqual(1);
+    canvasElements.forEach((canvas) => {
+      expect(canvas.className).toContain('motion-reduce:hidden');
+    });
   });
 });

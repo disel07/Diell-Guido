@@ -4,6 +4,38 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Briefcase, CheckCircle, Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const ExperienceLogo: React.FC<{ logo?: string; company: string; className?: string }> = ({
+  logo,
+  company,
+  className = 'w-12 h-12',
+}) => {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (logo && !hasError) {
+    const src = logo.startsWith('http') || logo.startsWith('data:')
+      ? logo
+      : `${import.meta.env.BASE_URL}${logo.replace(/^\//, '')}`;
+
+    return (
+      <img
+        src={src}
+        alt={`${company} logo`}
+        className={`${className} object-contain rounded-xl border border-white/10 bg-white/5 p-2 flex-shrink-0 shadow-sm`}
+        onError={() => setHasError(true)}
+      />
+    );
+  }
+
+  return (
+    <div
+      className={`${className} flex flex-shrink-0 items-center justify-center rounded-xl border border-cyber-secondary/30 bg-cyber-secondary/10 text-cyber-secondary`}
+      aria-hidden="true"
+    >
+      <Briefcase className="h-6 w-6" />
+    </div>
+  );
+};
+
 const Experience: React.FC = () => {
   const { language, t } = useLanguage();
   const featuredExperience = EXPERIENCE.find((exp) => exp.featured) ?? EXPERIENCE[0];
@@ -41,13 +73,16 @@ const Experience: React.FC = () => {
               </div>
 
               <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-mono text-2xl font-bold text-white md:text-3xl">
-                    {featuredExperience.role[language]}
-                  </h3>
-                  <p className="mt-2 text-xl text-gray-300">{featuredExperience.company}</p>
+                <div className="flex items-center gap-4">
+                  <ExperienceLogo logo={featuredExperience.logo} company={featuredExperience.company} className="w-16 h-16" />
+                  <div>
+                    <h3 className="font-mono text-2xl font-bold text-white md:text-3xl">
+                      {featuredExperience.role[language]}
+                    </h3>
+                    <p className="mt-1 text-xl text-gray-300">{featuredExperience.company}</p>
+                  </div>
                 </div>
-                <Briefcase className="h-8 w-8 text-cyber-secondary" aria-hidden="true" />
+                <Briefcase className="h-8 w-8 text-cyber-secondary hidden sm:block" aria-hidden="true" />
               </div>
 
               <div className="mb-6 flex flex-wrap gap-4 text-sm text-gray-400 font-mono">
@@ -121,16 +156,20 @@ const Experience: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-cyber-primary/5 to-cyber-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
 
                     <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-bold text-white group-hover:text-cyber-primary transition-colors">
-                          {exp.role[language]}
-                        </h3>
+                      <div className="flex items-start justify-between mb-3 gap-3">
+                        <div className="flex items-center gap-3">
+                          <ExperienceLogo logo={exp.logo} company={exp.company} className="w-12 h-12" />
+                          <div>
+                            <h3 className="text-xl font-bold text-white group-hover:text-cyber-primary transition-colors">
+                              {exp.role[language]}
+                            </h3>
+                            <h4 className="text-base text-gray-300">{exp.company}</h4>
+                          </div>
+                        </div>
                         {exp.type === 'tech' && (
-                          <Briefcase className="w-4 h-4 text-cyber-secondary flex-shrink-0" aria-hidden="true" />
+                          <Briefcase className="w-4 h-4 text-cyber-secondary flex-shrink-0 mt-1" aria-hidden="true" />
                         )}
                       </div>
-                      
-                      <h4 className="text-lg text-gray-300 mb-4">{exp.company}</h4>
 
                       <div className="flex flex-wrap gap-4 text-sm text-gray-400 font-mono mb-6">
                         <span className="flex items-center gap-1">

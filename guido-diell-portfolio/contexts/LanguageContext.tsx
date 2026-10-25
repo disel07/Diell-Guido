@@ -53,6 +53,7 @@ export const translations = {
       expires: 'Expires',
       credentialId: 'Credential ID',
       verified: 'Verified',
+      verifyBadge: 'Verify Credential',
       objectiveTitle: 'SYSTEM OBJECTIVE',
     },
     learning: {
@@ -89,9 +90,10 @@ export const translations = {
     awards: {
       titleA: 'AWARDS',
       titleB: 'SIGNAL',
-      subtitle: 'Publicly shareable recognition, with confidential details protected until announcement.',
+      subtitle: 'Official national awards and competitive recognitions in innovation, accessibility, and cybersecurity.',
       label: 'Awards and recognitions',
-      confidential: 'Details protected',
+      confidential: 'Official Honors',
+      viewBadge: 'Verify Award Credential',
     },
     education: {
       titleA: 'EDUCATION',
@@ -162,6 +164,7 @@ export const translations = {
       expires: 'Scadenza',
       credentialId: 'ID credenziale',
       verified: 'Verificata',
+      verifyBadge: 'Verifica credenziale',
       objectiveTitle: 'OBIETTIVO DI SISTEMA',
     },
     learning: {
@@ -198,9 +201,10 @@ export const translations = {
     awards: {
       titleA: 'SEGNALE',
       titleB: 'PREMI',
-      subtitle: 'Riconoscimento condivisibile pubblicamente, con dettagli riservati fino all annuncio.',
+      subtitle: 'Riconoscimenti nazionali ufficiali e premi competitivi per innovazione, accessibilità e cybersecurity.',
       label: 'Premi e riconoscimenti',
-      confidential: 'Dettagli protetti',
+      confidential: 'Riconoscimenti Ufficiali',
+      viewBadge: 'Verifica credenziale premio',
     },
     education: {
       titleA: 'PERCORSO',

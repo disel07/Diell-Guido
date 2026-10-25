@@ -10,11 +10,19 @@ interface DecodeTextProps {
 const CHARS = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const DecodeText: React.FC<DecodeTextProps> = ({ text, className = '', delay = 0 }) => {
-  const [displayText, setDisplayText] = useState(() => 
-    text.split('').map(() => CHARS[Math.floor(Math.random() * CHARS.length)]).join('')
-  );
+  const [displayText, setDisplayText] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return text;
+    }
+    return text.split('').map(() => CHARS[Math.floor(Math.random() * CHARS.length)]).join('');
+  });
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplayText(text);
+      return;
+    }
+
     const timeout = setTimeout(() => {
       let currentIndex = 0;
       const totalLength = text.length;

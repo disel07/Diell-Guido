@@ -22,10 +22,30 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-secondary/20 rounded-full blur-[128px] animate-pulse-slow delay-1000 pointer-events-none motion-reduce:animate-none" aria-hidden="true" />
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
+        {/* Open to Work Avatar */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative mb-6 group"
+        >
+          <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-cyber-primary via-cyber-secondary to-cyber-primary opacity-70 blur-md group-hover:opacity-100 transition-opacity duration-500 motion-reduce:opacity-40 motion-reduce:blur-none" aria-hidden="true" />
+          <div className="relative rounded-full p-1 bg-black/80 ring-2 ring-cyber-primary/50">
+            <img
+              src={`${import.meta.env.BASE_URL}images/avatar-opentowork.png`}
+              alt="Guido Diell - Open to Work profile"
+              className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover shadow-2xl"
+              width="144"
+              height="144"
+              loading="eager"
+            />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           className="mb-8 inline-block"
         >
           <span className="px-4 py-2 rounded-full border border-cyber-primary/30 bg-cyber-primary/10 text-cyber-primary font-mono text-sm shadow-[0_0_15px_rgba(0,243,255,0.3)]" role="status" aria-label={`${t.hero.statusLabel}: ${SITE_CONFIG.status}`}>
@@ -84,7 +104,7 @@ const Hero: React.FC = () => {
           transition={{ delay: 1.2, duration: 1 }}
           className="mt-4"
         >
-          <HashLink to="/#experience" scroll={scrollWithOffset} className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group" aria-label={t.hero.scrollLabel}>
+          <HashLink to="/#experience" scroll={scrollWithOffset} className="flex flex-col items-center gap-3 text-gray-500 hover:text-white transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-primary rounded p-1" aria-label={t.hero.scrollLabel}>
             <span className="text-xs font-mono tracking-[0.2em] group-hover:text-cyber-primary transition-colors">{t.hero.scroll}</span>
             <ChevronDown className="w-6 h-6 animate-bounce text-cyber-primary motion-reduce:animate-none" aria-hidden="true" />
           </HashLink>

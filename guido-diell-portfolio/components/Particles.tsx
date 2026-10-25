@@ -10,10 +10,15 @@ interface Particle {
   color: string;
 }
 
+const THROTTLE_RESIZE_MS = 200;
+
 const Particles: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionQuery.matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -41,11 +46,16 @@ const Particles: React.FC = () => {
       });
     }
 
-    let animationId: number;
+    let animationId = 0;
     let lastTime = 0;
     const interval = 1000 / 30; // 30fps per performance
 
     const animate = (currentTime: number) => {
+      if (document.visibilityState !== 'visible') {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+
       animationId = requestAnimationFrame(animate);
 
       const deltaTime = currentTime - lastTime;
@@ -54,7 +64,8 @@ const Particles: React.FC = () => {
 
       ctx.clearRect(0, 0, width, height);
 
-      particles.forEach((particle) => {
+      for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i];
         // Aggiorna posizione
         particle.x += particle.vx;
         particle.y += particle.vy;
@@ -71,32 +82,48 @@ const Particles: React.FC = () => {
         ctx.fillStyle = particle.color;
         ctx.globalAlpha = particle.opacity;
         ctx.fill();
-      });
+      }
 
       ctx.globalAlpha = 1;
     };
 
     animationId = requestAnimationFrame(animate);
 
+    let resizeTimeout: number | undefined;
     const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }, THROTTLE_RESIZE_MS);
+    };
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        cancelAnimationFrame(animationId);
+        ctx.clearRect(0, 0, width, height);
+      } else {
+        animationId = requestAnimationFrame(animate);
+      }
     };
 
     window.addEventListener('resize', handleResize);
+    motionQuery.addEventListener('change', handleMotionChange);
 
     return () => {
       cancelAnimationFrame(animationId);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
       window.removeEventListener('resize', handleResize);
+      motionQuery.removeEventListener('change', handleMotionChange);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-[1] pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full z-[1] pointer-events-none motion-reduce:hidden"
       aria-hidden="true"
     />
   );

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
-import { Award, LockKeyhole, Radio } from 'lucide-react';
+import { Award, ExternalLink, Radio, Trophy } from 'lucide-react';
 import { AWARDS } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -43,17 +43,29 @@ const Awards: React.FC = () => {
               <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
                 <div className="flex items-start gap-4">
                   <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-cyber-secondary/30 bg-cyber-secondary/10 text-cyber-secondary" aria-hidden="true">
-                    <Award className="h-6 w-6" />
+                    <Trophy className="h-6 w-6" />
                   </div>
                   <div>
                     <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-green-400/25 bg-green-400/10 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-green-300">
-                      <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
+                      <Award className="h-3.5 w-3.5" aria-hidden="true" />
                       {award.status[language]}
                     </div>
                     <h3 className="font-mono text-xl font-bold text-white group-hover:text-cyber-secondary transition-colors">
                       {award.title[language]}
                     </h3>
                     <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-400">{award.description[language]}</p>
+                    {award.link && (
+                      <a
+                        href={award.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${t.awards.viewBadge}: ${award.title[language]} (opens in new tab)`}
+                        className="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-cyber-primary hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-cyber-primary rounded"
+                      >
+                        <span>{t.awards.viewBadge}</span>
+                        <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                      </a>
+                    )}
                   </div>
                 </div>
 

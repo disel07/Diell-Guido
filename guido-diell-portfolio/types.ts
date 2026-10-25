@@ -16,6 +16,7 @@ export interface ExperienceItem {
   id: string;
   role: LocalizedText;
   company: string;
+  logo?: string;
   location: LocalizedText;
   period: LocalizedText;
   description: LocalizedList;
@@ -30,6 +31,7 @@ export interface EducationItem {
   degree: LocalizedText;
   location: LocalizedText;
   period: LocalizedText;
+  grade?: string;
   description: LocalizedText;
   focus: string[];
 }
@@ -57,6 +59,7 @@ export interface Certification {
   issued: LocalizedText;
   expires?: LocalizedText;
   credentialId?: string;
+  credentialUrl?: string;
   skills: LocalizedText;
   featured?: boolean;
 }
@@ -82,6 +85,9 @@ export interface LearningItem {
 export interface AwardItem {
   title: LocalizedText;
   status: LocalizedText;
+  issuer?: string;
+  date?: LocalizedText;
   description: LocalizedText;
   tags: string[];
+  link?: string;
 }

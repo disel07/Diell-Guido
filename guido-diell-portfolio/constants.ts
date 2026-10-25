@@ -16,29 +16,29 @@ import {
 export const SITE_CONFIG = {
   name: 'Guido Diell',
   role: {
-    en: 'IT Student | Python · Linux · Docker · Bash · SQL',
-    it: 'Studente IT | Python · Linux · Docker · Bash · SQL',
+    en: 'Computer Science Student @ UniCal | HR Recruiter @ RootRunners',
+    it: 'Studente di Informatica @ UniCal | HR Recruiter @ RootRunners',
   },
   status: 'ONLINE',
   headline: {
-    en: 'Python · Linux · Docker · Bash · SQL | cybersecurity or blockchain — IT or remote',
-    it: 'Python · Linux · Docker · Bash · SQL | cybersecurity o blockchain — IT o remoto',
+    en: 'Computer Science student at UniCal & HR Recruiter at RootRunners | Python · Linux · Cybersecurity',
+    it: 'Studente di Informatica a UniCal & HR Recruiter presso RootRunners | Python · Linux · Cybersecurity',
   },
   heroDescription: {
-    en: 'Looking for cybersecurity or blockchain opportunities in IT, hybrid or remote environments.',
-    it: 'Cerco opportunita in cybersecurity o blockchain in ambito IT, ibrido o da remoto.',
+    en: 'Studying Computer Science at Università della Calabria (UniCal) and recruiting technical talent at RootRunners. Exploring cybersecurity, Linux systems, and emerging technologies.',
+    it: 'Studio Informatica all\'Università della Calabria (UniCal) e seleziono talenti tecnici per RootRunners. Esploro cybersecurity, sistemi Linux e tecnologie emergenti.',
   },
   aboutMe: {
-    en: 'I am an IT student focused on practical systems work: Linux, Python, networking, hardware maintenance and small automation projects. I am building stronger foundations in cybersecurity, blockchain and full-stack development while looking for junior IT opportunities where I can learn fast and contribute with discipline.',
-    it: 'Sono uno studente di informatica orientato al lavoro pratico su sistemi: Linux, Python, reti, manutenzione hardware e piccoli progetti di automazione. Sto rafforzando le basi in cybersecurity, blockchain e sviluppo full-stack, cercando opportunita junior IT in cui imparare velocemente e contribuire con disciplina.',
+    en: 'I am a Computer Science undergraduate at Università della Calabria (UniCal) and an HR Recruiter at RootRunners. With a solid foundation in Linux systems, Python automation, networking, and technical talent acquisition, I am actively expanding into cybersecurity, blockchain, and distributed systems while bringing discipline and high standards to every project.',
+    it: 'Sono uno studente di Informatica presso l\'Università della Calabria (UniCal) e HR Recruiter presso RootRunners. Con solide basi in sistemi Linux, automazione in Python, reti e selezione di talenti tecnici, sto approfondendo le mie competenze in cybersecurity, blockchain e sistemi distribuiti, portando disciplina e alti standard in ogni progetto.',
   },
   location: {
-    en: "Santa Sofia d'Epiro, Calabria, Italy",
-    it: "Santa Sofia d'Epiro, Calabria, Italia",
+    en: "Santa Sofia d'Epiro / Cosenza, Calabria, Italy",
+    it: "Santa Sofia d'Epiro / Cosenza, Calabria, Italia",
   },
   availability: {
-    en: 'Cosenza | On-site · Hybrid · Remote',
-    it: 'Cosenza | In sede · Ibrido · Da remoto',
+    en: 'Cosenza | UniCal · RootRunners · Remote',
+    it: 'Cosenza | UniCal · RootRunners · Remoto',
   },
   contact: {
     email: 'diellguido007@gmail.com',
@@ -112,7 +112,78 @@ export const PROJECTS: Project[] = [
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    id: '1',
+    id: 'rootrunners',
+    role: {
+      en: 'HR Recruiter / Talent Acquisition',
+      it: 'Addetto alla selezione del personale / HR Recruiter',
+    },
+    company: 'RootRunners',
+    logo: 'images/rootrunners-logo.png',
+    location: {
+      en: 'Remote',
+      it: 'Da remoto',
+    },
+    period: {
+      en: 'Jun 2026 - Present',
+      it: 'giu 2026 - Presente',
+    },
+    description: {
+      en: [
+        'Managing tech talent screening, candidate assessments, and end-to-end recruitment pipelines.',
+        'Collaborating closely with engineering leads to evaluate technical competencies and cultural fit.',
+        'Conducting structured candidate evaluations and driving remote recruitment workflows.',
+      ],
+      it: [
+        'Gestione dello screening di profili tecnologici, valutazione candidati e pipeline di reclutamento.',
+        'Collaborazione diretta con i responsabili tecnici per valutare competenze tecniche e affinità culturale.',
+        'Conduzione di valutazioni strutturate dei candidati e ottimizzazione dei flussi di assunzione da remoto.',
+      ],
+    },
+    type: 'tech',
+    featured: true,
+    takeaways: {
+      en: ['Technical talent screening', 'Structured interviewing', 'Remote team coordination', 'Recruitment pipeline'],
+      it: ['Screening profili tecnici', 'Colloqui strutturati', 'Coordinamento team da remoto', 'Pipeline di selezione'],
+    },
+    tags: ['HR', 'Recruiting', 'Talent Acquisition', 'Remote', 'Tech Talent'],
+  },
+  {
+    id: 'urban-italian-group',
+    role: {
+      en: 'Pizza Chef',
+      it: 'Pizzaiolo',
+    },
+    company: 'Urban Italian Group',
+    logo: 'images/urban-italian-group-logo.png',
+    location: {
+      en: 'Östersund, Jämtland County, Sweden',
+      it: 'Östersund, Jämtland, Svezia',
+    },
+    period: {
+      en: 'Jul 2026 - Sep 2026',
+      it: 'lug 2026 - set 2026',
+    },
+    description: {
+      en: [
+        'Seasonal role in Östersund, Sweden at renowned restaurant group (home to "Truffle Jammin\'", best Scandinavian vegan pizza 2024).',
+        'Collaborated in an international high-pace kitchen team delivering high-volume service with uncompromising quality standards.',
+        'Demonstrated strong operational discipline, kitchen efficiency, stress resistance, and cross-cultural teamwork.',
+      ],
+      it: [
+        'Ruolo stagionale in sede a Östersund, Svezia presso il rinomato gruppo di ristorazione (creatori di "Truffle Jammin\'", miglior pizza vegana scandinava 2024).',
+        'Collaborazione in un team di cucina internazionale e dinamico con servizio ad alto volume ed elevati standard qualitativi.',
+        'Dimostrata forte disciplina operativa, efficienza in cucina, resistenza allo stress e collaborazione multiculturale.',
+      ],
+    },
+    type: 'other',
+    takeaways: {
+      en: ['High-volume kitchen service', 'Cross-cultural team synergy', 'Extreme pressure tolerance', 'Operational consistency'],
+      it: ['Servizio ad alto volume in cucina', 'Sinergia in team multiculturale', 'Resistenza a forte pressione', 'Costanza operativa'],
+    },
+    tags: ['International', 'Teamwork', 'High-volume Service', 'Sweden', 'Discipline'],
+  },
+  {
+    id: 'code-monsters',
     role: {
       en: 'IT Intern',
       it: 'Stagista informatica',
@@ -141,7 +212,6 @@ export const EXPERIENCE: ExperienceItem[] = [
       ],
     },
     type: 'tech',
-    featured: true,
     takeaways: {
       en: ['Linux maintenance', 'Raspberry Pi labs', 'Automation scripts', 'Team workflow'],
       it: ['Manutenzione Linux', 'Lab Raspberry Pi', 'Script di automazione', 'Workflow di team'],
@@ -149,7 +219,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     tags: ['Erasmus+', 'Linux', 'Raspberry Pi', 'Scripts'],
   },
   {
-    id: '2',
+    id: 'adcc',
     role: {
       en: 'School-Work Alternation Student',
       it: 'Studente in alternanza scuola-lavoro',
@@ -179,7 +249,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     tags: ['Science', 'Technology', 'International'],
   },
   {
-    id: '3',
+    id: 'i-compari',
     role: {
       en: 'Assistant Pizza Chef',
       it: 'Aiuto pizzaiolo',
@@ -210,24 +280,45 @@ export const EXPERIENCE: ExperienceItem[] = [
 
 export const EDUCATION: EducationItem[] = [
   {
-    school: 'ITI A. Monaco - Informatica',
+    school: 'Università della Calabria (UniCal)',
     degree: {
-      en: 'Technical IT Diploma, Computer Science',
-      it: 'Diploma tecnico, Informatica',
+      en: "Bachelor's Degree in Computer Science (Informatica)",
+      it: 'Laurea Triennale in Informatica',
     },
     location: {
-      en: 'Italy',
-      it: 'Italia',
+      en: 'Rende, Cosenza, Italy',
+      it: 'Rende, Cosenza, Italia',
+    },
+    period: {
+      en: 'Sep 2026 - Present',
+      it: 'set 2026 - Presente',
+    },
+    description: {
+      en: 'Undergraduate degree program in Computer Science at UniCal, focusing on algorithms, theoretical computing, operating systems, advanced software architecture, and systems engineering.',
+      it: 'Corso di laurea triennale in Informatica presso l\'Università della Calabria (UniCal), focalizzato su algoritmi, informatica teorica, sistemi operativi, architetture software avanzate e ingegneria dei sistemi.',
+    },
+    focus: ['Algorithms', 'Data Structures', 'Operating Systems', 'Software Engineering', 'Mathematics', 'Computer Science'],
+  },
+  {
+    school: 'ITI A. Monaco - Informatica',
+    degree: {
+      en: 'Technical IT Diploma, Computer Science (Grade: 92/100)',
+      it: 'Diploma tecnico, Informatica (Votazione: 92/100)',
+    },
+    location: {
+      en: 'Cosenza, Italy',
+      it: 'Cosenza, Italia',
     },
     period: {
       en: 'Jan 2021 - Jun 2026',
       it: 'gen 2021 - giu 2026',
     },
+    grade: '92/100',
     description: {
-      en: 'Technical computer science education focused on programming, networks, systems and practical IT foundations.',
-      it: 'Percorso tecnico informatico orientato a programmazione, reti, sistemi e basi pratiche IT.',
+      en: 'Technical computer science diploma graduated with 92/100. Comprehensive preparation in programming, systems, networks, cybersecurity and practical IT fundamentals.',
+      it: 'Diploma tecnico in informatica conseguito con votazione 92/100. Preparazione completa su programmazione, sistemi, reti, cybersecurity e fondamenti pratici IT.',
     },
-    focus: ['C#', 'Networking', 'Computer Science', 'Linux', 'Web', 'Hardware'],
+    focus: ['C#', 'Networking', 'Computer Science', 'Linux', 'Web', 'Hardware', 'Cybersecurity'],
   },
 ];
 
@@ -366,17 +457,31 @@ export const CERTIFICATIONS: Certification[] = [
     featured: true,
   },
   {
+    name: 'LLPA Digital Skills Cup - National Champion IT Security',
+    issuer: 'LLPA · Microsoft · AWS · Pipeline',
+    topic: 'it-security',
+    issued: { en: 'May 2026', it: 'mag 2026' },
+    credentialId: 'ebec2e5c-0c23-4a16-83d1-990b9eb645ba',
+    credentialUrl: 'https://www.credly.com/badges/ebec2e5c-0c23-4a16-83d1-990b9eb645ba',
+    skills: { en: 'IT security, Cloud Security, Threat Defense', it: 'Sicurezza informatica, Cloud Security, Difesa dalle minacce' },
+    featured: true,
+  },
+  {
     name: 'Introduction to Modern AI',
     issuer: 'Cisco',
     topic: 'ai',
     issued: { en: 'May 2026', it: 'mag 2026' },
-    skills: { en: 'Artificial intelligence', it: 'Intelligenza artificiale' },
+    credentialId: '1b5f1647-a661-429a-9a37-cd1ec89f7b83',
+    credentialUrl: 'https://www.credly.com/badges/1b5f1647-a661-429a-9a37-cd1ec89f7b83',
+    skills: { en: 'Artificial intelligence, Machine Learning', it: 'Intelligenza artificiale, Machine Learning' },
   },
   {
     name: 'Introduction to Cybersecurity',
     issuer: 'Cisco',
     topic: 'cybersecurity',
     issued: { en: 'Apr 2026', it: 'apr 2026' },
+    credentialId: '5fe6a8c8-9c8f-4449-bf3f-accc2f0c7dd6',
+    credentialUrl: 'https://www.credly.com/badges/5fe6a8c8-9c8f-4449-bf3f-accc2f0c7dd6',
     skills: { en: 'Cybersecurity, network security', it: 'Cybersecurity, sicurezza delle reti' },
   },
   {
@@ -386,7 +491,8 @@ export const CERTIFICATIONS: Certification[] = [
     issued: { en: 'Apr 2026', it: 'apr 2026' },
     expires: { en: 'Apr 2027', it: 'apr 2027' },
     credentialId: 'BBCC-EFGJTLGD9GTG2',
-    skills: { en: 'Blockchain, Web3', it: 'Blockchain, Web3' },
+    credentialUrl: 'https://updraft.cyfrin.io/',
+    skills: { en: 'Blockchain, Web3, Smart Contracts', it: 'Blockchain, Web3, Smart Contract' },
   },
   {
     name: 'Computer Essentials and Spreadsheets',
@@ -474,6 +580,22 @@ export const AWARDS: AwardItem[] = [
       en: 'Issued by Anitec-Assinform · May 2026. Winner in the category "ICT for Inclusion and Accessibility – No One Excluded in the Digital Era" with the UrbanAI project, developed in partnership with Somos Srl and ENS (National Deaf Association). VI edition.',
       it: 'Rilasciato da Anitec-Assinform · mag 2026. Vincitore nella categoria "ICT per l\'inclusione e l\'accessibilità – Nessuno escluso nell\'era digitale" con il progetto UrbanAI, sviluppato in partnership con Somos Srl ed ENS (Ente Nazionale Sordi). VI edizione.',
     },
-    tags: ['Anitec-Assinform', 'UrbanAI', 'Accessibility', 'AI'],
+    tags: ['Anitec-Assinform', 'UrbanAI', 'Accessibility', 'AI', 'Inclusion'],
+  },
+  {
+    title: {
+      en: 'LLPA Digital Skills Cup - National Champion 2026 IT Security',
+      it: 'LLPA Digital Skills Cup - Campione Nazionale 2026 IT Security',
+    },
+    status: {
+      en: 'National Champion',
+      it: 'Campione Nazionale',
+    },
+    description: {
+      en: 'Awarded by Leading Learning Partners Association (LLPA) in collaboration with Microsoft, AWS, and Pipeline Srl. Ranked 1st in Italy in IT Security and qualified to represent Italy at the World Finals on May 28, 2026.',
+      it: 'Assegnato da Leading Learning Partners Association (LLPA) in collaborazione con Microsoft, AWS e Pipeline Srl. 1° classificato in Italia in IT Security e qualificato per rappresentare l\'Italia alle Finali Mondiali del 28 maggio 2026.',
+    },
+    tags: ['LLPA', 'IT Security', 'Microsoft', 'AWS', 'Pipeline Srl', 'World Finals'],
+    link: 'https://www.credly.com/badges/ebec2e5c-0c23-4a16-83d1-990b9eb645ba',
   },
 ];

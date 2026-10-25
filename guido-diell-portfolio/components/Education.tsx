@@ -40,6 +40,11 @@ const Education: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-bold text-white">{item.school}</h3>
                     <p className="text-cyber-primary font-medium mt-1">{item.degree[language]}</p>
+                    {item.grade && (
+                      <span className="inline-block mt-2 px-2.5 py-0.5 rounded border border-cyber-primary/40 bg-cyber-primary/10 text-xs font-mono font-bold text-cyber-primary">
+                        {language === 'it' ? `Votazione: ${item.grade}` : `Graduation Grade: ${item.grade}`}
+                      </span>
+                    )}
                     <p className="text-gray-400 text-sm leading-relaxed mt-4 max-w-3xl">{item.description[language]}</p>
                   </div>
                 </div>

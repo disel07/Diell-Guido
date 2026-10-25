@@ -4,11 +4,22 @@ import { motion } from 'framer-motion';
 const CustomCursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
-    // Nascondi cursore di default solo su desktop
-    if (window.matchMedia('(pointer: fine)').matches) {
-      document.body.style.cursor = 'none';
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const checkEnabled = () => isFinePointer && !isCoarsePointer && !motionQuery.matches;
+    const enabled = checkEnabled();
+    setIsEnabled(enabled);
+
+    if (enabled) {
+      document.body.classList.add('cursor-none');
+    } else {
+      document.body.classList.remove('cursor-none');
+      return;
     }
 
     const updateMousePosition = (e: MouseEvent) => {
@@ -19,28 +30,41 @@ const CustomCursor: React.FC = () => {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setIsEnabled(false);
+        document.body.classList.remove('cursor-none');
+      } else if (isFinePointer && !isCoarsePointer) {
+        setIsEnabled(true);
+        document.body.classList.add('cursor-none');
+      }
+    };
+
+    motionQuery.addEventListener('change', handleMotionChange);
+
     return () => {
-      document.body.style.cursor = 'auto';
+      document.body.classList.remove('cursor-none');
       window.removeEventListener('mousemove', updateMousePosition);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
+      motionQuery.removeEventListener('change', handleMotionChange);
     };
   }, []);
 
-  // Non mostrare su touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+  if (!isEnabled) {
     return null;
   }
 
   return (
-    <>
+    <div aria-hidden="true">
       {/* Croce terminale centrale */}
       <motion.div
         className="fixed pointer-events-none z-[9999] mix-blend-difference"
+        aria-hidden="true"
         animate={{
           x: mousePosition.x - 10,
           y: mousePosition.y - 10,
@@ -53,7 +77,7 @@ const CustomCursor: React.FC = () => {
           mass: 0.5,
         }}
       >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           {/* Linea verticale */}
           <rect x="9" y="0" width="2" height="20" fill="#00f3ff" />
           {/* Linea orizzontale */}
@@ -66,6 +90,7 @@ const CustomCursor: React.FC = () => {
       {/* Anello che segue con delay */}
       <motion.div
         className="fixed pointer-events-none z-[9998]"
+        aria-hidden="true"
         animate={{
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
@@ -84,6 +109,7 @@ const CustomCursor: React.FC = () => {
       {/* Glow sotto */}
       <motion.div
         className="fixed pointer-events-none z-[9997]"
+        aria-hidden="true"
         animate={{
           x: mousePosition.x - 30,
           y: mousePosition.y - 30,
@@ -97,7 +123,7 @@ const CustomCursor: React.FC = () => {
       >
         <div className="w-[60px] h-[60px] rounded-full bg-cyber-primary/30 blur-xl" />
       </motion.div>
-    </>
+    </div>
   );
 };
 
